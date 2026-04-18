@@ -420,9 +420,9 @@ ol {
         &__title {
             color: $white-main;
             font-size: 22px;
-            font-weight: 700;
+            font-weight: 500;
             line-height: 1.15;
-            letter-spacing: -0.02em;
+            letter-spacing: 1.1;
         }
 
         &__meta {
@@ -645,6 +645,25 @@ ol {
             }
         }
 
+        &-rental {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+
+            span {
+                color: $white-muted;
+                font-size: 13px;
+                line-height: 1.4;
+            }
+
+            strong {
+                color: $white-main;
+                font-size: 15px;
+                line-height: 1.6;
+                font-weight: 500;
+            }
+        }
+
         &-info {
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -742,7 +761,7 @@ ol {
         }
 
         &__inner {
-           
+
             gap: 20px;
         }
 
@@ -860,7 +879,7 @@ ol {
 
         &__inner {
             gap: 16px;
-             
+
         }
 
         .cars-card {

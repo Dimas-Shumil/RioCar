@@ -739,9 +739,9 @@ ol {
 .cars .cars-card__title {
   color: #ffffff;
   font-size: 22px;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 1.15;
-  letter-spacing: -0.02em;
+  letter-spacing: 1.1;
 }
 .cars .cars-card__meta {
   display: flex;
@@ -925,6 +925,22 @@ ol {
   color: #ffffff;
   font-size: 16px;
   line-height: 1.55;
+  font-weight: 500;
+}
+.cars .cars-card__modal-rental {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.cars .cars-card__modal-rental span {
+  color: #8a8a8a;
+  font-size: 13px;
+  line-height: 1.4;
+}
+.cars .cars-card__modal-rental strong {
+  color: #ffffff;
+  font-size: 15px;
+  line-height: 1.6;
   font-weight: 500;
 }
 .cars .cars-card__modal-info {

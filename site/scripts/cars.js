@@ -139,6 +139,7 @@ function initCarsModal() {
     const modalPhoto = document.getElementById('carsModalPhoto');
     const modalBadge = document.getElementById('carsModalBadge');
     const modalComplectation = document.getElementById('carsModalComplectation');
+    const modalRental = document.getElementById('carsModalRental');
 
     const closeBtn = modal.querySelector('.cars-card__modal-close');
     const modalOverlay = modal.querySelector('.cars-card__modal-overlay');
@@ -158,6 +159,7 @@ function initCarsModal() {
             if (modalDrive) modalDrive.textContent = card.dataset.drive || '';
             if (modalGearbox) modalGearbox.textContent = card.dataset.gearbox || '';
             if (modalBadge) modalBadge.textContent = card.dataset.badge || '';
+            if (modalRental) modalRental.textContent = card.dataset.rental || 'Уточняйте условия аренды у менеджера';
             if (modalComplectation) modalComplectation.textContent = card.dataset.complectation || '';
 
             if (modalPhoto) {
