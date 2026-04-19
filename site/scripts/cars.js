@@ -193,3 +193,5 @@ document.addEventListener('DOMContentLoaded', () => {
     initCarsFilter();
     initCarsModal();
 });
+
+

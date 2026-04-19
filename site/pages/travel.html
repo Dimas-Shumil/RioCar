@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../styles/travel.css">
+    <title>Путешествия по Хакасии на автомобиле — RioCar</title>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="header__logo">
+            <a href="#home" aria-label="На главную">
+                <img src="site/image/Logo.png" alt="RioCar">
+            </a>
+        </div>
+
+        <nav class="header__nav header__nav--desktop">
+            <ul>
+                <li><a href="../../index.html">ГЛАВНАЯ</a></li>
+                <li><a href="../pages/cars.html">АВТОПАРК</a></li>
+                <!-- <li><a href="#otzyv">ОТЗЫВЫ</a></li> -->
+                <li><a href="#contacts">КОНТАКТЫ</a></li>
+                <li><a href="#travel-hero">ТВОЁ ПУТЕШЕСТВИЕ</a></li>
+                <li><a href="#form" class="header__cta">ОСТАВИТЬ ЗАЯВКУ</a></li>
+            </ul>
+        </nav>
+
+        <button class="header__burger" type="button" aria-label="Открыть меню" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <div class="mobile-menu-overlay"></div>
+
+        <nav class="mobile-menu">
+            <ul>
+                <li><a href="#advantages">ГЛАВНАЯ</a></li>
+                <li><a href="#work">АВТОПАРК</a></li>
+                <!-- <li><a href="#country">ОТЗЫВЫ</a></li> -->
+                <li><a href="#catalog">КОНТАКТЫ</a></li>
+                <li><a href="../pages/travel.html">ТВОЁ ПУТЕШЕСТВИЕ</a></li>
+                <li><a href="#form" class="mobile-menu__cta">ОСТАВИТЬ ЗАЯВКУ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- hero -->
+        <section class="travel-hero" id="travel-hero">
+            <div class="travel-hero__container">
+                <p class="travel-hero__subtitle">
+                    Твоё Путешествие
+                </p>
+
+                <h1 class="travel-hero__title">
+                    Откройте <span>Хакасию</span> на автомобиле
+                </h1>
+
+                <p class="travel-hero__text">
+                    Подбирайте направления, продумывайте маршрут и выбирайте автомобиль
+                    для поездок по Хакасии, Абакану и за пределами региона.
+                </p>
+
+                <div class="travel-hero__actions">
+                    <a href="#travel-directions" class="btn btn--primary">Подобрать маршрут</a>
+                    <a href="index.html#catalog" class="btn btn--secondary">Выбрать автомобиль</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- intro -->
+        <section class="travel-intro">
+            <div class="travel-intro__container">
+                <div class="travel-intro__left">
+                    <h2>
+                        Путешествия с <span>RioCar</span>
+                    </h2>
+                </div>
+
+                <div class="travel-intro__right">
+                    <p>
+                        RioCar — это не только аренда автомобилей в Абакане, но и удобный способ
+                        заранее продумать поездку. Мы объединяем подбор автомобиля и идеи маршрутов,
+                        чтобы путешествие начиналось не с хаоса, а с понятного плана.
+                    </p>
+
+                    <p>
+                        Эта страница — часть будущего приложения для ваших путешествий, где можно будет
+                        выбрать направление, посмотреть ключевые точки маршрута и подобрать машину
+                        под формат поездки.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- directions -->
+        <section class="travel-directions" id="travel-directions">
+            <div class="travel-directions__container">
+                <div class="travel-directions__title">
+                    <h2>
+                        Популярные <span>направления</span>
+                    </h2>
+
+                    <p>
+                        Идеи для поездок по Хакасии и маршрутов, которые удобно проходить на автомобиле.
+                    </p>
+                </div>
+
+                <!-- кнопки фильтры -->
+
+                <div class="travel-directions__filters">
+                    <button class="travel-filter active" data-filter="all">Все</button>
+                    <button class="travel-filter" data-filter="evening">На вечер</button>
+                    <button class="travel-filter" data-filter="day">На день</button>
+                    <button class="travel-filter" data-filter="weekend">На выходные</button>
+                    <button class="travel-filter" data-filter="long">Дальние поездки</button>
+                </div>
+
+                <div class="travel-directions__grid">
+                    <article class="travel-card" data-category="weekend">
+                        <div class="travel-card__image">
+                            <img src="site/image/travel/shira.jpg" alt="Ширинские озёра">
+                        </div>
+
+                        <div class="travel-card__content">
+                            <h3>Ширинские озёра</h3>
+                            <p>
+                                Отличный вариант для поездки на выходные: озёра, степные виды
+                                и отдых в дороге без спешки.
+                            </p>
+                            <a href="#" class="travel-card__link">Построить маршрут</a>
+                        </div>
+                    </article>
+
+                    <article class="travel-card" data-category="day">
+                        <div class="travel-card__image">
+                            <img src="site/image/travel/tuim.jpg" alt="Туимский провал">
+                        </div>
+
+                        <div class="travel-card__content">
+                            <h3>Туимский провал</h3>
+                            <p>
+                                Одна из самых узнаваемых точек Хакасии для самостоятельного
+                                маршрута на автомобиле.
+                            </p>
+                            <a href="#" class="travel-card__link">Построить маршрут</a>
+                        </div>
+                    </article>
+
+                    <article class="travel-card">
+                        <div class="travel-card__image">
+                            <img src="site/image/travel/sunduki.jpg" alt="Сундуки">
+                        </div>
+
+                        <div class="travel-card__content">
+                            <h3>Сундуки</h3>
+                            <p>
+                                Исторические места, красивые виды и спокойный маршрут
+                                для размеренного путешествия.
+                            </p>
+                            <a href="#" class="travel-card__link">Построить маршрут</a>
+                        </div>
+                    </article>
+
+                    <article class="travel-card">
+                        <div class="travel-card__image">
+                            <img src="site/image/travel/ges.jpg" alt="Саяно-Шушенская ГЭС">
+                        </div>
+
+                        <div class="travel-card__content">
+                            <h3>Саяно-Шушенская ГЭС</h3>
+                            <p>
+                                Впечатляющее направление для тех, кто хочет увидеть
+                                масштабные природные и инженерные локации.
+                            </p>
+                            <a href="#" class="travel-card__link">Построить маршрут</a>
+                        </div>
+                    </article>
+
+                    <article class="travel-card">
+                        <div class="travel-card__image">
+                            <img src="site/image/travel/ivan.jpg" alt="Ивановские озёра">
+                        </div>
+
+                        <div class="travel-card__content">
+                            <h3>Ивановские озёра</h3>
+                            <p>
+                                Более насыщенный маршрут для тех, кто хочет совместить
+                                дорогу, природу и яркие впечатления.
+                            </p>
+                            <a href="#" class="travel-card__link">Построить маршрут</a>
+                        </div>
+                    </article>
+
+                    <article class="travel-card" data-category="long">
+                        <div class="travel-card__image">
+                            <img src="site/image/travel/ergaki.jpg" alt="Ергаки">
+                        </div>
+
+                        <div class="travel-card__content">
+                            <h3>Ергаки</h3>
+                            <p>
+                                Горные пейзажи и ощущение настоящей дороги —
+                                для тех, кто любит маршрут с характером.
+                            </p>
+                            <a href="#" class="travel-card__link">Построить маршрут</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- steps -->
+        <section class="travel-steps">
+            <div class="travel-steps__container">
+                <div class="travel-steps__head">
+                    <h2>
+                        Как это <span>работает</span>
+                    </h2>
+                </div>
+
+                <div class="travel-steps__grid">
+                    <div class="travel-step">
+                        <span class="travel-step__number">01</span>
+                        <h3>Выберите направление</h3>
+                        <p>
+                            Горы, озёра или что-то дикое и атмосферное — выберите место,
+                            куда реально хочется поехать.
+                        </p>
+                    </div>
+
+                    <div class="travel-step">
+                        <span class="travel-step__number">02</span>
+                        <h3>Продумайте маршрут</h3>
+                        <p>
+                            Отметьте ключевые точки, дорогу и время в пути,
+                            чтобы поездка прошла без суеты.
+                        </p>
+                    </div>
+
+                    <div class="travel-step">
+                        <span class="travel-step__number">03</span>
+                        <h3>Выберите автомобиль</h3>
+                        <p>
+                            Подберите машину под свою задачу —
+                            город, трасса, компания или дальний трип.
+                        </p>
+                    </div>
+
+                    <div class="travel-step">
+                        <span class="travel-step__number">04</span>
+                        <h3>Выезжайте</h3>
+                        <p>
+                            Бронируйте авто и отправляйтесь в путь —
+                            маршрут уже продуман, осталось только ехать.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- cta -->
+        <section class="travel-cta">
+            <div class="travel-cta__container">
+                <h2>
+                    Начните свое <span>путешествие</span> с RioCar
+                </h2>
+
+                <p>
+                    Выберите маршрут, подберите автомобиль и отправляйтесь в поездку
+                    по Хакасии с комфортом.
+                </p>
+
+                <div class="travel-cta__actions">
+                    <a href="#travel-directions" class="btn btn--primary">Смотреть маршруты</a>
+                    <a href="index.html#form" class="btn btn--secondary">Оставить заявку</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="footer__container">
+            <div class="footer__top">
+                <div class="footer__brand">
+                    <a href="#home" class="footer__logo" aria-label="На главную">
+                        <img src="site/image/Logo.png" alt="RioCar">
+                    </a>
+
+                    <p class="footer__text">
+                        Аренда автомобилей в Абакане для города, поездок по Хакасии
+                        и путешествий за её пределы. Честные условия, ухоженный
+                        автопарк и удобное бронирование.
+                    </p>
+                </div>
+
+                <div class="footer__menu">
+                    <h3>Навигация</h3>
+                    <nav class="footer__nav" aria-label="Навигация по сайту">
+                        <a href="#home">Главная</a>
+                        <a href="#faq">FAQ</a>
+                        <a href="#contacts">Контакты</a>
+                        <a href="#form">Оставить заявку</a>
+                    </nav>
+                </div>
+
+                <div class="footer__contacts">
+                    <h3>Контакты</h3>
+
+                    <a href="tel:+79135444442" class="footer__contact">
+                        +7 (913) 544-44-42
+                    </a>
+
+                    <a href="https://wa.me/79135444442" target="_blank" rel="noopener noreferrer"
+                        class="footer__contact">
+                        Написать в MAX
+                    </a>
+
+                    <p class="footer__address">
+                        г. Абакан, ул. Торговая, 1
+                    </p>
+
+                    <p class="footer__address">
+                        ИНН 2465350820
+                    </p>
+
+                    <a href="https://wa.me/79135444442" target="_blank" rel="noopener noreferrer"
+                        class="footer__contact">
+                        Политика конфиденциальности
+                    </a>
+
+                    <a href="https://shumdev.ru/" target="_blank" rel="noopener noreferrer" class="footer__contact">
+                        Разработка и дизайн сайта
+                    </a>
+
+                    <a href="#form" class="footer__btn btn btn--primary">
+                        Забронировать авто
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="footer__bottom">
+                <p>© RioCar, 2026. Все права защищены.</p>
+                <a href="#home">Наверх</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../scripts/travel.js"></script>
+</body>
+
+</html>

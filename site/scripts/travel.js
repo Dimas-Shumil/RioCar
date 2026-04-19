@@ -1,24 +1,3 @@
-async function loadComponents() {
-    const elements = document.querySelectorAll('[data-include]');
-
-    for (const element of elements) {
-        const path = element.dataset.include;
-        if (!path) continue;
-
-        try {
-            const response = await fetch(path);
-
-            if (!response.ok) {
-                throw new Error(`Ошибка загрузки компонента: ${path}`);
-            }
-
-            element.innerHTML = await response.text();
-        } catch (error) {
-            console.error(error);
-        }
-    }
-}
-
 function initHeader() {
     const header = document.querySelector('.header');
     if (!header) return;
@@ -40,8 +19,7 @@ function initHeader() {
 
     if (burger && mobileMenu && overlay) {
         burger.addEventListener('click', () => {
-            const isOpen = !burger.classList.contains('active');
-            setMenuState(isOpen);
+            setMenuState(!burger.classList.contains('active'));
         });
 
         overlay.addEventListener('click', closeMenu);
@@ -67,6 +45,8 @@ function initHeader() {
         ticking = false;
     };
 
+    updateHeaderOnScroll();
+
     window.addEventListener('scroll', () => {
         if (!ticking) {
             window.requestAnimationFrame(updateHeaderOnScroll);
@@ -87,7 +67,6 @@ function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach((link) => {
         link.addEventListener('click', (event) => {
             const href = link.getAttribute('href');
-
             if (!href || href === '#') return;
 
             const target = document.querySelector(href);
@@ -120,68 +99,34 @@ function initSmoothScroll() {
     });
 }
 
-function initFaq() {
-    const faqItems = document.querySelectorAll('.faq__item');
-    if (!faqItems.length) return;
+function initTravelFilters() {
+    const filters = document.querySelectorAll('.travel-filter');
+    const cards = document.querySelectorAll('.travel-card');
 
-    faqItems.forEach((item) => {
-        const question = item.querySelector('.faq__question');
-        const answer = item.querySelector('.faq__answer');
+    if (!filters.length || !cards.length) return;
 
-        if (!question || !answer) return;
+    filters.forEach((btn) => {
+        btn.addEventListener('click', () => {
+            filters.forEach((b) => b.classList.remove('active'));
+            btn.classList.add('active');
 
-        question.addEventListener('click', () => {
-            const isActive = item.classList.contains('active');
+            const filter = btn.dataset.filter;
 
-            faqItems.forEach((faqItem) => {
-                const faqQuestion = faqItem.querySelector('.faq__question');
+            cards.forEach((card) => {
+                const categories = (card.dataset.category || '').split(' ');
 
-                faqItem.classList.remove('active');
-                faqQuestion?.setAttribute('aria-expanded', 'false');
+                if (filter === 'all' || categories.includes(filter)) {
+                    card.hidden = false;
+                } else {
+                    card.hidden = true;
+                }
             });
-
-            if (!isActive) {
-                item.classList.add('active');
-                question.setAttribute('aria-expanded', 'true');
-            }
         });
     });
-}
-
-function initRoutesPreviewReveal() {
-    const section = document.querySelector('.routes-preview');
-    if (!section) return;
-
-    const revealItems = section.querySelectorAll('.reveal');
-    if (!revealItems.length) return;
-
-    const observer = new IntersectionObserver((entries, obs) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                section.classList.add('is-visible');
-                obs.unobserve(section);
-            }
-        });
-    }, {
-        threshold: 0.2
-    });
-
-    observer.observe(section);
-}
-
-async function initApp() {
-    await loadComponents();
-
-    initHeader();
-    initSmoothScroll();
-    initFaq();
-    initRoutesPreviewReveal();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    initApp().catch((error) => {
-        console.error('Ошибка инициализации приложения:', error);
-    });
+    initHeader();
+    initSmoothScroll();
+    initTravelFilters();
 });
-
-
