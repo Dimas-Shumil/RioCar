@@ -1,726 +1,1222 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-  <link rel="icon" href="site/image/logo-mini.png">
-  <link rel="stylesheet" href="site/styles/main.css" />
-  <title>RioCar</title>
-</head>
+    <title>Прокат авто в Абакане — аренда автомобилей | RioCar</title>
 
-<body>
-  <div data-include="components/header.html"></div>
+    <meta
+      name="description"
+      content="RioCar — прокат автомобилей в Абакане и Хакасии. Аренда авто без водителя и с водителем, машины для города, поездок по Хакасии и дальних маршрутов. Честные условия и удобное бронирование."
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#000000" />
 
-  <main>
+    <link rel="canonical" href="https://dimas-shumil.github.io/RioCar/" />
 
-    <section class="hero-main" id="home">
-      <video class="hero-main__video" autoplay muted loop playsinline preload="none">
-        <source src="site/video/bgr-HeroMain.mp4" type="video/mp4">
-      </video>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Прокат авто в Абакане — RioCar" />
+    <meta
+      property="og:description"
+      content="Аренда автомобилей в Абакане и Хакасии: без водителя, с водителем, для города, поездок и путешествий."
+    />
+    <meta property="og:url" content="https://dimas-shumil.github.io/RioCar/" />
+    <meta
+      property="og:image"
+      content="https://dimas-shumil.github.io/RioCar/site/image/black-lexus.jpg"
+    />
 
-      <div class="hero-main__overlay"></div>
+    <link rel="icon" href="site/image/logo-mini.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <link rel="stylesheet" href="site/css/main.css" />
+  </head>
 
-      <div class="hero-main__content">
-        <p class="hero-main__subtitle">Аренда автомобилей для города, поездок и путешествий</p>
+  <body>
+    <div data-include="components/header.html"></div>
 
-        <h1 class="hero-main__title">
-          Прокат автомобилей в Абакане — <span>RioCar</span>
-        </h1>
+    <main>
+      <section class="hero-main" id="home">
+        <video
+          class="hero-main__video"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="none"
+          poster="site/image/black-lexus.jpg"
+        >
+          <source src="site/video/bgr-HeroMain.mp4" type="video/mp4" />
+        </video>
 
-        <p class="hero-main__text">
-          Выберите подходящий автомобиль для комфортных поездок по Абакану,
-          Хакасии и за её пределами. Удобное бронирование, честные цены и
-          автомобили в отличном состоянии.
+        <div class="hero-main__overlay"></div>
+
+        <div class="hero-main__content">
+          <p class="hero-main__subtitle">
+            Аренда автомобилей для города, поездок и путешествий
+          </p>
+
+          <h1 class="hero-main__title">
+            Прокат автомобилей в Абакане — <span>RioCar</span>
+          </h1>
+
+          <p class="hero-main__text">
+            Подберите автомобиль для поездок по Абакану, путешествий по Хакасии
+            и маршрутов за пределы региона. В RioCar доступны машины для города,
+            трассы, деловых встреч, семейных поездок и комфортного отдыха.
+          </p>
+
+          <div class="hero-main__actions">
+            <a href="site/pages/cars.html" class="btn btn--primary"
+              >Выбрать автомобиль</a
+            >
+            <a href="#form" class="btn btn--secondary">Оставить заявку</a>
+          </div>
+
+          <div class="hero-main__features">
+            <span>Быстрое бронирование</span>
+            <span>Честные цены</span>
+            <span>Без скрытых платежей</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- марки автомобилей -->
+
+      <section class="section-two" aria-labelledby="brands-title">
+        <h2 id="brands-title">
+          Автопарк RioCar — автомобили в аренду в Абакане
+        </h2>
+
+        <!-- небольшой SEO-текст -->
+        <p class="section-two__text">
+          В автопарке RioCar представлены автомобили популярных брендов для
+          аренды в Абакане. Вы можете выбрать машину для поездок по городу,
+          путешествий по Хакасии и дальних маршрутов — от комфортных седанов до
+          вместительных автомобилей для семьи.
         </p>
 
-        <div class="hero-main__actions">
-          <a href="site/pages/cars.html" class="btn btn--primary">Выбрать автомобиль</a>
-          <a href="#form" class="btn btn--secondary">Оставить заявку</a>
-        </div>
-
-        <div class="hero-main__features">
-          <span>Быстрое бронирование</span>
-          <span>Честные цены</span>
-          <span>Без скрытых платежей</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- марки автомобилей -->
-
-    <section class="section-two">
-      <h2>
-        Наш автопарк — ведущие бренды
-      </h2>
-
-      <div class="section-two__container">
-        <div class="section-two__item">
-          <img src="site/image/logoCar/mers-logo.png" alt="Audi" />
-        </div>
-
-        <div class="section-two__item">
-          <img src="site/image/logoCar/lexus-logo.png" alt="BMW" />
-        </div>
-
-        <div class="section-two__item">
-          <img src="site/image/logoCar/honda-logo.png" alt="Mercedes-Benz" />
-        </div>
-
-        <div class="section-two__item">
-          <img src="site/image/logoCar//kia-logo.png" alt="Hyundai" />
-        </div>
-
-        <div class="section-two__item">
-          <img src="site/image/logoCar/toyota-logo.png" alt="Toyota" />
-        </div>
-
-        <div class="section-two__item">
-          <img src="site/image/logoCar/hyinda-logo.png" alt="Hyundai" />
-        </div>
-
-      </div>
-    </section>
-
-    <!-- преимущества -->
-
-    <section class="advantages">
-      <div class="advantages-container">
-        <div class="advantages__text">
-          <h3>
-            Прокат автомобилей в Абакане
-          </h3>
-
-          <h2>
-            Почему выбирают <span>RioCar</span> в Абакане
-          </h2>
-
-          <p>
-            Арендуйте автомобили с водителем и без, без лишних сложностей — с прозрачными условиями,
-            ухоженным автопарком и удобным оформлением. Подберём автомобиль под любые задачи:
-            от поездок по городу до путешествий по Хакасии.
-          </p>
-
-          <a href="site/pages/cars.html" class="btn btn--primary">Выбрать автомобиль</a>
-        </div>
-
-        <div class="advantages__img">
-          <img src="site/image/black-lexus.jpg" alt="Автомобиль RioCar в Абакане">
-        </div>
-      </div>
-    </section>
-
-    <!-- reviews -->
-
-    <section class="reviews" id="reviews">
-      <div class="reviews-container">
-        <div class="general-title">
-          <h2>ОТЗЫВЫ</h2>
-          <h3>НАМ ДОВЕРЯЮТ НА НЕЗАВИСИМЫХ ПЛОЩАДКАХ</h3>
-        </div>
-
-        <div class="reviews-platforms">
-          <a href="https://yandex.com/maps/org/riocar/1729085988/?ll=91.438983%2C53.742869&z=17"
-            class="reviews-platform reviews-platform--yandex" target="_blank" rel="noopener noreferrer">
-            <div class="reviews-platform__top">
-              <span class="reviews-platform__badge">Яндекс Карты</span>
-              <span class="reviews-platform__rating">5/5</span>
-            </div>
-
-            <div class="reviews-platform__info">
-              <h4>Отзывы из Яндекс Карт</h4>
-              <p>Смотрите реальные оценки, впечатления клиентов и отзывы об аренде автомобилей RioCar.</p>
-            </div>
-
-            <div class="reviews-platform__bottom">
-              <span>Открыть площадку</span>
-              <span>Читать отзывы</span>
-            </div>
-          </a>
-
-          <a href="https://2gis.ru/abakan/search/%D1%80%D0%B8%D0%BE%D0%BA%D0%B0%D1%80/firm/9711414977520285/91.438035%2C53.74277?m=91.419129%2C53.744968%2F15.49"
-            class="reviews-platform reviews-platform--2gis" target="_blank" rel="noopener noreferrer">
-            <div class="reviews-platform__top">
-              <span class="reviews-platform__badge">2ГИС</span>
-              <span class="reviews-platform__rating">5/5</span>
-            </div>
-
-            <div class="reviews-platform__info">
-              <h4>Отзывы из 2ГИС</h4>
-              <p>Независимые отзывы о сервисе, состоянии автомобилей и качестве обслуживания в RioCar.</p>
-            </div>
-
-            <div class="reviews-platform__bottom">
-              <span>Открыть площадку</span>
-              <span>Читать отзывы</span>
-            </div>
-          </a>
-        </div>
-
-        <div class="reviews-tabs">
-          <button class="reviews-tabs__btn active" type="button" data-review-tab="yandex">
-            Яндекс Карты
-          </button>
-          <button class="reviews-tabs__btn" type="button" data-review-tab="gis">
-            2ГИС
-          </button>
-        </div>
-
-        <div class="reviews-pane active" id="reviews-yandex">
-          <div class="reviews-slider swiper reviews-swiper-yandex">
-            <div class="swiper-wrapper">
-              <div class="swiper-slide">
-                <article class="review-card">
-                  <div class="review-card__top">
-                    <div class="review-card__author">
-                      <strong>Александр</strong>
-                      <span>Яндекс Карты</span>
-                    </div>
-                    <div class="review-card__rating">5/5</div>
-                  </div>
-
-                  <p class="review-card__text">
-                    Брали Toyota Camry на несколько дней. Всё оформили быстро, машина была чистая и в хорошем состоянии.
-                    Поездка прошла спокойно, сервис понравился.
-                  </p>
-
-                  <div class="review-card__bottom">
-                    <span>Февраль 2026</span>
-                    <a href="https://yandex.com/maps/org/riocar/1729085988/?ll=91.438983%2C53.742869&z=17"
-                      target="_blank" rel="noopener noreferrer">Открыть</a>
-                  </div>
-                </article>
-              </div>
-
-              <div class="swiper-slide">
-                <article class="review-card">
-                  <div class="review-card__top">
-                    <div class="review-card__author">
-                      <strong>Марина</strong>
-                      <span>Яндекс Карты</span>
-                    </div>
-                    <div class="review-card__rating">5/5</div>
-                  </div>
-
-                  <p class="review-card__text">
-                    Нужна была машина для поездки за город. Подобрали подходящий вариант, всё объяснили по условиям,
-                    общение приятное, без суеты и лишних сложностей.
-                  </p>
-
-                  <div class="review-card__bottom">
-                    <span>Январь 2026</span>
-                    <a href="https://yandex.com/maps/org/riocar/1729085988/?ll=91.438983%2C53.742869&z=17"
-                      target="_blank" rel="noopener noreferrer">Открыть</a>
-                  </div>
-                </article>
-              </div>
-
-              <div class="swiper-slide">
-                <article class="review-card">
-                  <div class="review-card__top">
-                    <div class="review-card__author">
-                      <strong>Игорь</strong>
-                      <span>Яндекс Карты</span>
-                    </div>
-                    <div class="review-card__rating">5/5</div>
-                  </div>
-
-                  <p class="review-card__text">
-                    Понравилось, что всё честно и понятно. Машину выдали вовремя, салон чистый,
-                    по состоянию автомобиля вопросов не было. Будем обращаться ещё.
-                  </p>
-
-                  <div class="review-card__bottom">
-                    <span>Декабрь 2025</span>
-                    <a href="https://yandex.com/maps/org/riocar/1729085988/?ll=91.438983%2C53.742869&z=17"
-                      target="_blank" rel="noopener noreferrer">Открыть</a>
-                  </div>
-                </article>
-              </div>
-
-              <div class="swiper-slide">
-                <article class="review-card">
-                  <div class="review-card__top">
-                    <div class="review-card__author">
-                      <strong>Дмитрий</strong>
-                      <span>Яндекс Карты</span>
-                    </div>
-                    <div class="review-card__rating">5/5</div>
-                  </div>
-
-                  <p class="review-card__text">
-                    Брали авто для поездки по Хакасии. Очень удобно, что можно быстро подобрать машину под маршрут.
-                    Сервис аккуратный, всё на хорошем уровне.
-                  </p>
-
-                  <div class="review-card__bottom">
-                    <span>Ноябрь 2025</span>
-                    <a href="https://yandex.com/maps/org/riocar/1729085988/?ll=91.438983%2C53.742869&z=17"
-                      target="_blank" rel="noopener noreferrer">Открыть</a>
-                  </div>
-                </article>
-              </div>
-            </div>
-
-            <div class="reviews-slider__nav">
-              <button class="reviews-slider__btn reviews-slider__btn--prev reviews-slider__btn--prev-yandex"
-                type="button" aria-label="Назад">
-                <svg viewBox="0 0 24 24">
-                  <path d="M15 6L9 12L15 18" />
-                </svg>
-              </button>
-
-              <button class="reviews-slider__btn reviews-slider__btn--next reviews-slider__btn--next-yandex"
-                type="button" aria-label="Вперёд">
-                <svg viewBox="0 0 24 24">
-                  <path d="M9 6L15 12L9 18" />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div class="reviews-pane" id="reviews-gis">
-          <div class="reviews-slider swiper reviews-swiper-gis">
-            <div class="swiper-wrapper">
-              <div class="swiper-slide">
-                <article class="review-card">
-                  <div class="review-card__top">
-                    <div class="review-card__author">
-                      <strong>Екатерина</strong>
-                      <span>2ГИС</span>
-                    </div>
-                    <div class="review-card__rating">5/5</div>
-                  </div>
-
-                  <p class="review-card__text">
-                    Очень понравился подход. Быстро вышли на связь, помогли подобрать автомобиль
-                    и всё подробно рассказали по аренде. Машина была в отличном состоянии.
-                  </p>
-
-                  <div class="review-card__bottom">
-                    <span>Февраль 2026</span>
-                    <a href="https://2gis.ru/abakan/search/%D1%80%D0%B8%D0%BE%D0%BA%D0%B0%D1%80/firm/9711414977520285/91.438035%2C53.74277?m=91.419129%2C53.744968%2F15.49"
-                      target="_blank" rel="noopener noreferrer">Открыть</a>
-                  </div>
-                </article>
-              </div>
-
-              <div class="swiper-slide">
-                <article class="review-card">
-                  <div class="review-card__top">
-                    <div class="review-card__author">
-                      <strong>Ольга</strong>
-                      <span>2ГИС</span>
-                    </div>
-                    <div class="review-card__rating">5/5</div>
-                  </div>
-
-                  <p class="review-card__text">
-                    Бронировали машину заранее для семейной поездки. Всё прошло очень спокойно:
-                    без задержек, без неприятных сюрпризов, с нормальным человеческим отношением.
-                  </p>
-
-                  <div class="review-card__bottom">
-                    <span>Январь 2026</span>
-                    <a href="https://2gis.ru/abakan/search/%D1%80%D0%B8%D0%BE%D0%BA%D0%B0%D1%80/firm/9711414977520285/91.438035%2C53.74277?m=91.419129%2C53.744968%2F15.49"
-                      target="_blank" rel="noopener noreferrer">Открыть</a>
-                  </div>
-                </article>
-              </div>
-
-              <div class="swiper-slide">
-                <article class="review-card">
-                  <div class="review-card__top">
-                    <div class="review-card__author">
-                      <strong>Андрей</strong>
-                      <span>2ГИС</span>
-                    </div>
-                    <div class="review-card__rating">5/5</div>
-                  </div>
-
-                  <p class="review-card__text">
-                    Хороший сервис, всё понятно по условиям, машина чистая и ухоженная.
-                    Для поездки по Абакану и за город подошло отлично.
-                  </p>
-
-                  <div class="review-card__bottom">
-                    <span>Декабрь 2025</span>
-                    <a href="https://2gis.ru/abakan/search/%D1%80%D0%B8%D0%BE%D0%BA%D0%B0%D1%80/firm/9711414977520285/91.438035%2C53.74277?m=91.419129%2C53.744968%2F15.49"
-                      target="_blank" rel="noopener noreferrer">Открыть</a>
-                  </div>
-                </article>
-              </div>
-
-              <div class="swiper-slide">
-                <article class="review-card">
-                  <div class="review-card__top">
-                    <div class="review-card__author">
-                      <strong>Никита</strong>
-                      <span>2ГИС</span>
-                    </div>
-                    <div class="review-card__rating">5/5</div>
-                  </div>
-
-                  <p class="review-card__text">
-                    Пользовались услугами RioCar впервые. Остались довольны: быстрое оформление,
-                    понятные условия, хороший выбор автомобилей и приятное общение.
-                  </p>
-
-                  <div class="review-card__bottom">
-                    <span>Ноябрь 2025</span>
-                    <a href="https://2gis.ru/abakan/search/%D1%80%D0%B8%D0%BE%D0%BA%D0%B0%D1%80/firm/9711414977520285/91.438035%2C53.74277?m=91.419129%2C53.744968%2F15.49"
-                      target="_blank" rel="noopener noreferrer">Открыть</a>
-                  </div>
-                </article>
-              </div>
-            </div>
-
-            <div class="reviews-slider__nav">
-              <button class="reviews-slider__btn reviews-slider__btn--prev reviews-slider__btn--prev-gis" type="button"
-                aria-label="Назад">
-                <svg viewBox="0 0 24 24">
-                  <path d="M15 6L9 12L15 18" />
-                </svg>
-              </button>
-
-              <button class="reviews-slider__btn reviews-slider__btn--next reviews-slider__btn--next-gis" type="button"
-                aria-label="Вперёд">
-                <svg viewBox="0 0 24 24">
-                  <path d="M9 6L15 12L9 18" />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- faq -->
-
-    <section class="faq" id="faq" aria-labelledby="faq-title">
-      <div class="faq__container">
-
-        <div class="faq__title">
-          <h2 id="faq-title">
-            ЧАСТЫЕ
-            <span>ВОПРОСЫ</span>
-          </h2>
-        </div>
-
-        <div class="faq__list" role="list" aria-label="Часто задаваемые вопросы">
-
-          <div class="faq__item active" role="listitem">
-            <button class="faq__question" type="button" aria-expanded="true" aria-controls="faq-answer-1"
-              id="faq-question-1">
-              <span>Можно ли арендовать автомобиль без водителя?</span>
-              <span class="faq__icon" aria-hidden="true"></span>
-            </button>
-            <div class="faq__answer" id="faq-answer-1" role="region" aria-labelledby="faq-question-1">
-              <div class="faq__answer-content">
-                Да, в RioCar можно арендовать автомобиль как без водителя, так и с водителем. Подберём удобный
-                вариант под поездки по Абакану, Хакасии и за её пределами.
-              </div>
-            </div>
+        <div class="section-two__container">
+          <div class="section-two__item">
+            <img
+              src="site/image/logoCar/mers-logo.png"
+              alt="Mercedes-Benz — аренда авто в Абакане | мерседес арендовать Абакан"
+            />
           </div>
 
-          <div class="faq__item" role="listitem">
-            <button class="faq__question" type="button" aria-expanded="false" aria-controls="faq-answer-2"
-              id="faq-question-2">
-              <span>Можно ли заказать автомобиль с водителем?</span>
-              <span class="faq__icon" aria-hidden="true"></span>
-            </button>
-            <div class="faq__answer" id="faq-answer-2" role="region" aria-labelledby="faq-question-2">
-              <div class="faq__answer-content">
-                Да, у нас доступна аренда автомобиля с водителем. Это удобно для деловых поездок, встреч,
-                трансферов, поездок по Хакасии и маршрутов за пределы города.
-              </div>
-            </div>
+          <div class="section-two__item">
+            <img
+              src="site/image/logoCar/lexus-logo.png"
+              alt="Lexus — прокат автомобилей в Абакане | лексус арендовать Абакан"
+            />
           </div>
 
-          <div class="faq__item" role="listitem">
-            <button class="faq__question" type="button" aria-expanded="false" aria-controls="faq-answer-3"
-              id="faq-question-3">
-              <span>Сколько стоит аренда автомобиля с водителем?</span>
-              <span class="faq__icon" aria-hidden="true"></span>
-            </button>
-            <div class="faq__answer" id="faq-answer-3" role="region" aria-labelledby="faq-question-3">
-              <div class="faq__answer-content">
-                Стоимость аренды автомобиля с водителем начинается от 17 000 ₽ в сутки. Дополнительно
-                оплачивается работа водителя — от 5 500 ₽ в день, в зависимости от маршрута. Отдельно
-                оплачиваются питание, проживание водителя и ГСМ по факту расхода.
-              </div>
-            </div>
+          <div class="section-two__item">
+            <img
+              src="site/image/logoCar/honda-logo.png"
+              alt="Honda — автомобили в аренду Хакасия | хонда арендовать Хакасия"
+            />
           </div>
 
-          <div class="faq__item" role="listitem">
-            <button class="faq__question" type="button" aria-expanded="false" aria-controls="faq-answer-4"
-              id="faq-question-4">
-              <span>Можно ли выезжать за пределы Абакана?</span>
-              <span class="faq__icon" aria-hidden="true"></span>
-            </button>
-            <div class="faq__answer" id="faq-answer-4" role="region" aria-labelledby="faq-question-4">
-              <div class="faq__answer-content">
-                Да, автомобиль можно использовать не только в Абакане. Подробности маршрута лучше заранее
-                согласовать при бронировании, чтобы мы сразу предложили подходящий автомобиль и условия аренды.
-              </div>
-            </div>
+          <div class="section-two__item">
+            <img
+              src="site/image/logoCar/kia-logo.png"
+              alt="Kia — аренда машин в Абакане | киа арендовать Абакан"
+            />
           </div>
 
-          <div class="faq__item" role="listitem">
-            <button class="faq__question" type="button" aria-expanded="false" aria-controls="faq-answer-6"
-              id="faq-question-6">
-              <span>Можно ли заказать доставку автомобиля по городу?</span>
-              <span class="faq__icon" aria-hidden="true"></span>
-            </button>
-            <div class="faq__answer" id="faq-answer-6" role="region" aria-labelledby="faq-question-6">
-              <div class="faq__answer-content">
-                Да, мы можем организовать доставку автомобиля по городу. Это удобно, если вы хотите сразу
-                получить машину в нужной точке без лишних поездок.
-              </div>
-            </div>
+          <div class="section-two__item">
+            <img
+              src="site/image/logoCar/toyota-logo.png"
+              alt="Toyota — прокат авто в Абакане | тойота арендовать Абакан"
+            />
           </div>
 
-          <div class="faq__item" role="listitem">
-            <button class="faq__question" type="button" aria-expanded="false" aria-controls="faq-answer-7"
-              id="faq-question-7">
-              <span>Что делать, если во время аренды возникнет поломка?</span>
-              <span class="faq__icon" aria-hidden="true"></span>
-            </button>
-            <div class="faq__answer" id="faq-answer-7" role="region" aria-labelledby="faq-question-7">
-              <div class="faq__answer-content">
-                Если во время аренды возникнет техническая неисправность, сразу свяжитесь с нами. Мы оперативно
-                подскажем дальнейшие действия и поможем решить ситуацию максимально быстро.
-              </div>
-            </div>
+          <div class="section-two__item">
+            <img
+              src="site/image/logoCar/hyinda-logo.png"
+              alt="Hyundai — аренда автомобилей Хакасия | хендай арендовать Хакасия"
+            />
           </div>
-
-          <div class="faq__item" role="listitem">
-            <button class="faq__question" type="button" aria-expanded="false" aria-controls="faq-answer-8"
-              id="faq-question-8">
-              <span>Нужен ли залог при аренде автомобиля?</span>
-              <span class="faq__icon" aria-hidden="true"></span>
-            </button>
-            <div class="faq__answer" id="faq-answer-8" role="region" aria-labelledby="faq-question-8">
-              <div class="faq__answer-content">
-                Размер залога зависит от конкретного автомобиля и условий аренды. Точную информацию мы сообщим
-                заранее перед бронированием, чтобы все условия были понятны до оформления.
-              </div>
-            </div>
-          </div>
-
         </div>
+      </section>
 
-      </div>
-    </section>
+      <!-- преимущества -->
 
-    <!-- туристический блок -->
+      <section class="advantages">
+        <div class="advantages-container">
+          <div class="advantages__text">
+            <p class="advantages-p_high">Прокат автомобилей в Абакане</p>
 
-    <section class="routes-preview">
-      <div class="routes-preview__overlay"></div>
+            <h2>Почему выбирают <span>RioCar</span> в Абакане</h2>
 
-      <div class="routes-preview__container">
-        <div class="routes-preview__content">
-          <p class="routes__subtitle reveal reveal--1">Путешествия с RioCar</p>
+            <p>
+              Арендуйте автомобили с водителем и без, без лишних сложностей — с
+              прозрачными условиями, ухоженным автопарком и удобным оформлением.
+              Подберём автомобиль под любые задачи: от поездок по городу до
+              путешествий по Хакасии.
+            </p>
 
-          <h2 class="routes__title reveal reveal--2">
-            Открой Хакасию вместе с <span>RioCar</span>
-          </h2>
-
-          <p class="routes__text reveal reveal--3">
-            В RioCar уже доступен раздел «Твоё путешествие» — маршруты, красивые места и идеи для поездок по Хакасии.
-          </p>
-
-          <p class="routes__text routes__text--small reveal reveal--4">
-            Полный опыт будет доступен в приложении — с расширенными возможностями и удобным планированием путешествий.
-          </p>
-
-          <a href="site/pages/travel.html" class="btn btn--primary reveal reveal--5">
-            Смотреть маршруты
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- контакты -->
-
-    <section class="contact-section" id="contacts" aria-labelledby="contact-section-title">
-      <div class="contact-section__container">
-        <div class="contact-section__head">
-          <p class="contact-section__subtitle">Контакты RioCar</p>
-
-          <h2 id="contact-section-title" class="contact-section__title">
-            Свяжитесь с <span>нами</span>
-          </h2>
-
-          <p class="contact-section__text">
-            Подберём автомобиль для аренды в Абакане, ответим по условиям,
-            стоимости, бронированию и поездкам по Хакасии и за её пределами.
-          </p>
-        </div>
-
-        <div class="contact-section__inner">
-          <div class="contact-section__left">
-            <div class="contact-section__map">
-              <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Aexample&amp;source=constructor"
-                loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" title="Карта RioCar">
-              </iframe>
-            </div>
-
-            <div class="contact-section__info">
-              <div class="contact-section__row">
-                <span class="contact-section__label">Телефон</span>
-                <a href="tel:+79135444442" class="contact-section__value">+7 (913) 544-44-42</a>
-              </div>
-
-              <div class="contact-section__row">
-                <span class="contact-section__label">MAX</span>
-                <a href="https://max.ru/u/f9LHodD0cOJqcWwh7GT0wEd-bx6rZkAdHNzd8vtUnBMThtehF4DutO8K8Q4" target="_blank"
-                  rel="noopener noreferrer" class="contact-section__value">
-                  Написать в MAX
-                </a>
-              </div>
-
-              <div class="contact-section__row">
-                <span class="contact-section__label">Адрес</span>
-                <span class="contact-section__value">г. Абакан, ул. Торговая, 1</span>
-              </div>
-
-              <div class="contact-section__row">
-                <span class="contact-section__label">Режим работы</span>
-                <span class="contact-section__value">Ежедневно с 09:00 до 17:00</span>
-              </div>
-            </div>
+            <a href="site/pages/cars.html" class="btn btn--primary"
+              >Выбрать автомобиль</a
+            >
           </div>
 
-          <div class="contact-section__form-wrap">
-            <form class="contact-section__form" action="#" method="post" id="form">
+          <div class="advantages__img">
+            <img
+              src="site/image/black-lexus.jpg"
+              alt="Автомобиль RioCar в Абакане"
+            />
+          </div>
+        </div>
+      </section>
 
-              <!-- SUCCESS -->
-              <div class="form-success" id="successMessage" style="display: none;">
-                <h3>Заявка отправлена!</h3>
-                <p>Мы получили вашу заявку и свяжемся в ближайшее время.</p>
+      <!-- reviews -->
+
+      <section class="reviews" id="reviews">
+        <div class="reviews-container">
+          <div class="general-title">
+            <h2>ОТЗЫВЫ О RioCar</h2>
+            <h3>НАМ ДОВЕРЯЮТ НА НЕЗАВИСИМЫХ ПЛОЩАДКАХ</h3>
+          </div>
+
+          <div class="reviews-platforms">
+            <a
+              href="https://yandex.com/maps/org/riocar/1729085988/?ll=91.438983%2C53.742869&z=17"
+              class="reviews-platform reviews-platform--yandex"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div class="reviews-platform__top">
+                <span class="reviews-platform__badge">Яндекс Карты</span>
+                <span class="reviews-platform__rating">5/5</span>
               </div>
 
-              <!-- ERROR -->
-              <div class="form-error" id="errorMessage" style="display: none;">
-                <h3>Ошибка отправки</h3>
-                <p>Попробуйте позже или позвоните нам.</p>
-              </div>
-
-              <!-- HONEYPOT -->
-              <input type="text" name="website" autocomplete="off" tabindex="-1" class="hp-field">
-
-              <div class="contact-section__form-grid">
-
-                <label class="contact-section__field">
-                  <span>Ваше имя</span>
-                  <input type="text" name="name" placeholder="Как к вам обращаться" autocomplete="name" required>
-                </label>
-
-                <label class="contact-section__field">
-                  <span>Телефон</span>
-                  <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" autocomplete="tel" required>
-                </label>
-
-                <label class="contact-section__field contact-section__field--car">
-                  <span>Какой автомобиль вас интересует</span>
-
-                  <select name="car" id="contactCarSelect" required>
-                    <option value="" disabled selected>Выберите автомобиль</option>
-
-                    <option value="Toyota Land Cruiser 200" data-year="2016" data-price="от 12 750 ₽ / сутки">
-                      Toyota Land Cruiser 200 — 2016
-                    </option>
-
-                    <option value="Toyota Land Cruiser 200 с водителем" data-year="2023"
-                      data-price="от 22 500 ₽ / сутки">
-                      Toyota Land Cruiser 200 с водителем — 2023
-                    </option>
-
-                    <option value="Mercedes Benz E-300" data-year="2015" data-price="от 7 380 ₽ / сутки">
-                      Mercedes Benz E-300 — 2015
-                    </option>
-
-                    <option value="Toyota Camry 2023" data-year="2023" data-price="от 6 150 ₽ / сутки">
-                      Toyota Camry — 2023
-                    </option>
-
-                    <option value="Toyota Camry 2017" data-year="2017" data-price="от 6 150 ₽ / сутки">
-                      Toyota Camry — 2017
-                    </option>
-
-                    <option value="Toyota Camry 2015" data-year="2015" data-price="от 4 920 ₽ / сутки">
-                      Toyota Camry — 2015
-                    </option>
-
-                    <option value="Toyota Camry 2013" data-year="2013" data-price="от 4 505 ₽ / сутки">
-                      Toyota Camry — 2013
-                    </option>
-
-                    <option value="Toyota Camry 2010" data-year="2010" data-price="от 3 600 ₽ / сутки">
-                      Toyota Camry — 2010
-                    </option>
-
-                    <option value="Toyota RAV 4" data-year="2014" data-price="от 5 200 ₽ / сутки">
-                      Toyota RAV 4 — 2014
-                    </option>
-
-                    <option value="Hyundai Solaris" data-year="2018" data-price="от 2 870 ₽ / сутки">
-                      Hyundai Solaris — 2018
-                    </option>
-
-                    <option value="Kia Rio" data-year="2018" data-price="от 2 870 ₽ / сутки">
-                      Kia Rio — 2018
-                    </option>
-
-                    <option value="Honda Stepwgn Spada" data-year="2015" data-price="от 6 150 ₽ / сутки">
-                      Honda Stepwgn Spada — 2015
-                    </option>
-                  </select>
-                </label>
-
-                <label class="contact-section__field">
-                  <span>Дата поездки</span>
-                  <input type="text" name="date" placeholder="Например: 15–17 августа">
-                </label>
-
-              </div>
-
-              <!-- скрытые поля -->
-              <input type="hidden" name="car_year" id="contactCarYear">
-              <input type="hidden" name="car_price" id="contactCarPrice">
-
-              <label class="contact-section__field contact-section__field--full">
-                <span>Комментарий</span>
-                <textarea name="message" rows="5"
-                  placeholder="Напишите, куда планируете поехать, сколько человек будет в поездке и какой автомобиль нужен"></textarea>
-              </label>
-
-              <div class="contact-section__bottom">
-                <p class="contact-section__policy">
-                  Нажимая кнопку, вы соглашаетесь c
-                  <a href="#">политикой конфиденциальности</a>.
+              <div class="reviews-platform__info">
+                <h4>Отзывы из Яндекс Карт</h4>
+                <p>
+                  Смотрите реальные оценки, впечатления клиентов и отзывы об
+                  аренде автомобилей RioCar.
                 </p>
+              </div>
 
-                <button type="submit" class="contact-section__btn btn btn--primary" id="submitBtn">
-                  <span class="btn-text">Отправить заявку</span>
+              <div class="reviews-platform__bottom">
+                <span>Открыть площадку</span>
+                <span>Читать отзывы</span>
+              </div>
+            </a>
+
+            <a
+              href="https://2gis.ru/abakan/search/%D1%80%D0%B8%D0%BE%D0%BA%D0%B0%D1%80/firm/9711414977520285/91.438035%2C53.74277?m=91.419129%2C53.744968%2F15.49"
+              class="reviews-platform reviews-platform--2gis"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div class="reviews-platform__top">
+                <span class="reviews-platform__badge">2ГИС</span>
+                <span class="reviews-platform__rating">5/5</span>
+              </div>
+
+              <div class="reviews-platform__info">
+                <h4>Отзывы из 2ГИС</h4>
+                <p>
+                  Независимые отзывы о сервисе, состоянии автомобилей и качестве
+                  обслуживания в RioCar.
+                </p>
+              </div>
+
+              <div class="reviews-platform__bottom">
+                <span>Открыть площадку</span>
+                <span>Читать отзывы</span>
+              </div>
+            </a>
+          </div>
+
+          <div class="reviews-tabs">
+            <button
+              class="reviews-tabs__btn active"
+              type="button"
+              data-review-tab="yandex"
+            >
+              Яндекс Карты
+            </button>
+            <button
+              class="reviews-tabs__btn"
+              type="button"
+              data-review-tab="gis"
+            >
+              2ГИС
+            </button>
+          </div>
+
+          <div class="reviews-pane active" id="reviews-yandex">
+            <div class="reviews-slider swiper reviews-swiper-yandex">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <article class="review-card">
+                    <div class="review-card__top">
+                      <div class="review-card__author">
+                        <strong>Александр</strong>
+                        <span>Яндекс Карты</span>
+                      </div>
+                      <div class="review-card__rating">5/5</div>
+                    </div>
+
+                    <p class="review-card__text">
+                      Брали Toyota Camry на несколько дней. Всё оформили быстро,
+                      машина была чистая и в хорошем состоянии. Поездка прошла
+                      спокойно, сервис понравился.
+                    </p>
+
+                    <div class="review-card__bottom">
+                      <span>Февраль 2026</span>
+                      <a
+                        href="https://yandex.com/maps/org/riocar/1729085988/?ll=91.438983%2C53.742869&z=17"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >Открыть</a
+                      >
+                    </div>
+                  </article>
+                </div>
+
+                <div class="swiper-slide">
+                  <article class="review-card">
+                    <div class="review-card__top">
+                      <div class="review-card__author">
+                        <strong>Марина</strong>
+                        <span>Яндекс Карты</span>
+                      </div>
+                      <div class="review-card__rating">5/5</div>
+                    </div>
+
+                    <p class="review-card__text">
+                      Нужна была машина для поездки за город. Подобрали
+                      подходящий вариант, всё объяснили по условиям, общение
+                      приятное, без суеты и лишних сложностей.
+                    </p>
+
+                    <div class="review-card__bottom">
+                      <span>Январь 2026</span>
+                      <a
+                        href="https://yandex.com/maps/org/riocar/1729085988/?ll=91.438983%2C53.742869&z=17"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >Открыть</a
+                      >
+                    </div>
+                  </article>
+                </div>
+
+                <div class="swiper-slide">
+                  <article class="review-card">
+                    <div class="review-card__top">
+                      <div class="review-card__author">
+                        <strong>Игорь</strong>
+                        <span>Яндекс Карты</span>
+                      </div>
+                      <div class="review-card__rating">5/5</div>
+                    </div>
+
+                    <p class="review-card__text">
+                      Понравилось, что всё честно и понятно. Машину выдали
+                      вовремя, салон чистый, по состоянию автомобиля вопросов не
+                      было. Будем обращаться ещё.
+                    </p>
+
+                    <div class="review-card__bottom">
+                      <span>Декабрь 2025</span>
+                      <a
+                        href="https://yandex.com/maps/org/riocar/1729085988/?ll=91.438983%2C53.742869&z=17"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >Открыть</a
+                      >
+                    </div>
+                  </article>
+                </div>
+
+                <div class="swiper-slide">
+                  <article class="review-card">
+                    <div class="review-card__top">
+                      <div class="review-card__author">
+                        <strong>Дмитрий</strong>
+                        <span>Яндекс Карты</span>
+                      </div>
+                      <div class="review-card__rating">5/5</div>
+                    </div>
+
+                    <p class="review-card__text">
+                      Брали авто для поездки по Хакасии. Очень удобно, что можно
+                      быстро подобрать машину под маршрут. Сервис аккуратный,
+                      всё на хорошем уровне.
+                    </p>
+
+                    <div class="review-card__bottom">
+                      <span>Ноябрь 2025</span>
+                      <a
+                        href="https://yandex.com/maps/org/riocar/1729085988/?ll=91.438983%2C53.742869&z=17"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >Открыть</a
+                      >
+                    </div>
+                  </article>
+                </div>
+              </div>
+
+              <div class="reviews-slider__nav">
+                <button
+                  class="reviews-slider__btn reviews-slider__btn--prev reviews-slider__btn--prev-yandex"
+                  type="button"
+                  aria-label="Назад"
+                >
+                  <svg viewBox="0 0 24 24">
+                    <path d="M15 6L9 12L15 18" />
+                  </svg>
+                </button>
+
+                <button
+                  class="reviews-slider__btn reviews-slider__btn--next reviews-slider__btn--next-yandex"
+                  type="button"
+                  aria-label="Вперёд"
+                >
+                  <svg viewBox="0 0 24 24">
+                    <path d="M9 6L15 12L9 18" />
+                  </svg>
                 </button>
               </div>
+            </div>
+          </div>
 
-            </form>
+          <div class="reviews-pane" id="reviews-gis">
+            <div class="reviews-slider swiper reviews-swiper-gis">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <article class="review-card">
+                    <div class="review-card__top">
+                      <div class="review-card__author">
+                        <strong>Екатерина</strong>
+                        <span>2ГИС</span>
+                      </div>
+                      <div class="review-card__rating">5/5</div>
+                    </div>
+
+                    <p class="review-card__text">
+                      Очень понравился подход. Быстро вышли на связь, помогли
+                      подобрать автомобиль и всё подробно рассказали по аренде.
+                      Машина была в отличном состоянии.
+                    </p>
+
+                    <div class="review-card__bottom">
+                      <span>Февраль 2026</span>
+                      <a
+                        href="https://2gis.ru/abakan/search/%D1%80%D0%B8%D0%BE%D0%BA%D0%B0%D1%80/firm/9711414977520285/91.438035%2C53.74277?m=91.419129%2C53.744968%2F15.49"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >Открыть</a
+                      >
+                    </div>
+                  </article>
+                </div>
+
+                <div class="swiper-slide">
+                  <article class="review-card">
+                    <div class="review-card__top">
+                      <div class="review-card__author">
+                        <strong>Ольга</strong>
+                        <span>2ГИС</span>
+                      </div>
+                      <div class="review-card__rating">5/5</div>
+                    </div>
+
+                    <p class="review-card__text">
+                      Бронировали машину заранее для семейной поездки. Всё
+                      прошло очень спокойно: без задержек, без неприятных
+                      сюрпризов, с нормальным человеческим отношением.
+                    </p>
+
+                    <div class="review-card__bottom">
+                      <span>Январь 2026</span>
+                      <a
+                        href="https://2gis.ru/abakan/search/%D1%80%D0%B8%D0%BE%D0%BA%D0%B0%D1%80/firm/9711414977520285/91.438035%2C53.74277?m=91.419129%2C53.744968%2F15.49"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >Открыть</a
+                      >
+                    </div>
+                  </article>
+                </div>
+
+                <div class="swiper-slide">
+                  <article class="review-card">
+                    <div class="review-card__top">
+                      <div class="review-card__author">
+                        <strong>Андрей</strong>
+                        <span>2ГИС</span>
+                      </div>
+                      <div class="review-card__rating">5/5</div>
+                    </div>
+
+                    <p class="review-card__text">
+                      Хороший сервис, всё понятно по условиям, машина чистая и
+                      ухоженная. Для поездки по Абакану и за город подошло
+                      отлично.
+                    </p>
+
+                    <div class="review-card__bottom">
+                      <span>Декабрь 2025</span>
+                      <a
+                        href="https://2gis.ru/abakan/search/%D1%80%D0%B8%D0%BE%D0%BA%D0%B0%D1%80/firm/9711414977520285/91.438035%2C53.74277?m=91.419129%2C53.744968%2F15.49"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >Открыть</a
+                      >
+                    </div>
+                  </article>
+                </div>
+
+                <div class="swiper-slide">
+                  <article class="review-card">
+                    <div class="review-card__top">
+                      <div class="review-card__author">
+                        <strong>Никита</strong>
+                        <span>2ГИС</span>
+                      </div>
+                      <div class="review-card__rating">5/5</div>
+                    </div>
+
+                    <p class="review-card__text">
+                      Пользовались услугами RioCar впервые. Остались довольны:
+                      быстрое оформление, понятные условия, хороший выбор
+                      автомобилей и приятное общение.
+                    </p>
+
+                    <div class="review-card__bottom">
+                      <span>Ноябрь 2025</span>
+                      <a
+                        href="https://2gis.ru/abakan/search/%D1%80%D0%B8%D0%BE%D0%BA%D0%B0%D1%80/firm/9711414977520285/91.438035%2C53.74277?m=91.419129%2C53.744968%2F15.49"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >Открыть</a
+                      >
+                    </div>
+                  </article>
+                </div>
+              </div>
+
+              <div class="reviews-slider__nav">
+                <button
+                  class="reviews-slider__btn reviews-slider__btn--prev reviews-slider__btn--prev-gis"
+                  type="button"
+                  aria-label="Назад"
+                >
+                  <svg viewBox="0 0 24 24">
+                    <path d="M15 6L9 12L15 18" />
+                  </svg>
+                </button>
+
+                <button
+                  class="reviews-slider__btn reviews-slider__btn--next reviews-slider__btn--next-gis"
+                  type="button"
+                  aria-label="Вперёд"
+                >
+                  <svg viewBox="0 0 24 24">
+                    <path d="M9 6L15 12L9 18" />
+                  </svg>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-  </main>
+      <!-- faq -->
 
-  <div data-include="components/footer.html"></div>
+      <section class="faq" id="faq" aria-labelledby="faq-title">
+        <div class="faq__container">
+          <div class="faq__title">
+            <h2 id="faq-title">
+              ЧАСТЫЕ
+              <span>ВОПРОСЫ</span>
+            </h2>
+          </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script src="site/scripts/main.js"></script>
-</body>
+          <div
+            class="faq__list"
+            role="list"
+            aria-label="Часто задаваемые вопросы"
+          >
+            <div class="faq__item active" role="listitem">
+              <button
+                class="faq__question"
+                type="button"
+                aria-expanded="true"
+                aria-controls="faq-answer-1"
+                id="faq-question-1"
+              >
+                <span>Можно ли арендовать автомобиль без водителя?</span>
+                <span class="faq__icon" aria-hidden="true"></span>
+              </button>
+              <div
+                class="faq__answer"
+                id="faq-answer-1"
+                role="region"
+                aria-labelledby="faq-question-1"
+              >
+                <div class="faq__answer-content">
+                  Да, в RioCar можно арендовать автомобиль как без водителя, так
+                  и с водителем. Подберём удобный вариант под поездки по
+                  Абакану, Хакасии и за её пределами.
+                </div>
+              </div>
+            </div>
 
+            <div class="faq__item" role="listitem">
+              <button
+                class="faq__question"
+                type="button"
+                aria-expanded="false"
+                aria-controls="faq-answer-2"
+                id="faq-question-2"
+              >
+                <span>Можно ли заказать автомобиль с водителем?</span>
+                <span class="faq__icon" aria-hidden="true"></span>
+              </button>
+              <div
+                class="faq__answer"
+                id="faq-answer-2"
+                role="region"
+                aria-labelledby="faq-question-2"
+              >
+                <div class="faq__answer-content">
+                  Да, у нас доступна аренда автомобиля с водителем. Это удобно
+                  для деловых поездок, встреч, трансферов, поездок по Хакасии и
+                  маршрутов за пределы города.
+                </div>
+              </div>
+            </div>
+
+            <div class="faq__item" role="listitem">
+              <button
+                class="faq__question"
+                type="button"
+                aria-expanded="false"
+                aria-controls="faq-answer-3"
+                id="faq-question-3"
+              >
+                <span>Сколько стоит аренда автомобиля с водителем?</span>
+                <span class="faq__icon" aria-hidden="true"></span>
+              </button>
+              <div
+                class="faq__answer"
+                id="faq-answer-3"
+                role="region"
+                aria-labelledby="faq-question-3"
+              >
+                <div class="faq__answer-content">
+                  Стоимость аренды автомобиля с водителем начинается от 17 000 ₽
+                  в сутки. Дополнительно оплачивается работа водителя — от 5 500
+                  ₽ в день, в зависимости от маршрута. Отдельно оплачиваются
+                  питание, проживание водителя и ГСМ по факту расхода.
+                </div>
+              </div>
+            </div>
+
+            <div class="faq__item" role="listitem">
+              <button
+                class="faq__question"
+                type="button"
+                aria-expanded="false"
+                aria-controls="faq-answer-4"
+                id="faq-question-4"
+              >
+                <span>Можно ли выезжать за пределы Абакана?</span>
+                <span class="faq__icon" aria-hidden="true"></span>
+              </button>
+              <div
+                class="faq__answer"
+                id="faq-answer-4"
+                role="region"
+                aria-labelledby="faq-question-4"
+              >
+                <div class="faq__answer-content">
+                  Да, автомобиль можно использовать не только в Абакане.
+                  Подробности маршрута лучше заранее согласовать при
+                  бронировании, чтобы мы сразу предложили подходящий автомобиль
+                  и условия аренды.
+                </div>
+              </div>
+            </div>
+
+            <div class="faq__item" role="listitem">
+              <button
+                class="faq__question"
+                type="button"
+                aria-expanded="false"
+                aria-controls="faq-answer-6"
+                id="faq-question-6"
+              >
+                <span>Можно ли заказать доставку автомобиля по городу?</span>
+                <span class="faq__icon" aria-hidden="true"></span>
+              </button>
+              <div
+                class="faq__answer"
+                id="faq-answer-6"
+                role="region"
+                aria-labelledby="faq-question-6"
+              >
+                <div class="faq__answer-content">
+                  Да, мы можем организовать доставку автомобиля по городу. Это
+                  удобно, если вы хотите сразу получить машину в нужной точке
+                  без лишних поездок.
+                </div>
+              </div>
+            </div>
+
+            <div class="faq__item" role="listitem">
+              <button
+                class="faq__question"
+                type="button"
+                aria-expanded="false"
+                aria-controls="faq-answer-7"
+                id="faq-question-7"
+              >
+                <span>Что делать, если во время аренды возникнет поломка?</span>
+                <span class="faq__icon" aria-hidden="true"></span>
+              </button>
+              <div
+                class="faq__answer"
+                id="faq-answer-7"
+                role="region"
+                aria-labelledby="faq-question-7"
+              >
+                <div class="faq__answer-content">
+                  Если во время аренды возникнет техническая неисправность,
+                  сразу свяжитесь с нами. Мы оперативно подскажем дальнейшие
+                  действия и поможем решить ситуацию максимально быстро.
+                </div>
+              </div>
+            </div>
+
+            <div class="faq__item" role="listitem">
+              <button
+                class="faq__question"
+                type="button"
+                aria-expanded="false"
+                aria-controls="faq-answer-8"
+                id="faq-question-8"
+              >
+                <span>Нужен ли залог при аренде автомобиля?</span>
+                <span class="faq__icon" aria-hidden="true"></span>
+              </button>
+              <div
+                class="faq__answer"
+                id="faq-answer-8"
+                role="region"
+                aria-labelledby="faq-question-8"
+              >
+                <div class="faq__answer-content">
+                  Размер залога зависит от конкретного автомобиля и условий
+                  аренды. Точную информацию мы сообщим заранее перед
+                  бронированием, чтобы все условия были понятны до оформления.
+                </div>
+              </div>
+            </div>
+
+            <div class="faq__item" role="listitem">
+              <button
+                class="faq__question"
+                type="button"
+                aria-expanded="false"
+                aria-controls="faq-answer-9"
+                id="faq-question-9"
+              >
+                <span>Можно ли арендовать авто для поездки по Хакасии?</span>
+                <span class="faq__icon" aria-hidden="true"></span>
+              </button>
+              <div
+                class="faq__answer"
+                id="faq-answer-9"
+                role="region"
+                aria-labelledby="faq-question-9"
+              >
+                <div class="faq__answer-content">
+                  Да, автомобили RioCar подходят для поездок по Хакасии,
+                  маршрутов за город и путешествий на несколько дней. Мы поможем
+                  подобрать автомобиль под маршрут.
+                </div>
+              </div>
+            </div>
+
+            <div class="faq__item" role="listitem">
+              <button
+                class="faq__question"
+                type="button"
+                aria-expanded="false"
+                aria-controls="faq-answer-10"
+                id="faq-question-10"
+              >
+                <span>Какие автомобили доступны в прокате в Абакане?</span>
+                <span class="faq__icon" aria-hidden="true"></span>
+              </button>
+              <div
+                class="faq__answer"
+                id="faq-answer-10"
+                role="region"
+                aria-labelledby="faq-question-10"
+              >
+                <div class="faq__answer-content">
+                  В RioCar доступны автомобили разных классов: седаны,
+                  кроссоверы и машины для поездок по трассе и городу. Полный
+                  список доступен в разделе «Автопарк».
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- туристический блок -->
+
+      <section class="routes-preview">
+        <div class="routes-preview__overlay"></div>
+
+        <div class="routes-preview__container">
+          <div class="routes-preview__content">
+            <p class="routes__subtitle reveal reveal--1">
+              МАРШРУТЫ ПО ХАКАСИИ НА МАШИНЕ
+            </p>
+
+            <h2 class="routes__title reveal reveal--2">
+              Открой Хакасию вместе с <span>RioCar</span>
+            </h2>
+
+            <p class="routes__text reveal reveal--3">
+              В RioCar уже доступен раздел «Твоё путешествие» — маршруты,
+              красивые места и идеи для поездок по Хакасии.
+            </p>
+
+            <p class="routes__text routes__text--small reveal reveal--4">
+              Полный опыт будет доступен в приложении — с расширенными
+              возможностями и удобным планированием путешествий.
+            </p>
+
+            <a
+              href="site/pages/travel.html"
+              class="btn btn--primary reveal reveal--5"
+            >
+              Смотреть маршруты
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- контакты -->
+
+      <section
+        class="contact-section"
+        id="contacts"
+        aria-labelledby="contact-section-title"
+      >
+        <div class="contact-section__container">
+          <div class="contact-section__head">
+            <p class="contact-section__subtitle">Контакты RioCar</p>
+
+            <h2 id="contact-section-title" class="contact-section__title">
+              Забронировать авто в <span>Абакане</span>
+            </h2>
+
+            <p class="contact-section__text">
+              Оставьте заявку на аренду автомобиля в Абакане. Мы подберём машину
+              под город, поездку по Хакасии или маршрут за пределы региона и
+              расскажем условия бронирования.
+            </p>
+          </div>
+
+          <div class="contact-section__inner">
+            <div class="contact-section__left">
+              <div class="contact-section__map">
+                <iframe
+                  src="https://yandex.ru/map-widget/v1/?um=constructor%3Aexample&amp;source=constructor"
+                  loading="lazy"
+                  allowfullscreen
+                  referrerpolicy="no-referrer-when-downgrade"
+                  title="Карта RioCar"
+                >
+                </iframe>
+              </div>
+
+              <div class="contact-section__info">
+                <div class="contact-section__row">
+                  <span class="contact-section__label">Телефон</span>
+                  <a href="tel:+79135444442" class="contact-section__value"
+                    >+7 (913) 544-44-42</a
+                  >
+                </div>
+
+                <div class="contact-section__row">
+                  <span class="contact-section__label">MAX</span>
+                  <a
+                    href="https://max.ru/u/f9LHodD0cOJqcWwh7GT0wEd-bx6rZkAdHNzd8vtUnBMThtehF4DutO8K8Q4"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="contact-section__value"
+                  >
+                    Написать в MAX
+                  </a>
+                </div>
+
+                <div class="contact-section__row">
+                  <span class="contact-section__label">Адрес</span>
+                  <address class="contact-section__value">
+                    г. Абакан, ул. Торговая, 1
+                  </address>
+                </div>
+
+                <div class="contact-section__row">
+                  <span class="contact-section__label">Режим работы</span>
+                  <span class="contact-section__value">
+                    Ежедневно с 09:00 до 17:00
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="contact-section__form-wrap">
+              <form
+                class="contact-section__form"
+                action="#"
+                method="post"
+                id="form"
+              >
+                <!-- SUCCESS -->
+                <div
+                  class="form-success"
+                  id="successMessage"
+                  style="display: none"
+                >
+                  <h3>Заявка отправлена!</h3>
+                  <p>Мы получили вашу заявку и свяжемся в ближайшее время.</p>
+                </div>
+
+                <!-- ERROR -->
+                <div class="form-error" id="errorMessage" style="display: none">
+                  <h3>Ошибка отправки</h3>
+                  <p>Попробуйте позже или позвоните нам.</p>
+                </div>
+
+                <!-- HONEYPOT -->
+                <input
+                  type="text"
+                  name="website"
+                  autocomplete="off"
+                  tabindex="-1"
+                  class="hp-field"
+                />
+
+                <div class="contact-section__form-grid">
+                  <label class="contact-section__field">
+                    <span>Ваше имя</span>
+                    <input
+                      type="text"
+                      name="name"
+                      placeholder="Как к вам обращаться"
+                      autocomplete="name"
+                      required
+                    />
+                  </label>
+
+                  <label class="contact-section__field">
+                    <span>Телефон</span>
+                    <input
+                      type="tel"
+                      name="phone"
+                      placeholder="+7 (___) ___-__-__"
+                      autocomplete="tel"
+                      required
+                    />
+                  </label>
+
+                  <label
+                    class="contact-section__field contact-section__field--car"
+                  >
+                    <span>Какой автомобиль вас интересует</span>
+
+                    <select name="car" id="contactCarSelect" required>
+                      <option value="" disabled selected>
+                        Выберите автомобиль
+                      </option>
+
+                      <option
+                        value="Toyota Land Cruiser 200"
+                        data-year="2016"
+                        data-price="от 12 750 ₽ / сутки"
+                      >
+                        Toyota Land Cruiser 200 — 2016
+                      </option>
+
+                      <option
+                        value="Toyota Land Cruiser 200 с водителем"
+                        data-year="2023"
+                        data-price="от 22 500 ₽ / сутки"
+                      >
+                        Toyota Land Cruiser 200 с водителем — 2023
+                      </option>
+
+                      <option
+                        value="Mercedes Benz E-300"
+                        data-year="2015"
+                        data-price="от 7 380 ₽ / сутки"
+                      >
+                        Mercedes Benz E-300 — 2015
+                      </option>
+
+                      <option
+                        value="Toyota Camry 2023"
+                        data-year="2023"
+                        data-price="от 6 150 ₽ / сутки"
+                      >
+                        Toyota Camry — 2023
+                      </option>
+
+                      <option
+                        value="Toyota Camry 2017"
+                        data-year="2017"
+                        data-price="от 6 150 ₽ / сутки"
+                      >
+                        Toyota Camry — 2017
+                      </option>
+
+                      <option
+                        value="Toyota Camry 2015"
+                        data-year="2015"
+                        data-price="от 4 920 ₽ / сутки"
+                      >
+                        Toyota Camry — 2015
+                      </option>
+
+                      <option
+                        value="Toyota Camry 2013"
+                        data-year="2013"
+                        data-price="от 4 505 ₽ / сутки"
+                      >
+                        Toyota Camry — 2013
+                      </option>
+
+                      <option
+                        value="Toyota Camry 2010"
+                        data-year="2010"
+                        data-price="от 3 600 ₽ / сутки"
+                      >
+                        Toyota Camry — 2010
+                      </option>
+
+                      <option
+                        value="Toyota RAV 4"
+                        data-year="2014"
+                        data-price="от 5 200 ₽ / сутки"
+                      >
+                        Toyota RAV 4 — 2014
+                      </option>
+
+                      <option
+                        value="Hyundai Solaris"
+                        data-year="2018"
+                        data-price="от 2 870 ₽ / сутки"
+                      >
+                        Hyundai Solaris — 2018
+                      </option>
+
+                      <option
+                        value="Kia Rio"
+                        data-year="2018"
+                        data-price="от 2 870 ₽ / сутки"
+                      >
+                        Kia Rio — 2018
+                      </option>
+
+                      <option
+                        value="Honda Stepwgn Spada"
+                        data-year="2015"
+                        data-price="от 6 150 ₽ / сутки"
+                      >
+                        Honda Stepwgn Spada — 2015
+                      </option>
+                    </select>
+                  </label>
+
+                  <label class="contact-section__field">
+                    <span>Дата поездки</span>
+                    <input
+                      type="text"
+                      name="date"
+                      placeholder="Например: 15–17 августа"
+                    />
+                  </label>
+                </div>
+
+                <!-- скрытые поля -->
+                <input type="hidden" name="car_year" id="contactCarYear" />
+                <input type="hidden" name="car_price" id="contactCarPrice" />
+
+                <label
+                  class="contact-section__field contact-section__field--full"
+                >
+                  <span>Комментарий</span>
+                  <textarea
+                    name="message"
+                    rows="5"
+                    placeholder="Напишите, куда планируете поехать, сколько человек будет в поездке и какой автомобиль нужен"
+                  ></textarea>
+                </label>
+
+                <div class="contact-section__bottom">
+                  <p class="contact-section__policy">
+                    Нажимая кнопку, вы соглашаетесь c
+                    <a href="#">политикой конфиденциальности</a>.
+                  </p>
+
+                  <button
+                    type="submit"
+                    class="contact-section__btn btn btn--primary"
+                    id="submitBtn"
+                  >
+                    <span class="btn-text">Отправить заявку</span>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div data-include="components/footer.html"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="site/scripts/main.js"></script>
+
+    <!-- FAQ schema -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Можно ли арендовать автомобиль без водителя в Абакане?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Да, в RioCar можно арендовать автомобиль без водителя и с водителем."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Можно ли выезжать за пределы Абакана?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Да, автомобили RioCar подходят для поездок по Хакасии и за пределы региона."
+            }
+          }
+        ]
+      }
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "AutoRental",
+        "@id": "https://dimas-shumil.github.io/RioCar/#riocar",
+        "name": "RioCar",
+        "url": "https://dimas-shumil.github.io/RioCar/",
+        "logo": "https://dimas-shumil.github.io/RioCar/site/image/logo.png",
+        "image": "https://dimas-shumil.github.io/RioCar/site/image/black-lexus.jpg",
+        "description": "RioCar — прокат автомобилей в Абакане и Хакасии. Аренда авто без водителя и с водителем для города, деловых поездок, трансферов и путешествий по региону.",
+        "telephone": "+79135444442",
+        "priceRange": "₽₽",
+        "paymentAccepted": "Cash, Bank Card, Bank Transfer",
+        "currenciesAccepted": "RUB",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Абакан",
+          "streetAddress": "ул. Торговая, 1",
+          "addressCountry": "RU"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 53.742869,
+          "longitude": 91.438983
+        },
+        "areaServed": [
+          {
+            "@type": "City",
+            "name": "Абакан"
+          },
+          {
+            "@type": "AdministrativeArea",
+            "name": "Республика Хакасия"
+          },
+          {
+            "@type": "City",
+            "name": "Черногорск"
+          },
+          {
+            "@type": "City",
+            "name": "Саяногорск"
+          },
+          {
+            "@type": "City",
+            "name": "Минусинск"
+          }
+        ],
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday"
+            ],
+            "opens": "09:00",
+            "closes": "17:00"
+          }
+        ],
+        "sameAs": [
+          "https://yandex.com/maps/org/riocar/1729085988/",
+          "https://2gis.ru/abakan/firm/9711414977520285"
+        ],
+        "makesOffer": [
+          {
+            "@type": "Offer",
+            "name": "Аренда автомобиля без водителя",
+            "description": "Прокат автомобилей в Абакане без водителя для поездок по городу, Хакасии и за пределы региона.",
+            "areaServed": "Абакан, Республика Хакасия",
+            "priceCurrency": "RUB"
+          },
+          {
+            "@type": "Offer",
+            "name": "Аренда автомобиля с водителем",
+            "description": "Аренда автомобиля с водителем для трансферов, деловых поездок и маршрутов по Хакасии.",
+            "areaServed": "Абакан, Республика Хакасия",
+            "priceCurrency": "RUB"
+          },
+          {
+            "@type": "Offer",
+            "name": "Автомобиль для путешествий по Хакасии",
+            "description": "Подбор автомобиля для поездок к природным локациям, озёрам, горам и туристическим маршрутам Хакасии.",
+            "areaServed": "Республика Хакасия",
+            "priceCurrency": "RUB"
+          }
+        ]
+      }
+    </script>
+  </body>
 </html>

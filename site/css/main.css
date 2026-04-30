@@ -298,7 +298,6 @@ body.menu-open {
 }
 .footer__logo {
   display: inline-flex;
-  width: -moz-fit-content;
   width: fit-content;
   margin-bottom: 22px;
 }
@@ -332,7 +331,6 @@ body.menu-open {
   gap: 14px;
 }
 .footer__nav a {
-  width: -moz-fit-content;
   width: fit-content;
   color: #cfcfcf;
   font-size: 15px;
@@ -515,8 +513,7 @@ video {
 }
 
 video {
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 ul,
@@ -530,11 +527,6 @@ ol {
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(10px);
-}
-
-::-moz-selection {
-  background: #d8a016;
-  color: #000;
 }
 
 ::selection {
@@ -574,8 +566,7 @@ ol {
   inset: 0;
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   z-index: 1;
 }
 .hero-main__overlay {
@@ -587,10 +578,8 @@ ol {
 .hero-main__content {
   position: relative;
   z-index: 3;
-  max-width: 860px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  width: 100%;
+  max-width: 920px;
 }
 .hero-main__subtitle {
   margin-bottom: 18px;
@@ -734,6 +723,16 @@ ol {
   margin-bottom: 40px;
   text-align: center;
 }
+.section-two__text {
+  width: 100%;
+  max-width: 760px;
+  margin: -18px auto 34px;
+  color: rgba(207, 207, 207, 0.72);
+  font-size: clamp(13px, 1vw, 15px);
+  line-height: 1.7;
+  text-align: center;
+  letter-spacing: 0.01em;
+}
 .section-two__container {
   width: 100%;
   max-width: 1200px;
@@ -752,8 +751,7 @@ ol {
   max-width: 170px;
   width: 100%;
   height: auto;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
 }
 
 @media (max-width: 1200px) {
@@ -777,6 +775,12 @@ ol {
   .section-two__container {
     grid-template-columns: repeat(6, 1fr);
     gap: 20px;
+  }
+  .section-two__text {
+    max-width: 92%;
+    margin: -12px auto 26px;
+    font-size: 13px;
+    line-height: 1.6;
   }
   .section-two__item {
     min-height: 70px;
@@ -814,7 +818,7 @@ ol {
   gap: 16px;
   flex: 1 1 54%;
 }
-.advantages .advantages__text h3 {
+.advantages .advantages__text .advantages-p_high {
   color: #d8a016;
   font-size: 20px;
   font-family: inter, sans-serif;
@@ -860,8 +864,7 @@ ol {
   width: 100%;
   height: auto;
   display: block;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
 }
 .advantages .btn {
@@ -1776,9 +1779,6 @@ ol {
   line-height: 1.4;
   transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
 }
-.contact-section__field input::-moz-placeholder, .contact-section__field textarea::-moz-placeholder {
-  color: rgba(255, 255, 255, 0.38);
-}
 .contact-section__field input::placeholder,
 .contact-section__field textarea::placeholder {
   color: rgba(255, 255, 255, 0.38);
@@ -1928,4 +1928,4 @@ ol {
   .contact-section__map iframe {
     min-height: 320px;
   }
-}/*# sourceMappingURL=main.css.map */
+}
