@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /.env
+Disallow: /package.json
+Disallow: /package-lock.json
+Disallow: /server.js
+
+Sitemap: https://riocar-abakan.ru/sitemap.xml
