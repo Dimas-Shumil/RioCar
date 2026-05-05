@@ -16,13 +16,7 @@ const __dirname = path.dirname(__filename);
 const PORT = Number(process.env.PORT) || 3000;
 const MIN_FORM_TIME_MS = 2500;
 
-const requiredEnv = [
-  'SMTP_HOST',
-  'SMTP_PORT',
-  'SMTP_USER',
-  'SMTP_PASS',
-  'TO_EMAIL',
-];
+const requiredEnv = ['SMTP_HOST', 'SMTP_PORT', 'SMTP_USER', 'SMTP_PASS', 'TO_EMAIL'];
 const missingEnv = requiredEnv.filter((key) => !process.env[key]);
 
 if (missingEnv.length) {
@@ -63,6 +57,9 @@ const transporter = nodemailer.createTransport({
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS,
   },
+  connectionTimeout: 10000,
+  greetingTimeout: 10000,
+  socketTimeout: 10000,
 });
 
 app.get('/health', (req, res) => {
@@ -158,7 +155,7 @@ app.post('/api/send', sendLimiter, async (req, res) => {
 Комментарий: ${message || '—'}
 Страница: ${page || '—'}
 Дата заявки: ${createdAt}
-        `.trim();
+    `.trim();
 
     const html = buildEmailTemplate({
       name,
@@ -173,13 +170,19 @@ app.post('/api/send', sendLimiter, async (req, res) => {
       createdAt,
     });
 
-    await transporter.sendMail({
+    const sendMailPromise = transporter.sendMail({
       from: `"RioCar сайт" <${process.env.SMTP_USER}>`,
       to: process.env.TO_EMAIL,
       subject: `Заявка RioCar: ${car}`,
       text,
       html,
     });
+
+    const timeoutPromise = new Promise((_, reject) => {
+      setTimeout(() => reject(new Error('SMTP timeout')), 10000);
+    });
+
+    await Promise.race([sendMailPromise, timeoutPromise]);
 
     return res.status(200).json({
       success: true,
@@ -197,7 +200,7 @@ app.post('/api/send', sendLimiter, async (req, res) => {
 
 transporter.verify((error) => {
   if (error) {
-    console.error('Ошибка подключения к SMTP RioCar:', error);
+    console.error('Ошибка подключения к SMTP RioCar:', error.message);
   } else {
     console.log('SMTP RioCar готов к отправке писем');
   }
@@ -227,17 +230,9 @@ function escapeHtml(value) {
 function normalizePhone(phone) {
   const digits = String(phone || '').replace(/\D/g, '');
 
-  if (digits.length === 11 && digits.startsWith('8')) {
-    return digits;
-  }
-
-  if (digits.length === 11 && digits.startsWith('7')) {
-    return `8${digits.slice(1)}`;
-  }
-
-  if (digits.length === 10) {
-    return `8${digits}`;
-  }
+  if (digits.length === 11 && digits.startsWith('8')) return digits;
+  if (digits.length === 11 && digits.startsWith('7')) return `8${digits.slice(1)}`;
+  if (digits.length === 10) return `8${digits}`;
 
   return '';
 }
@@ -248,7 +243,6 @@ function isValidPhone(phone) {
 
 function formatPhone(phone) {
   const normalized = normalizePhone(phone);
-
   if (!normalized) return '';
 
   return `+7 (${normalized.slice(1, 4)}) ${normalized.slice(4, 7)}-${normalized.slice(7, 9)}-${normalized.slice(9, 11)}`;
@@ -256,7 +250,6 @@ function formatPhone(phone) {
 
 function makeTelLink(phone) {
   const normalized = normalizePhone(phone);
-
   if (!normalized) return '';
 
   return `+7${normalized.slice(1)}`;
@@ -358,14 +351,14 @@ RIOCAR / ЗАЯВКА
 ${emailRow('Имя', escapeHtml(name))}
 
 ${emailRow(
-  'Телефон',
-  `<a href="tel:${escapeHtml(telLink)}" style="color:#d8a016; text-decoration:none;">${escapeHtml(formattedPhone)}</a>`,
-)}
+    'Телефон',
+    `<a href="tel:${escapeHtml(telLink)}" style="color:#d8a016; text-decoration:none;">${escapeHtml(formattedPhone)}</a>`,
+  )}
 
 ${emailRow(
-  'Автомобиль',
-  `<span style="display:inline-block; padding:10px 16px; border-radius:999px; background:#d8a016; color:#000000; font-size:15px; font-weight:700;">${escapeHtml(car)}</span>`,
-)}
+    'Автомобиль',
+    `<span style="display:inline-block; padding:10px 16px; border-radius:999px; background:#d8a016; color:#000000; font-size:15px; font-weight:700;">${escapeHtml(car)}</span>`,
+  )}
 
 ${emailRow('Год', escapeHtml(carYear || '—'))}
 

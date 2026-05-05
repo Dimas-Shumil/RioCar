@@ -473,6 +473,7 @@ function formatPhoneForSend(phone) {
 
   return `+7 (${normalized.slice(1, 4)}) ${normalized.slice(4, 7)}-${normalized.slice(7, 9)}-${normalized.slice(9, 11)}`;
 }
+
 function initContactFormSubmit() {
   const form = document.getElementById('form');
   if (!form) return;
@@ -569,14 +570,22 @@ function initContactFormSubmit() {
     if (submitBtn) submitBtn.disabled = true;
     if (btnText) btnText.textContent = 'Отправляем...';
 
+    let timeoutId;
+
     try {
+      const controller = new AbortController();
+      timeoutId = setTimeout(() => controller.abort(), 12000);
+
       const response = await fetch('/api/send', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
+        signal: controller.signal,
       });
+
+      clearTimeout(timeoutId);
 
       const result = await response.json().catch(() => ({}));
 
@@ -594,10 +603,14 @@ function initContactFormSubmit() {
       form.reset();
       initContactCarSelect();
     } catch (error) {
-      showError(
-        'Ошибка отправки',
-        'Попробуйте позже или свяжитесь с нами по телефону.',
-      );
+      if (timeoutId) clearTimeout(timeoutId);
+
+      const errorText =
+        error.name === 'AbortError'
+          ? 'Сервер долго не отвечает. Попробуйте позже или свяжитесь с нами по телефону.'
+          : 'Ошибка отправки. Попробуйте позже или свяжитесь с нами по телефону.';
+
+      showError('Ошибка отправки', errorText);
     } finally {
       if (submitBtn) submitBtn.disabled = false;
       if (btnText) btnText.textContent = 'Отправить заявку';
