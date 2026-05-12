@@ -1102,6 +1102,221 @@ ol {
     }
 }
 
+@media (max-width: 1024px) {
+  .reviews {
+    padding: 56px 28px;
+
+    &-container {
+      gap: 40px;
+    }
+
+    .general-title {
+      h2 {
+        font-size: 36px;
+      }
+
+      h3 {
+        font-size: 24px;
+      }
+    }
+
+    &-platform {
+      padding: 22px;
+
+      &__rating {
+        font-size: 24px;
+      }
+    }
+  }
+
+  .review-card {
+    padding: 22px;
+  }
+}
+
+@media (max-width: 768px) {
+  .reviews {
+    padding: 48px 20px;
+
+    &-container {
+      gap: 32px;
+    }
+
+    .general-title {
+      gap: 12px;
+
+      h2 {
+        font-size: 30px;
+        line-height: 1.1;
+      }
+
+      h3 {
+        font-size: 20px;
+        line-height: 1.2;
+      }
+    }
+
+    &-platforms {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    &-platform {
+      gap: 16px;
+      padding: 20px;
+      border-radius: 18px;
+
+      &:hover {
+        transform: none;
+      }
+
+      &__top {
+        gap: 12px;
+      }
+
+      &__rating {
+        font-size: 22px;
+        white-space: nowrap;
+      }
+
+      &__info {
+        h4 {
+          font-size: 18px;
+        }
+
+        p {
+          font-size: 14px;
+          line-height: 1.5;
+        }
+      }
+
+      &__bottom {
+        gap: 12px;
+        font-size: 13px;
+      }
+    }
+
+    &-tabs {
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      &__btn {
+        flex: 0 0 auto;
+        padding: 12px 18px;
+        font-size: 13px;
+      }
+    }
+
+    &-slider {
+      overflow: visible;
+
+      &__nav {
+        justify-content: center;
+        margin-top: 18px;
+      }
+
+      &__btn {
+        width: 44px;
+        height: 44px;
+      }
+    }
+  }
+
+  .review-card {
+    padding: 20px;
+    border-radius: 18px;
+    gap: 16px;
+
+    &:hover {
+      transform: none;
+    }
+
+    &__top {
+      gap: 12px;
+    }
+
+    &__author {
+      strong {
+        font-size: 16px;
+      }
+    }
+
+    &__text {
+      font-size: 14px;
+    }
+
+    &__bottom {
+      gap: 12px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .reviews {
+    padding: 40px 16px;
+
+    &-container {
+      gap: 28px;
+    }
+
+    .general-title {
+      h2 {
+        font-size: 26px;
+      }
+
+      h3 {
+        font-size: 17px;
+      }
+    }
+
+    &-platform {
+      padding: 18px;
+      border-radius: 16px;
+
+      &__top {
+        align-items: flex-start;
+      }
+
+      &__badge {
+        padding: 6px 12px;
+        font-size: 11px;
+      }
+
+      &__rating {
+        font-size: 20px;
+      }
+
+      &__bottom {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  }
+
+  .review-card {
+    padding: 18px;
+    border-radius: 16px;
+
+    &__top {
+      align-items: flex-start;
+    }
+
+    &__rating {
+      white-space: nowrap;
+    }
+
+    &__bottom {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+}
+
 //  faq
 .faq {
     width: 100%;

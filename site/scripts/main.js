@@ -175,17 +175,17 @@ function initReviewsSliders() {
         prevEl: '.reviews-slider__btn--prev-yandex',
       },
       breakpoints: {
-        640: {
-          slidesPerView: 1.2,
-          spaceBetween: 14,
+        0: {
+          slidesPerView: 1,
+          spaceBetween: 16,
         },
         768: {
           slidesPerView: 2,
-          spaceBetween: 18,
+          spaceBetween: 20,
         },
         1200: {
           slidesPerView: 3,
-          spaceBetween: 20,
+          spaceBetween: 24,
         },
       },
     });
