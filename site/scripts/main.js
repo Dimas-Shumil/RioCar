@@ -19,6 +19,56 @@ async function loadComponents() {
     }
   }
 }
+
+function initHeroVideo() {
+  const video = document.querySelector('[data-hero-video]');
+  if (!video) return;
+
+  const desktopMedia = window.matchMedia('(min-width: 769px)');
+  const videoSrc = video.dataset.videoSrc;
+
+  if (!videoSrc) return;
+
+  let source = null;
+
+  const enableVideo = () => {
+    if (!desktopMedia.matches || source) return;
+
+    source = document.createElement('source');
+    source.src = videoSrc;
+    source.type = 'video/mp4';
+
+    video.appendChild(source);
+    video.load();
+
+    const playPromise = video.play();
+
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {});
+    }
+  };
+
+  const disableVideo = () => {
+    if (desktopMedia.matches || !source) return;
+
+    video.pause();
+    source.remove();
+    source = null;
+    video.removeAttribute('src');
+    video.load();
+  };
+
+  enableVideo();
+
+  desktopMedia.addEventListener('change', () => {
+    if (desktopMedia.matches) {
+      enableVideo();
+    } else {
+      disableVideo();
+    }
+  });
+}
+
 // функция для инициализации мобильного меню и управления его состоянием при скролле и кликах
 function initHeader() {
   const header = document.querySelector('.header');
@@ -622,6 +672,7 @@ function initContactFormSubmit() {
 async function initApp() {
   await loadComponents();
 
+  initHeroVideo();
   initHeader();
   initSmoothScroll();
   initFaq();

@@ -13,7 +13,7 @@
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#000000" />
 
-    <link rel="canonical" href="https://dimas-shumil.github.io/RioCar/" />
+    <link rel="canonical" href="https://riocar-abakan.ru/" />
 
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Прокат авто в Абакане — RioCar" />
@@ -21,10 +21,17 @@
       property="og:description"
       content="Аренда автомобилей в Абакане и Хакасии: без водителя, с водителем, для города, поездок и путешествий."
     />
-    <meta property="og:url" content="https://dimas-shumil.github.io/RioCar/" />
+    <meta property="og:url" content="https://riocar-abakan.ru/" />
     <meta
       property="og:image"
-      content="https://dimas-shumil.github.io/RioCar/site/image/black-lexus.webp"
+      content="https://riocar-abakan.ru/site/image/black-lexus.webp"
+    />
+
+    <link
+      rel="preload"
+      as="image"
+      href="site/image/black-lexus.webp"
+      media="(max-width: 768px)"
     />
 
     <link rel="icon" href="site/image/logo-mini.png" />
@@ -46,11 +53,11 @@
           muted
           loop
           playsinline
-          preload="none"
+          preload="metadata"
           poster="site/image/black-lexus.webp"
-        >
-          <source src="site/video/bgr-HeroMain.mp4" type="video/mp4" />
-        </video>
+          data-hero-video
+          data-video-src="site/video/bgr-HeroMain.mp4"
+        ></video>
 
         <div class="hero-main__overlay"></div>
 
@@ -1097,7 +1104,10 @@
 
     <div data-include="components/footer.html"></div>
 
-    <script defer src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"
+    ></script>
     <script defer src="site/scripts/main.js"></script>
 
     <!-- FAQ schema -->
@@ -1130,11 +1140,11 @@
       {
         "@context": "https://schema.org",
         "@type": "AutoRental",
-        "@id": "https://dimas-shumil.github.io/RioCar/#riocar",
+        "@id": "https://riocar-abakan.ru",
         "name": "RioCar",
-        "url": "https://dimas-shumil.github.io/RioCar/",
-        "logo": "https://dimas-shumil.github.io/RioCar/site/image/logo.png",
-        "image": "https://dimas-shumil.github.io/RioCar/site/image/black-lexus.webp",
+        "url": "https://riocar-abakan.ru/",
+        "logo": "https://riocar-abakan.ru/site/image/logo.png",
+        "image": "https://riocar-abakan.ru/site/image/black-lexus.webp",
         "description": "RioCar — прокат автомобилей в Абакане и Хакасии. Аренда авто без водителя и с водителем для города, деловых поездок, трансферов и путешествий по региону.",
         "telephone": "+79135444442",
         "priceRange": "₽₽",

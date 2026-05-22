@@ -36,6 +36,11 @@ app.use(
 
 app.use(express.json({ limit: '20kb' }));
 app.use(express.urlencoded({ extended: false, limit: '20kb' }));
+
+app.get('/index.html', (req, res) => {
+  res.redirect(301, '/');
+});
+
 app.use(express.static(__dirname));
 
 const sendLimiter = rateLimit({
