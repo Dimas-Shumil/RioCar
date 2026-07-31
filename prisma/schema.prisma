@@ -1,0 +1,159 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum LeadStatus {
+  NEW
+  IN_PROGRESS
+  CONTACTED
+  COMPLETED
+}
+
+enum CarCategory {
+  ECONOM
+  COMFORT
+  PREMIUM
+}
+
+enum PublicationType {
+  NEWS
+  PROMOTION
+}
+
+model Admin {
+  id           Int            @id @default(autoincrement())
+  login        String         @unique
+  passwordHash String
+  lastLoginAt  DateTime?
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  sessions     AdminSession[]
+}
+
+model Client {
+  id        Int      @id @default(autoincrement())
+  name      String
+  phone     String   @unique
+  comment   String?
+  leads     Lead[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([name])
+  @@index([createdAt])
+}
+
+model Lead {
+  id       Int    @id @default(autoincrement())
+  clientId Int
+  client   Client @relation(fields: [clientId], references: [id], onDelete: Restrict)
+
+  status LeadStatus @default(NEW)
+
+  name     String
+  phone    String
+  car      String
+  tripDate String?
+  carYear  String?
+  carPrice String?
+  message  String?
+  page     String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([clientId])
+  @@index([phone])
+  @@index([status, createdAt])
+}
+
+model Car {
+  id       Int         @id @default(autoincrement())
+  title    String
+  slug     String      @unique
+  category CarCategory
+
+  year          Int?
+  engine        String?
+  mileage       String?
+  drive         String?
+  gearbox       String?
+  complectation String?
+  rentalTerms   String?
+  description   String?
+
+  pricePerDay Int?
+  deposit     Int?
+
+  isActive  Boolean @default(true)
+  sortOrder Int     @default(0)
+
+  images CarImage[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([isActive, sortOrder])
+  @@index([category])
+}
+
+model CarImage {
+  id    Int @id @default(autoincrement())
+  carId Int
+  car   Car @relation(fields: [carId], references: [id], onDelete: Cascade)
+
+  imagePath String
+  alt       String?
+  isPrimary Boolean @default(false)
+  sortOrder Int     @default(0)
+
+  createdAt DateTime @default(now())
+
+  @@unique([carId, imagePath])
+  @@index([carId, sortOrder])
+}
+
+model Publication {
+  id   Int             @id @default(autoincrement())
+  type PublicationType
+
+  title      String
+  slug       String  @unique
+  excerpt    String?
+  content    String
+  coverImage String?
+
+  isActive    Boolean   @default(true)
+  publishedAt DateTime?
+  startsAt    DateTime?
+  endsAt      DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([type, isActive])
+  @@index([createdAt])
+}
+
+model AdminSession {
+  id            String   @id @default(cuid())
+  adminId       Int
+  tokenHash     String   @unique
+  csrfTokenHash String
+  expiresAt     DateTime
+  lastUsedAt    DateTime @default(now())
+  ipAddress     String?
+  userAgent     String?
+  createdAt     DateTime @default(now())
+
+  admin Admin @relation(fields: [adminId], references: [id], onDelete: Cascade)
+
+  @@index([adminId])
+  @@index([expiresAt])
+  @@index([lastUsedAt])
+}

@@ -1,22 +1,69 @@
+import 'dotenv/config';
 import express from 'express';
 import nodemailer from 'nodemailer';
 import rateLimit from 'express-rate-limit';
 import helmet from 'helmet';
-import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
-
-dotenv.config();
+import { readFileSync } from 'node:fs';
+import cookieParser from 'cookie-parser';
+import authRouter from './routes/auth.routes.js';
 
 const app = express();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+const PUBLIC_DIR = path.join(__dirname, 'public');
+const COMPONENTS_DIR = path.join(__dirname, 'components');
+
+const headerComponent = readFileSync(
+  path.join(COMPONENTS_DIR, 'header.html'),
+  'utf8',
+);
+
+const footerComponent = readFileSync(
+  path.join(COMPONENTS_DIR, 'footer.html'),
+  'utf8',
+);
+
+function buildPublicPage(fileName) {
+  const filePath = path.join(PUBLIC_DIR, fileName);
+  const template = readFileSync(filePath, 'utf8');
+
+  if (!template.includes('<!-- HEADER_COMPONENT -->')) {
+    throw new Error(
+      `В файле public/${fileName} отсутствует <!-- HEADER_COMPONENT -->`,
+    );
+  }
+
+  if (!template.includes('<!-- FOOTER_COMPONENT -->')) {
+    throw new Error(
+      `В файле public/${fileName} отсутствует <!-- FOOTER_COMPONENT -->`,
+    );
+  }
+
+  return template
+    .replace('<!-- HEADER_COMPONENT -->', headerComponent)
+    .replace('<!-- FOOTER_COMPONENT -->', footerComponent);
+}
+
+const publicPages = {
+  home: buildPublicPage('index.html'),
+  cars: buildPublicPage('cars.html'),
+  travel: buildPublicPage('travel.html'),
+};
+
 const PORT = Number(process.env.PORT) || 3000;
 const MIN_FORM_TIME_MS = 2500;
 
-const requiredEnv = ['SMTP_HOST', 'SMTP_PORT', 'SMTP_USER', 'SMTP_PASS', 'TO_EMAIL'];
+const requiredEnv = [
+  'SMTP_HOST',
+  'SMTP_PORT',
+  'SMTP_USER',
+  'SMTP_PASS',
+  'TO_EMAIL',
+];
 const missingEnv = requiredEnv.filter((key) => !process.env[key]);
 
 if (missingEnv.length) {
@@ -36,12 +83,41 @@ app.use(
 
 app.use(express.json({ limit: '20kb' }));
 app.use(express.urlencoded({ extended: false, limit: '20kb' }));
+app.use(cookieParser());
+
+app.use('/api/admin/auth', authRouter);
 
 app.get('/index.html', (req, res) => {
   res.redirect(301, '/');
 });
 
-app.use(express.static(__dirname));
+app.use('/styles', express.static(path.join(__dirname, 'styles')));
+app.use('/scripts', express.static(path.join(__dirname, 'scripts')));
+app.use('/site', express.static(path.join(__dirname, 'site')));
+app.use('/img', express.static(path.join(__dirname, 'img')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+// Публичные HTML-страницы с готовыми компонентами
+app.get('/', (req, res) => {
+  res.status(200).type('html').send(publicPages.home);
+});
+
+app.get('/cars.html', (req, res) => {
+  res.status(200).type('html').send(publicPages.cars);
+});
+
+app.get('/travel.html', (req, res) => {
+  res.status(200).type('html').send(publicPages.travel);
+});
+
+// Редиректы со старых адресов
+app.get('/site/pages/cars.html', (req, res) => {
+  res.redirect(301, '/cars.html');
+});
+
+app.get('/site/pages/travel.html', (req, res) => {
+  res.redirect(301, '/travel.html');
+});
 
 const sendLimiter = rateLimit({
   windowMs: 60 * 1000,
@@ -211,6 +287,19 @@ transporter.verify((error) => {
   }
 });
 
+app.use((error, req, res, next) => {
+  console.error('Необработанная ошибка RioCar:', error);
+
+  if (res.headersSent) {
+    return next(error);
+  }
+
+  return res.status(500).json({
+    success: false,
+    message: 'Внутренняя ошибка сервера.',
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`RioCar server started: http://localhost:${PORT}`);
 });
@@ -236,7 +325,8 @@ function normalizePhone(phone) {
   const digits = String(phone || '').replace(/\D/g, '');
 
   if (digits.length === 11 && digits.startsWith('8')) return digits;
-  if (digits.length === 11 && digits.startsWith('7')) return `8${digits.slice(1)}`;
+  if (digits.length === 11 && digits.startsWith('7'))
+    return `8${digits.slice(1)}`;
   if (digits.length === 10) return `8${digits}`;
 
   return '';
@@ -356,14 +446,14 @@ RIOCAR / ЗАЯВКА
 ${emailRow('Имя', escapeHtml(name))}
 
 ${emailRow(
-    'Телефон',
-    `<a href="tel:${escapeHtml(telLink)}" style="color:#d8a016; text-decoration:none;">${escapeHtml(formattedPhone)}</a>`,
-  )}
+  'Телефон',
+  `<a href="tel:${escapeHtml(telLink)}" style="color:#d8a016; text-decoration:none;">${escapeHtml(formattedPhone)}</a>`,
+)}
 
 ${emailRow(
-    'Автомобиль',
-    `<span style="display:inline-block; padding:10px 16px; border-radius:999px; background:#d8a016; color:#000000; font-size:15px; font-weight:700;">${escapeHtml(car)}</span>`,
-  )}
+  'Автомобиль',
+  `<span style="display:inline-block; padding:10px 16px; border-radius:999px; background:#d8a016; color:#000000; font-size:15px; font-weight:700;">${escapeHtml(car)}</span>`,
+)}
 
 ${emailRow('Год', escapeHtml(carYear || '—'))}
 
