@@ -8,12 +8,14 @@ import { fileURLToPath } from 'url';
 import { readFileSync } from 'node:fs';
 import cookieParser from 'cookie-parser';
 import authRouter from './routes/auth.routes.js';
+import requireAuth from './middleware/require-auth.js';
+import dashboardRouter from './routes/dashboard.routes.js';
 
 const app = express();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
+const ADMIN_PAGES_DIR = path.join(__dirname, 'admin-pages');
 const PUBLIC_DIR = path.join(__dirname, 'public');
 const COMPONENTS_DIR = path.join(__dirname, 'components');
 
@@ -86,6 +88,7 @@ app.use(express.urlencoded({ extended: false, limit: '20kb' }));
 app.use(cookieParser());
 
 app.use('/api/admin/auth', authRouter);
+app.use('/api/admin/dashboard', dashboardRouter);
 
 app.get('/index.html', (req, res) => {
   res.redirect(301, '/');
@@ -93,6 +96,17 @@ app.get('/index.html', (req, res) => {
 
 app.use('/styles', express.static(path.join(__dirname, 'styles')));
 app.use('/scripts', express.static(path.join(__dirname, 'scripts')));
+app.get('/admin/login', (req, res) => {
+  res.sendFile(path.join(ADMIN_PAGES_DIR, 'login.html'));
+});
+
+app.get('/admin', requireAuth.page, (req, res) => {
+  res.redirect(302, '/admin/dashboard');
+});
+
+app.get('/admin/dashboard', requireAuth.page, (req, res) => {
+  res.sendFile(path.join(ADMIN_PAGES_DIR, 'dashboard.html'));
+});
 app.use('/site', express.static(path.join(__dirname, 'site')));
 app.use('/img', express.static(path.join(__dirname, 'img')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));

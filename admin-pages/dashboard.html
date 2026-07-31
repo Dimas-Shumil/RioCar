@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+
+    <meta name="theme-color" content="#111214" />
+
+    <title>Панель управления — RioCar | ShumDev Custom CMS</title>
+
+    <link rel="stylesheet" href="/site/css/admin.min.css" />
+
+    <script src="/site/scripts/admin/dashboard.js" defer></script>
+  </head>
+
+  <body class="admin-dashboard-page" data-admin-page="dashboard">
+    <div class="admin-shell">
+      <aside class="admin-sidebar">
+        <div class="admin-sidebar__head">
+          <a
+            class="admin-sidebar__logo"
+            href="/admin/dashboard"
+            aria-label="RioCar — панель управления"
+          >
+            <span>RIO</span><strong>CAR</strong>
+          </a>
+
+          <span class="admin-sidebar__caption"> ShumDev Custom CMS </span>
+        </div>
+
+        <nav class="admin-sidebar__nav" aria-label="Навигация админ-панели">
+          <a
+            class="admin-sidebar__link admin-sidebar__link--active"
+            href="/admin/dashboard"
+            aria-current="page"
+          >
+            <span class="admin-sidebar__index">01</span>
+            <span>Обзор</span>
+          </a>
+
+          <a class="admin-sidebar__link" href="/admin/requests">
+            <span class="admin-sidebar__index">02</span>
+            <span>Заявки</span>
+          </a>
+
+          <a class="admin-sidebar__link" href="/admin/clients">
+            <span class="admin-sidebar__index">03</span>
+            <span>Клиенты</span>
+          </a>
+
+          <a class="admin-sidebar__link" href="/admin/cars">
+            <span class="admin-sidebar__index">04</span>
+            <span>Автомобили</span>
+          </a>
+
+          <a class="admin-sidebar__link" href="/admin/publications">
+            <span class="admin-sidebar__index">05</span>
+            <span>Публикации</span>
+          </a>
+        </nav>
+
+        <div class="admin-sidebar__bottom">
+          <a class="admin-sidebar__site-link" href="/" target="_blank" rel="noopener">
+            Открыть сайт
+          </a>
+
+          <button
+            class="admin-sidebar__logout"
+            type="button"
+            data-admin-logout
+          >
+            Выйти
+          </button>
+        </div>
+      </aside>
+
+      <main class="admin-main">
+        <header class="admin-header">
+          <div class="admin-header__intro">
+            <span class="admin-header__eyebrow"> Панель управления </span>
+
+            <h1 class="admin-header__title">
+              Обзор RioCar
+            </h1>
+
+            <p class="admin-header__text">
+              Главные показатели и последние обращения клиентов.
+            </p>
+          </div>
+
+          <div class="admin-header__user">
+            <div class="admin-header__user-copy">
+              <span class="admin-header__user-role">Администратор</span>
+              <strong class="admin-header__user-login" data-admin-login>—</strong>
+            </div>
+
+            <button
+              class="admin-header__logout"
+              type="button"
+              data-admin-logout
+            >
+              Выйти
+            </button>
+          </div>
+        </header>
+
+        <section class="admin-dashboard">
+          <div class="admin-dashboard__head">
+            <div>
+              <span class="admin-dashboard__caption"> Актуальные данные </span>
+              <h2 class="admin-dashboard__title">Сводка</h2>
+            </div>
+
+            <button
+              class="admin-dashboard__refresh"
+              type="button"
+              data-dashboard-refresh
+            >
+              Обновить
+            </button>
+          </div>
+
+          <p
+            class="admin-dashboard__message"
+            role="alert"
+            hidden
+            data-dashboard-message
+          ></p>
+
+          <div class="admin-dashboard__loading" data-dashboard-loading>
+            Загружаем данные…
+          </div>
+
+          <div class="admin-dashboard__content" hidden data-dashboard-content>
+            <div class="admin-dashboard__stats">
+              <article class="admin-stat-card admin-stat-card--primary">
+                <span class="admin-stat-card__label">Заявки</span>
+
+                <strong
+                  class="admin-stat-card__value"
+                  data-dashboard-stat="leads"
+                >
+                  0
+                </strong>
+
+                <span class="admin-stat-card__note">За всё время</span>
+              </article>
+
+              <article class="admin-stat-card">
+                <span class="admin-stat-card__label">Автомобили</span>
+
+                <strong
+                  class="admin-stat-card__value"
+                  data-dashboard-stat="cars"
+                >
+                  0
+                </strong>
+
+                <span class="admin-stat-card__note">Всего в базе</span>
+              </article>
+
+              <article class="admin-stat-card">
+                <span class="admin-stat-card__label">Скрытые автомобили</span>
+
+                <strong
+                  class="admin-stat-card__value"
+                  data-dashboard-stat="hiddenCars"
+                >
+                  0
+                </strong>
+
+                <span class="admin-stat-card__note">Не видны на сайте</span>
+              </article>
+
+              <article class="admin-stat-card">
+                <span class="admin-stat-card__label">Активные акции</span>
+
+                <strong
+                  class="admin-stat-card__value"
+                  data-dashboard-stat="activePromotions"
+                >
+                  0
+                </strong>
+
+                <span class="admin-stat-card__note">Действуют сейчас</span>
+              </article>
+            </div>
+
+            <section class="admin-dashboard__latest">
+              <div class="admin-dashboard__section-head">
+                <div>
+                  <span class="admin-dashboard__section-caption">
+                    Последние обращения
+                  </span>
+
+                  <h3 class="admin-dashboard__section-title">
+                    Последние заявки
+                  </h3>
+                </div>
+
+                <a
+                  class="admin-dashboard__section-link"
+                  href="/admin/requests"
+                >
+                  Все заявки
+                </a>
+              </div>
+
+              <div
+                class="admin-dashboard__latest-list"
+                data-dashboard-latest
+              ></div>
+
+              <div
+                class="admin-dashboard__empty"
+                hidden
+                data-dashboard-empty
+              >
+                <strong>Заявок пока нет</strong>
+                <span>Новые обращения с сайта появятся здесь.</span>
+              </div>
+            </section>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

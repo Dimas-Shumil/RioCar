@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+
+    <title>Вход в админ-панель — RioCar | ShumDev Custom CMS</title>
+
+    <link rel="stylesheet" href="/site/css/admin.min.css" />
+
+    <script src="/site/scripts/admin/login.js" defer></script>
+  </head>
+
+  <body class="admin-login-page admin-login-page--photo">
+    <main class="admin-login">
+      <section class="admin-login__media">
+        <img
+          class="admin-login__media-image"
+          src="/site/image/admin/login-car.webp"
+          alt=""
+        />
+
+        <div class="admin-login__media-overlay" aria-hidden="true"></div>
+
+        <a
+          class="admin-login__brand"
+          href="/"
+          aria-label="Перейти на сайт RioCar"
+        >
+          <span>RIO</span><strong>CAR</strong>
+        </a>
+
+        <div class="admin-login__media-content">
+          <span class="admin-login__media-caption">Автопарк RioCar</span>
+
+          <p class="admin-login__media-text">Аренда автомобилей в Абакане</p>
+        </div>
+      </section>
+
+      <section class="admin-login__content">
+        <div class="admin-login__form-wrap">
+          <div class="admin-login__heading">
+            <span class="admin-login__caption"> ShumDev Custom CMS </span>
+
+            <h1 class="admin-login__title">Вход в панель</h1>
+
+            <p class="admin-login__description">
+              Введите логин и пароль администратора RioCar.
+            </p>
+          </div>
+
+          <form class="admin-login__form" novalidate data-admin-login-form>
+            <div class="admin-field">
+              <label class="admin-field__label" for="admin-login">
+                Логин
+              </label>
+
+              <input
+                class="admin-field__input"
+                id="admin-login"
+                name="login"
+                type="text"
+                autocomplete="username"
+                maxlength="64"
+                placeholder="Введите логин"
+                required
+                data-admin-login
+              />
+            </div>
+
+            <div class="admin-field">
+              <label class="admin-field__label" for="admin-password">
+                Пароль
+              </label>
+
+              <div class="admin-field__password">
+                <input
+                  class="admin-field__input admin-field__input--password"
+                  id="admin-password"
+                  name="password"
+                  type="password"
+                  autocomplete="current-password"
+                  maxlength="128"
+                  placeholder="Введите пароль"
+                  required
+                  data-admin-password
+                />
+
+                <button
+                  class="admin-field__password-toggle"
+                  type="button"
+                  aria-label="Показать пароль"
+                  aria-pressed="false"
+                  data-password-toggle
+                >
+                  <span data-password-toggle-text> Показать </span>
+                </button>
+              </div>
+            </div>
+
+            <div
+              class="admin-login__message"
+              role="status"
+              aria-live="polite"
+              hidden
+              data-admin-login-message
+            ></div>
+
+            <button
+              class="admin-login__submit"
+              type="submit"
+              data-admin-login-submit
+            >
+              <span data-admin-login-submit-text> Войти </span>
+
+              <span
+                class="admin-login__loader"
+                aria-hidden="true"
+                hidden
+                data-admin-login-loader
+              ></span>
+            </button>
+          </form>
+
+          <div class="admin-login__security">
+            <span aria-hidden="true">◇</span>
+
+            <p>Доступ разрешён только администратору RioCar.</p>
+          </div>
+
+          <a class="admin-login__back" href="/"> ← Вернуться на сайт </a>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
