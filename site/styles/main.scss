@@ -398,6 +398,297 @@ ol {
     }
 }
 
+// Публикации на главной
+.publication-strip {
+    padding: 28px 0 34px;
+    overflow: hidden;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    background: $black-soft;
+
+    &__container {
+        width: min(100%, 1600px);
+        margin: 0 auto;
+        padding: 0 32px;
+    }
+
+    &__head {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 24px;
+        margin-bottom: 18px;
+
+        h2 {
+            margin-top: 3px;
+            color: #ffffff;
+            font-family: inter, sans-serif;
+            font-size: clamp(18px, 1.4vw, 24px);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+    }
+
+    &__eyebrow {
+        color: #d8a016;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+    }
+
+    &__slider {
+        overflow: visible;
+    }
+
+    &__pagination {
+        display: flex;
+        justify-content: flex-end;
+        gap: 7px;
+        min-width: 78px;
+        padding-bottom: 4px;
+
+        .swiper-pagination-bullet {
+            width: 20px;
+            height: 3px;
+            margin: 0 !important;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.28);
+            opacity: 1;
+            transition: width 0.3s ease, background-color 0.3s ease;
+        }
+
+        .swiper-pagination-bullet-active {
+            width: 34px;
+            background: #e2aa1c;
+        }
+    }
+}
+
+.publication-card {
+    position: relative;
+    display: block;
+    height: 220px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    border-radius: 16px;
+    background: #151617;
+    color: #ffffff;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.28);
+    isolation: isolate;
+
+    &:hover {
+        color: #ffffff;
+        border-color: rgba(216, 160, 22, 0.65);
+        transform: translateY(-3px);
+
+        .publication-card__image {
+            transform: scale(1.045);
+        }
+
+        .publication-card__open {
+            color: #111111;
+            background: #e2aa1c;
+        }
+    }
+
+    &__image {
+        position: absolute;
+        inset: 0 0 0 auto;
+        z-index: -2;
+        width: 68%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        transition: transform 0.7s ease;
+    }
+
+    &__shade {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background:
+            linear-gradient(90deg, #111214 0%, rgba(17, 18, 20, 0.98) 38%, rgba(17, 18, 20, 0.72) 66%, rgba(17, 18, 20, 0.18) 100%),
+            linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.62));
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 66%;
+        height: 100%;
+        padding: 22px;
+    }
+
+    &__badge {
+        display: inline-flex;
+        align-items: center;
+        min-height: 27px;
+        margin-bottom: 14px;
+        padding: 0 10px;
+        border-radius: 6px;
+        color: #151515;
+        background: #f0b91f;
+        font-size: 10px;
+        font-weight: 900;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+    }
+
+    &[data-publication-type='news'] &__badge {
+        color: #ffffff;
+        background: #2469d8;
+    }
+
+    &[data-publication-type='offer'] &__badge {
+        color: #ffffff;
+        background: #16834a;
+    }
+
+    &__title {
+        display: -webkit-box;
+        overflow: hidden;
+        color: #ffffff;
+        font-family: inter, sans-serif;
+        font-size: clamp(19px, 1.45vw, 25px);
+        font-weight: 750;
+        line-height: 1.25;
+        letter-spacing: -0.025em;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+    }
+
+    &__meta {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        margin-top: auto;
+        color: rgba(255, 255, 255, 0.62);
+        font-size: 12px;
+        font-weight: 500;
+    }
+
+    &__calendar {
+        position: relative;
+        width: 15px;
+        height: 14px;
+        border: 1.5px solid currentColor;
+        border-radius: 3px;
+
+        &::before {
+            position: absolute;
+            top: 3px;
+            left: 1px;
+            width: 10px;
+            border-top: 1.5px solid currentColor;
+            content: '';
+        }
+    }
+
+    &__open {
+        position: absolute;
+        right: 15px;
+        bottom: 15px;
+        display: grid;
+        width: 34px;
+        height: 34px;
+        place-items: center;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 9px;
+        color: #ffffff;
+        background: rgba(0, 0, 0, 0.35);
+        font-size: 19px;
+        line-height: 1;
+        backdrop-filter: blur(8px);
+        transition: color 0.25s ease, background-color 0.25s ease;
+    }
+}
+
+@media (max-width: 768px) {
+    .publication-strip {
+        padding: 22px 0 28px;
+
+        &__container {
+            padding: 0 18px;
+        }
+
+        &__head {
+            align-items: center;
+            margin-bottom: 14px;
+
+            h2 {
+                font-size: 17px;
+            }
+        }
+
+        &__eyebrow {
+            font-size: 9px;
+        }
+
+        &__pagination {
+            min-width: 54px;
+
+            .swiper-pagination-bullet {
+                width: 12px;
+            }
+
+            .swiper-pagination-bullet-active {
+                width: 24px;
+            }
+        }
+    }
+
+    .publication-card {
+        height: 196px;
+        border-radius: 14px;
+
+        &__content {
+            width: 72%;
+            padding: 18px;
+        }
+
+        &__title {
+            font-size: 19px;
+        }
+
+        &__open {
+            right: 12px;
+            bottom: 12px;
+            width: 32px;
+            height: 32px;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .publication-strip {
+        &__head h2 {
+            max-width: 230px;
+        }
+    }
+
+    .publication-card {
+        height: 188px;
+
+        &__image {
+            width: 75%;
+        }
+
+        &__content {
+            width: 78%;
+        }
+
+        &__badge {
+            margin-bottom: 11px;
+        }
+
+        &__title {
+            font-size: 18px;
+        }
+    }
+}
+
 // section-two
 
 .section-two {

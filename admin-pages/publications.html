@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+    <meta name="theme-color" content="#111214" />
+
+    <title>Публикации — RioCar | ShumDev Custom CMS</title>
+
+    <link rel="stylesheet" href="/site/css/admin.min.css" />
+
+    <script src="/site/scripts/admin/session-guard.js" defer></script>
+    <script src="/site/scripts/admin/publications.js" defer></script>
+  </head>
+
+  <body
+    class="admin-dashboard-page admin-publications-page"
+    data-admin-page="publications"
+  >
+    <div class="admin-shell">
+      <aside class="admin-sidebar">
+        <div class="admin-sidebar__head">
+          <a
+            class="admin-sidebar__logo"
+            href="/admin/dashboard"
+            aria-label="RioCar — панель управления"
+          >
+            <span>RIO</span><strong>CAR</strong>
+          </a>
+
+          <span class="admin-sidebar__caption">ShumDev Custom CMS</span>
+        </div>
+
+        <nav class="admin-sidebar__nav" aria-label="Навигация админ-панели">
+          <a class="admin-sidebar__link" href="/admin/dashboard">
+            <span class="admin-sidebar__index">01</span>
+            <span>Обзор</span>
+          </a>
+
+          <a class="admin-sidebar__link" href="/admin/requests">
+            <span class="admin-sidebar__index">02</span>
+            <span>Заявки</span>
+          </a>
+
+          <a class="admin-sidebar__link" href="/admin/clients">
+            <span class="admin-sidebar__index">03</span>
+            <span>Клиенты</span>
+          </a>
+
+          <a class="admin-sidebar__link" href="/admin/cars">
+            <span class="admin-sidebar__index">04</span>
+            <span>Автомобили</span>
+          </a>
+
+          <a
+            class="admin-sidebar__link admin-sidebar__link--active"
+            href="/admin/publications"
+            aria-current="page"
+          >
+            <span class="admin-sidebar__index">05</span>
+            <span>Публикации</span>
+          </a>
+        </nav>
+
+        <div class="admin-sidebar__bottom">
+          <button
+            class="admin-sidebar__site-link"
+            type="button"
+            data-admin-open-site
+          >
+            Вернуться на сайт
+          </button>
+
+          <button class="admin-sidebar__logout" type="button" data-admin-logout>
+            Выйти
+          </button>
+        </div>
+      </aside>
+
+      <main class="admin-main">
+        <header class="admin-header">
+          <div class="admin-header__intro">
+            <span class="admin-header__eyebrow">Панель управления</span>
+            <h1 class="admin-header__title">Публикации</h1>
+            <p class="admin-header__text">
+              Новости, акции и специальные предложения для главной страницы RioCar.
+            </p>
+          </div>
+
+          <div class="admin-header__user">
+            <div class="admin-header__user-copy">
+              <span class="admin-header__user-role">Администратор</span>
+              <strong class="admin-header__user-login" data-admin-login>—</strong>
+            </div>
+
+            <button class="admin-header__logout" type="button" data-admin-logout>
+              Выйти
+            </button>
+          </div>
+        </header>
+
+        <section class="admin-publications">
+          <div class="admin-publications__head">
+            <div>
+              <span class="admin-dashboard__caption">Контент RioCar</span>
+              <h2 class="admin-publications__title">Новости и предложения</h2>
+            </div>
+
+            <div class="admin-publications__head-actions">
+              <button
+                class="admin-publications__refresh"
+                type="button"
+                data-publications-refresh
+              >
+                Обновить
+              </button>
+
+              <a
+                class="admin-publications__create"
+                href="/admin/publications/new"
+              >
+                Добавить публикацию
+              </a>
+            </div>
+          </div>
+
+          <p
+            class="admin-publications__message"
+            role="alert"
+            hidden
+            data-publications-message
+          ></p>
+
+          <div class="admin-publications__filters">
+            <label class="admin-publications__search">
+              <span>Поиск</span>
+              <input
+                type="search"
+                placeholder="Заголовок, описание или slug"
+                autocomplete="off"
+                data-publications-search
+              />
+            </label>
+
+            <label class="admin-publications__filter">
+              <span>Тип</span>
+              <select data-publications-type>
+                <option value="ALL">Все типы</option>
+                <option value="PROMOTION">Акции</option>
+                <option value="NEWS">Новости</option>
+                <option value="OFFER">Предложения</option>
+              </select>
+            </label>
+
+            <label class="admin-publications__filter">
+              <span>Публикация</span>
+              <select data-publications-visibility>
+                <option value="ALL">Все</option>
+                <option value="ACTIVE">На сайте</option>
+                <option value="HIDDEN">Скрытые</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="admin-publications__loading" data-publications-loading>
+            Загружаем публикации…
+          </div>
+
+          <div
+            class="admin-publications__content"
+            hidden
+            data-publications-content
+          >
+            <div class="admin-publications__stats">
+              <article>
+                <span>Всего</span>
+                <strong data-publications-stat="total">0</strong>
+              </article>
+
+              <article>
+                <span>На сайте</span>
+                <strong data-publications-stat="active">0</strong>
+              </article>
+
+              <article>
+                <span>Скрытые</span>
+                <strong data-publications-stat="hidden">0</strong>
+              </article>
+
+              <article>
+                <span>На главной</span>
+                <strong data-publications-stat="onHome">0</strong>
+              </article>
+            </div>
+
+            <div
+              class="admin-publications__table-wrap"
+              data-publications-table
+            >
+              <table class="admin-publications-table">
+                <thead>
+                  <tr>
+                    <th>Публикация</th>
+                    <th>Тип</th>
+                    <th>Срок</th>
+                    <th>Главная</th>
+                    <th>Статус</th>
+                    <th>Действия</th>
+                  </tr>
+                </thead>
+
+                <tbody data-publications-list></tbody>
+              </table>
+            </div>
+
+            <div
+              class="admin-publications__empty"
+              hidden
+              data-publications-empty
+            >
+              <strong>Публикации не найдены</strong>
+              <span>Измени фильтры или добавь новую публикацию.</span>
+            </div>
+
+            <div
+              class="admin-publications__pagination"
+              hidden
+              data-publications-pagination
+            >
+              <button type="button" data-publications-page="prev">Назад</button>
+              <span data-publications-page-label>Страница 1 из 1</span>
+              <button type="button" data-publications-page="next">Вперёд</button>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

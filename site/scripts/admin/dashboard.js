@@ -1,7 +1,4 @@
 (() => {
-  const SESSION_URL = '/api/admin/auth/session';
-  const CSRF_URL = '/api/admin/auth/csrf';
-  const LOGOUT_URL = '/api/admin/auth/logout';
   const DASHBOARD_URL = '/api/admin/dashboard';
 
   const statusLabels = {
@@ -11,15 +8,12 @@
     COMPLETED: 'Завершена',
   };
 
-  let csrfToken = '';
-
   const loading = document.querySelector('[data-dashboard-loading]');
   const content = document.querySelector('[data-dashboard-content]');
   const message = document.querySelector('[data-dashboard-message]');
   const refreshButton = document.querySelector('[data-dashboard-refresh]');
   const latestList = document.querySelector('[data-dashboard-latest]');
   const emptyState = document.querySelector('[data-dashboard-empty]');
-  const logoutButtons = document.querySelectorAll('[data-admin-logout]');
 
   function redirectToLogin() {
     window.location.replace('/admin/login');
@@ -34,7 +28,10 @@
 
     const data = await response.json().catch(() => ({}));
 
-    return { response, data };
+    return {
+      response,
+      data,
+    };
   }
 
   function escapeHtml(value) {
@@ -172,7 +169,9 @@
       }
 
       if (!response.ok) {
-        throw new Error(data.message || 'Не удалось загрузить данные.');
+        throw new Error(
+          data.message || 'Не удалось загрузить данные.',
+        );
       }
 
       renderStats(data.stats);
@@ -187,84 +186,24 @@
     }
   }
 
-  async function loadSession() {
-    const { response, data } = await requestJson(SESSION_URL);
-
-    if (!response.ok || !data.authenticated || !data.admin) {
-      redirectToLogin();
-      return false;
-    }
-
-    document.querySelectorAll('[data-admin-login]').forEach((element) => {
-      element.textContent = data.admin.login || 'admin';
-    });
-
-    return true;
-  }
-
-  async function loadCsrfToken() {
-    const { response, data } = await requestJson(CSRF_URL, {
-      method: 'POST',
-    });
-
-    if (!response.ok || typeof data.csrfToken !== 'string') {
-      throw new Error('Не удалось получить токен безопасности.');
-    }
-
-    csrfToken = data.csrfToken;
-    sessionStorage.setItem('riocarAdminCsrfToken', csrfToken);
-  }
-
-  function bindLogout() {
-    logoutButtons.forEach((button) => {
-      button.addEventListener('click', async () => {
-        button.disabled = true;
-
-        try {
-          if (!csrfToken) {
-            await loadCsrfToken();
-          }
-
-          const { response } = await requestJson(LOGOUT_URL, {
-            method: 'POST',
-            headers: {
-              'X-CSRF-Token': csrfToken,
-            },
-          });
-
-          if (response.ok || response.status === 401) {
-            sessionStorage.removeItem('riocarAdminCsrfToken');
-            redirectToLogin();
-            return;
-          }
-
-          throw new Error('Сервер отклонил выход.');
-        } catch (error) {
-          showMessage(error.message || 'Не удалось выйти из панели.');
-          button.disabled = false;
-        }
-      });
-    });
-  }
-
   async function init() {
-    try {
-      const authenticated = await loadSession();
+    const sessionGuard = window.RioCarAdminSession;
 
-      if (!authenticated) {
-        return;
-      }
-
-      await loadCsrfToken();
-      bindLogout();
-      await loadDashboard();
-    } catch (error) {
-      console.error('Ошибка инициализации dashboard:', error);
+    if (!sessionGuard) {
       redirectToLogin();
+      return;
     }
+
+    const sessionReady = await sessionGuard.ready;
+
+    if (!sessionReady) {
+      return;
+    }
+
+    await loadDashboard();
   }
 
-  refreshButton.addEventListener('click', loadDashboard);
+  refreshButton?.addEventListener('click', loadDashboard);
 
-  init();
+  void init();
 })();

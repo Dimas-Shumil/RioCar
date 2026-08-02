@@ -17,196 +17,90 @@ function initHeader() {
 
   const closeMenu = () => setMenuState(false);
 
-  if (burger && mobileMenu && overlay) {
-    burger.addEventListener('click', () => {
-      setMenuState(!burger.classList.contains('active'));
-    });
+  burger?.addEventListener('click', () => {
+    setMenuState(!burger.classList.contains('active'));
+  });
 
-    overlay.addEventListener('click', closeMenu);
+  overlay?.addEventListener('click', closeMenu);
 
-    mobileMenu.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', closeMenu);
-    });
-  }
+  mobileMenu?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', closeMenu);
+  });
 
   let lastScroll = window.scrollY;
   let ticking = false;
 
-  const updateHeaderOnScroll = () => {
+  const updateHeader = () => {
     const currentScroll = window.scrollY;
-    const menuOpen = body.classList.contains('menu-open');
     const isScrollingDown = currentScroll > lastScroll;
-    const shouldHide = isScrollingDown && currentScroll > 120 && !menuOpen;
+    const menuOpen = body.classList.contains('menu-open');
 
     header.classList.toggle('scrolled', currentScroll > 20);
-    header.classList.toggle('header--hidden', shouldHide);
+    header.classList.toggle(
+      'header--hidden',
+      isScrollingDown && currentScroll > 120 && !menuOpen,
+    );
 
     lastScroll = currentScroll;
     ticking = false;
   };
 
   window.addEventListener('scroll', () => {
-    if (!ticking) {
-      window.requestAnimationFrame(updateHeaderOnScroll);
-      ticking = true;
-    }
+    if (ticking) return;
+
+    window.requestAnimationFrame(updateHeader);
+    ticking = true;
   });
 
   window.addEventListener('resize', () => {
-    if (window.innerWidth > 992) {
-      closeMenu();
-    }
+    if (window.innerWidth > 1024) closeMenu();
   });
 }
 
 function initSmoothScroll() {
-  const body = document.body;
-
   document.querySelectorAll('a[href^="#"]').forEach((link) => {
     link.addEventListener('click', (event) => {
-      const href = link.getAttribute('href');
-      if (!href || href === '#') return;
+      const selector = link.getAttribute('href');
+      if (!selector || selector === '#') return;
 
-      const target = document.querySelector(href);
+      const target = document.querySelector(selector);
       if (!target) return;
 
       event.preventDefault();
 
-      const header = document.querySelector('.header');
-      const burger = document.querySelector('.header__burger');
-      const mobileMenu = document.querySelector('.mobile-menu');
-      const overlay = document.querySelector('.mobile-menu-overlay');
+      const headerHeight = document.querySelector('.header')?.offsetHeight || 0;
+      const top =
+        target.getBoundingClientRect().top +
+        window.scrollY -
+        headerHeight -
+        20;
 
-      const headerHeight = header?.offsetHeight || 0;
-      const topOffset = headerHeight + 20;
-      const topPosition =
-        target.getBoundingClientRect().top + window.pageYOffset - topOffset;
-
-      window.scrollTo({
-        top: topPosition,
-        behavior: 'smooth',
-      });
-
-      if (burger?.classList.contains('active')) {
-        burger.classList.remove('active');
-        mobileMenu?.classList.remove('active');
-        overlay?.classList.remove('active');
-        body.classList.remove('menu-open');
-        burger.setAttribute('aria-expanded', 'false');
-      }
+      window.scrollTo({ top, behavior: 'smooth' });
     });
   });
 }
 
 function initCarsFilter() {
-  const filters = document.querySelectorAll('.cars-filter');
-  const cards = document.querySelectorAll('.cars-card');
+  const filters = [...document.querySelectorAll('.cars-filter')];
+  const cards = [...document.querySelectorAll('.cars-card')];
 
   if (!filters.length || !cards.length) return;
 
-  filters.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const filter = btn.dataset.filter;
+  filters.forEach((button) => {
+    button.addEventListener('click', () => {
+      const filter = button.dataset.filter || 'all';
 
-      filters.forEach((b) => b.classList.remove('active'));
-      btn.classList.add('active');
+      filters.forEach((item) => {
+        const active = item === button;
+        item.classList.toggle('active', active);
+        item.setAttribute('aria-pressed', String(active));
+      });
 
       cards.forEach((card) => {
-        const category = card.dataset.category;
-
-        if (filter === 'all' || category === filter) {
-          card.style.display = '';
-        } else {
-          card.style.display = 'none';
-        }
+        card.hidden =
+          filter !== 'all' && card.dataset.category !== filter;
       });
     });
-  });
-}
-
-function buildCarFormLink(card) {
-  const title = card.dataset.title || '';
-  const year = card.dataset.year || '';
-  const price = card.dataset.price || '';
-
-  const params = new URLSearchParams({
-    car: title,
-    year,
-    price,
-  });
-
-  return `/?${params.toString()}#form`;
-}
-
-function initCarsModal() {
-  const cards = document.querySelectorAll('.cars-card');
-  const modal = document.getElementById('carsModal');
-
-  if (!cards.length || !modal) return;
-
-  const modalTitle = document.getElementById('carsModalTitle');
-  const modalPrice = document.getElementById('carsModalPrice');
-  const modalYear = document.getElementById('carsModalYear');
-  const modalEngine = document.getElementById('carsModalEngine');
-  const modalMileage = document.getElementById('carsModalMileage');
-  const modalDrive = document.getElementById('carsModalDrive');
-  const modalGearbox = document.getElementById('carsModalGearbox');
-  const modalPhoto = document.getElementById('carsModalPhoto');
-  const modalBadge = document.getElementById('carsModalBadge');
-  const modalComplectation = document.getElementById('carsModalComplectation');
-  const modalRental = document.getElementById('carsModalRental');
-  const modalBtn = modal.querySelector('.cars-card__modal-btn');
-
-  const closeBtn = modal.querySelector('.cars-card__modal-close');
-  const modalOverlay = modal.querySelector('.cars-card__modal-overlay');
-
-  const closeModal = () => {
-    modal.classList.remove('active');
-    document.body.style.overflow = '';
-  };
-
-  cards.forEach((card) => {
-    card.addEventListener('click', () => {
-      if (modalTitle) modalTitle.textContent = card.dataset.title || '';
-      if (modalPrice) modalPrice.textContent = card.dataset.price || '';
-      if (modalYear) modalYear.textContent = card.dataset.year || '';
-      if (modalEngine) modalEngine.textContent = card.dataset.engine || '';
-      if (modalMileage) modalMileage.textContent = card.dataset.mileage || '';
-      if (modalDrive) modalDrive.textContent = card.dataset.drive || '';
-      if (modalGearbox) modalGearbox.textContent = card.dataset.gearbox || '';
-      if (modalBadge) modalBadge.textContent = card.dataset.badge || '';
-      if (modalRental)
-        modalRental.textContent =
-          card.dataset.rental || 'Уточняйте условия аренды у менеджера';
-      if (modalComplectation)
-        modalComplectation.textContent = card.dataset.complectation || '';
-
-      if (modalPhoto) {
-        modalPhoto.src = card.dataset.image || '';
-        modalPhoto.alt = card.dataset.title || 'Автомобиль';
-      }
-
-      if (modalBtn) {
-        modalBtn.href = buildCarFormLink(card);
-      }
-
-      modal.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    });
-  });
-
-  if (closeBtn) {
-    closeBtn.addEventListener('click', closeModal);
-  }
-
-  if (modalOverlay) {
-    modalOverlay.addEventListener('click', closeModal);
-  }
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.classList.contains('active')) {
-      closeModal();
-    }
   });
 }
 
@@ -214,5 +108,4 @@ document.addEventListener('DOMContentLoaded', () => {
   initHeader();
   initSmoothScroll();
   initCarsFilter();
-  initCarsModal();
 });

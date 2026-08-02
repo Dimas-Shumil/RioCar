@@ -172,6 +172,54 @@ function initSmoothScroll() {
   });
 }
 
+
+function initPublicationsSlider() {
+  const slider = document.querySelector('[data-publications-slider]');
+
+  if (!slider || typeof Swiper === 'undefined') return;
+
+  const count = Number.parseInt(slider.dataset.publicationsCount || '0', 10);
+  const pagination = document.querySelector('[data-publications-pagination]');
+
+  new Swiper(slider, {
+    slidesPerView: 1.08,
+    spaceBetween: 14,
+    speed: 720,
+    grabCursor: count > 1,
+    watchOverflow: true,
+    rewind: count > 1,
+    autoplay:
+      count > 1
+        ? {
+            delay: 3600,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true,
+          }
+        : false,
+    pagination:
+      count > 1 && pagination
+        ? {
+            el: pagination,
+            clickable: true,
+          }
+        : undefined,
+    breakpoints: {
+      640: {
+        slidesPerView: 1.55,
+        spaceBetween: 16,
+      },
+      900: {
+        slidesPerView: 2.25,
+        spaceBetween: 18,
+      },
+      1280: {
+        slidesPerView: 3.15,
+        spaceBetween: 20,
+      },
+    },
+  });
+}
+
 let reviewsSwiperYandex = null;
 let reviewsSwiperGis = null;
 
@@ -680,6 +728,7 @@ async function initApp() {
   initContactCarSelect();
   initPhoneMask();
   initContactFormSubmit();
+  initPublicationsSlider();
   initReviewsTabs();
   initReviewsSliders();
 }

@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+
+    <meta name="theme-color" content="#111214" />
+
+    <title>Клиенты — RioCar | ShumDev Custom CMS</title>
+
+    <link rel="stylesheet" href="/site/css/admin.min.css" />
+
+    <script src="/site/scripts/admin/session-guard.js" defer></script>
+    <script src="/site/scripts/admin/clients.js" defer></script>
+  </head>
+
+  <body
+    class="admin-dashboard-page admin-requests-page admin-clients-page"
+    data-admin-page="clients"
+  >
+    <div class="admin-shell">
+      <aside class="admin-sidebar">
+        <div class="admin-sidebar__head">
+          <a
+            class="admin-sidebar__logo"
+            href="/admin/dashboard"
+            aria-label="RioCar — панель управления"
+          >
+            <span>RIO</span><strong>CAR</strong>
+          </a>
+
+          <span class="admin-sidebar__caption"> ShumDev Custom CMS </span>
+        </div>
+
+        <nav class="admin-sidebar__nav" aria-label="Навигация админ-панели">
+          <a class="admin-sidebar__link" href="/admin/dashboard">
+            <span class="admin-sidebar__index">01</span>
+            <span>Обзор</span>
+          </a>
+
+          <a class="admin-sidebar__link" href="/admin/requests">
+            <span class="admin-sidebar__index">02</span>
+            <span>Заявки</span>
+          </a>
+
+          <a
+            class="admin-sidebar__link admin-sidebar__link--active"
+            href="/admin/clients"
+            aria-current="page"
+          >
+            <span class="admin-sidebar__index">03</span>
+            <span>Клиенты</span>
+          </a>
+
+          <a class="admin-sidebar__link" href="/admin/cars">
+            <span class="admin-sidebar__index">04</span>
+            <span>Автомобили</span>
+          </a>
+
+          <a class="admin-sidebar__link" href="/admin/publications">
+            <span class="admin-sidebar__index">05</span>
+            <span>Публикации</span>
+          </a>
+        </nav>
+
+        <div class="admin-sidebar__bottom">
+          <button
+            class="admin-sidebar__site-link"
+            type="button"
+            data-admin-open-site
+          >
+            Вернуться на сайт
+          </button>
+
+          <button class="admin-sidebar__logout" type="button" data-admin-logout>
+            Выйти
+          </button>
+        </div>
+      </aside>
+
+      <main class="admin-main">
+        <header class="admin-header">
+          <div class="admin-header__intro">
+            <span class="admin-header__eyebrow"> Панель управления </span>
+
+            <h1 class="admin-header__title">Клиенты RioCar</h1>
+
+            <p class="admin-header__text">
+              Контактные данные клиентов и история их обращений.
+            </p>
+          </div>
+
+          <button class="admin-header__logout" type="button" data-admin-logout>
+            Выйти
+          </button>
+        </header>
+
+        <section class="admin-requests admin-clients">
+          <div class="admin-requests__head">
+            <div>
+              <span class="admin-requests__caption"> База клиентов </span>
+
+              <h2 class="admin-requests__title">Все клиенты</h2>
+            </div>
+
+            <div class="admin-clients__actions">
+              <button
+                class="admin-clients__add"
+                type="button"
+                data-client-create
+              >
+                Добавить клиента
+              </button>
+
+              <button
+                class="admin-requests__refresh"
+                type="button"
+                data-clients-refresh
+              >
+                Обновить
+              </button>
+            </div>
+          </div>
+
+          <p
+            class="admin-requests__message"
+            role="alert"
+            hidden
+            data-clients-message
+          ></p>
+
+          <div class="admin-requests__filters admin-clients__filters">
+            <label class="admin-requests__search">
+              <span class="admin-requests__search-label"> Поиск </span>
+
+              <input
+                type="search"
+                placeholder="Имя, телефон или комментарий"
+                autocomplete="off"
+                data-clients-search
+              />
+            </label>
+          </div>
+
+          <div class="admin-requests__loading" data-clients-loading>
+            Загружаем клиентов…
+          </div>
+
+          <div class="admin-requests__content" hidden data-clients-content>
+            <div class="admin-requests__table-wrap">
+              <table class="admin-requests__table admin-clients__table">
+                <thead>
+                  <tr>
+                    <th>Клиент</th>
+                    <th>Телефон</th>
+                    <th>Заявок</th>
+                    <th>Последний автомобиль</th>
+                    <th>Последняя заявка</th>
+                    <th>Комментарий</th>
+                    <th>Добавлен</th>
+                    <th></th>
+                  </tr>
+                </thead>
+
+                <tbody data-clients-list></tbody>
+              </table>
+            </div>
+
+            <div class="admin-requests__empty" hidden data-clients-empty>
+              <strong>Клиенты не найдены</strong>
+
+              <span>Попробуй изменить поисковый запрос.</span>
+            </div>
+
+            <div
+              class="admin-requests__pagination"
+              hidden
+              data-clients-pagination
+            >
+              <button type="button" data-clients-page="prev">Назад</button>
+
+              <span data-clients-page-label> Страница 1 из 1 </span>
+
+              <button type="button" data-clients-page="next">Вперёд</button>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div
+      class="admin-request-modal"
+      hidden
+      aria-hidden="true"
+      data-client-modal
+    >
+      <button
+        class="admin-request-modal__backdrop"
+        type="button"
+        aria-label="Закрыть карточку клиента"
+        data-client-modal-close
+      ></button>
+
+      <section
+        class="admin-request-modal__dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="client-modal-title"
+      >
+        <button
+          class="admin-request-modal__close"
+          type="button"
+          aria-label="Закрыть карточку"
+          data-client-modal-close
+        >
+          ×
+        </button>
+
+        <div class="admin-request-modal__loading" data-client-modal-loading>
+          Загружаем данные клиента…
+        </div>
+
+        <div
+          class="admin-request-modal__content"
+          hidden
+          data-client-modal-content
+        >
+          <span class="admin-request-modal__caption" data-client-modal-number>
+            Клиент
+          </span>
+
+          <h2 id="client-modal-title" data-client-modal-title>
+            Карточка клиента
+          </h2>
+
+          <div class="admin-client-modal__meta" data-client-edit-only>
+            <div>
+              <span>Добавлен</span>
+              <strong data-client-modal-created>—</strong>
+            </div>
+
+            <div>
+              <span>Количество заявок</span>
+              <strong data-client-modal-leads-count>0</strong>
+            </div>
+          </div>
+
+          <form class="admin-client-modal__form" data-client-form>
+            <label>
+              <span>Имя клиента</span>
+
+              <input
+                type="text"
+                name="name"
+                maxlength="60"
+                required
+                data-client-modal-name
+              />
+            </label>
+
+            <label>
+              <span>Телефон</span>
+
+              <input
+                type="tel"
+                name="phone"
+                maxlength="40"
+                required
+                data-client-modal-phone
+              />
+            </label>
+
+            <label class="admin-client-modal__comment">
+              <span>Внутренний комментарий</span>
+
+              <textarea
+                name="comment"
+                maxlength="1000"
+                placeholder="Например: постоянный клиент, предпочитает премиум-автомобили"
+                data-client-modal-comment
+              ></textarea>
+            </label>
+
+            <p
+              class="admin-request-modal__message"
+              role="alert"
+              hidden
+              data-client-modal-error
+            ></p>
+
+            <div class="admin-request-modal__footer">
+              <div class="admin-client-modal__footer-actions">
+                <a
+                  class="admin-client-modal__call"
+                  href="#"
+                  data-client-modal-call
+                  data-client-edit-only
+                >
+                  Позвонить клиенту
+                </a>
+
+                <button
+                  class="admin-client-modal__delete"
+                  type="button"
+                  data-client-modal-delete
+                  data-client-edit-only
+                >
+                  Удалить клиента
+                </button>
+              </div>
+
+              <button type="submit" data-client-modal-save>
+                Сохранить данные
+              </button>
+            </div>
+          </form>
+
+          <section class="admin-client-modal__history" data-client-edit-only>
+            <div class="admin-client-modal__history-head">
+              <span>История обращений</span>
+            </div>
+
+            <div
+              class="admin-client-modal__history-list"
+              data-client-modal-history
+            ></div>
+
+            <div
+              class="admin-client-modal__history-empty"
+              hidden
+              data-client-modal-history-empty
+            >
+              У клиента пока нет заявок.
+            </div>
+          </section>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

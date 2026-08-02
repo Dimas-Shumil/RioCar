@@ -13,6 +13,8 @@
 
     <link rel="stylesheet" href="/site/css/admin.min.css" />
 
+    <script src="/site/scripts/admin/session-guard.js" defer></script>
+
     <script src="/site/scripts/admin/dashboard.js" defer></script>
   </head>
 
@@ -63,9 +65,13 @@
         </nav>
 
         <div class="admin-sidebar__bottom">
-          <a class="admin-sidebar__site-link" href="/" target="_blank" rel="noopener">
-            Открыть сайт
-          </a>
+          <button
+            class="admin-sidebar__site-link"
+            type="button"
+            data-admin-open-site
+          >
+            Вернуться на сайт
+          </button>
 
           <button
             class="admin-sidebar__logout"

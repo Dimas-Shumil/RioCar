@@ -5,11 +5,12 @@ import {
 
 import prisma from '../lib/prisma.js';
 import {
-  SESSION_TTL_MS,
+  SESSION_ABSOLUTE_TTL_MS,
+  SESSION_IDLE_TTL_MS,
 } from '../config/security.js';
 
 const TOKEN_BYTES = 32;
-const MAX_ACTIVE_SESSIONS = 5;
+const MAX_ACTIVE_SESSIONS = 3;
 
 function generateToken() {
   return randomBytes(TOKEN_BYTES).toString('base64url');
@@ -34,18 +35,33 @@ async function createAdminSession({ adminId, req }) {
 
   const now = new Date();
   const expiresAt = new Date(
-    now.getTime() + SESSION_TTL_MS,
+    now.getTime() + SESSION_ABSOLUTE_TTL_MS,
+  );
+
+  const idleCutoff = new Date(
+    now.getTime() - SESSION_IDLE_TTL_MS,
   );
 
   const metadata = getRequestMetadata(req);
 
   const session = await prisma.$transaction(
     async (transaction) => {
+      // Удаляем абсолютные и heartbeat-просроченные сессии,
+      // чтобы закрытые вкладки не занимали один из трёх слотов.
       await transaction.adminSession.deleteMany({
         where: {
-          expiresAt: {
-            lte: now,
-          },
+          OR: [
+            {
+              expiresAt: {
+                lte: now,
+              },
+            },
+            {
+              lastUsedAt: {
+                lte: idleCutoff,
+              },
+            },
+          ],
         },
       });
 

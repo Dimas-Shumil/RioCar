@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+    <meta name="theme-color" content="#111214" />
+
+    <title>Автомобиль — RioCar | ShumDev Custom CMS</title>
+
+    <link rel="stylesheet" href="/site/css/admin.min.css" />
+
+    <script src="/site/scripts/admin/session-guard.js" defer></script>
+    <script src="/site/scripts/admin/car-edit.js" defer></script>
+  </head>
+
+  <body
+    class="admin-dashboard-page admin-car-edit-page"
+    data-admin-page="cars"
+  >
+    <div class="admin-shell">
+      <aside class="admin-sidebar">
+        <div class="admin-sidebar__head">
+          <a
+            class="admin-sidebar__logo"
+            href="/admin/dashboard"
+            aria-label="RioCar — панель управления"
+          >
+            <span>RIO</span><strong>CAR</strong>
+          </a>
+
+          <span class="admin-sidebar__caption">ShumDev Custom CMS</span>
+        </div>
+
+        <nav class="admin-sidebar__nav" aria-label="Навигация админ-панели">
+          <a class="admin-sidebar__link" href="/admin/dashboard">
+            <span class="admin-sidebar__index">01</span>
+            <span>Обзор</span>
+          </a>
+
+          <a class="admin-sidebar__link" href="/admin/requests">
+            <span class="admin-sidebar__index">02</span>
+            <span>Заявки</span>
+          </a>
+
+          <a class="admin-sidebar__link" href="/admin/clients">
+            <span class="admin-sidebar__index">03</span>
+            <span>Клиенты</span>
+          </a>
+
+          <a
+            class="admin-sidebar__link admin-sidebar__link--active"
+            href="/admin/cars"
+            aria-current="page"
+          >
+            <span class="admin-sidebar__index">04</span>
+            <span>Автомобили</span>
+          </a>
+
+          <a class="admin-sidebar__link" href="/admin/publications">
+            <span class="admin-sidebar__index">05</span>
+            <span>Публикации</span>
+          </a>
+        </nav>
+
+        <div class="admin-sidebar__bottom">
+          <button
+            class="admin-sidebar__site-link"
+            type="button"
+            data-admin-open-site
+          >
+            Вернуться на сайт
+          </button>
+
+          <button class="admin-sidebar__logout" type="button" data-admin-logout>
+            Выйти
+          </button>
+        </div>
+      </aside>
+
+      <main class="admin-main">
+        <header class="admin-header admin-car-edit__header">
+          <div class="admin-header__intro">
+            <a class="admin-car-edit__back" href="/admin/cars">← К автопарку</a>
+            <span class="admin-header__eyebrow" data-car-edit-eyebrow>
+              Новый автомобиль
+            </span>
+            <h1 class="admin-header__title" data-car-edit-title>
+              Добавление автомобиля
+            </h1>
+            <p class="admin-header__text">
+              Заполни данные, сохрани машину и затем добавь фотографии.
+            </p>
+          </div>
+
+          <div class="admin-header__user">
+            <div class="admin-header__user-copy">
+              <span class="admin-header__user-role">Администратор</span>
+              <strong class="admin-header__user-login" data-admin-login>—</strong>
+            </div>
+
+            <button class="admin-header__logout" type="button" data-admin-logout>
+              Выйти
+            </button>
+          </div>
+        </header>
+
+        <section class="admin-car-edit">
+          <p
+            class="admin-car-edit__message"
+            role="alert"
+            hidden
+            data-car-edit-message
+          ></p>
+
+          <div class="admin-car-edit__loading" data-car-edit-loading>
+            Загружаем автомобиль…
+          </div>
+
+          <form
+            class="admin-car-form"
+            hidden
+            data-car-form
+            novalidate
+          >
+            <section class="admin-car-form__section">
+              <div class="admin-car-form__section-head">
+                <div>
+                  <span>Основное</span>
+                  <h2>Карточка автомобиля</h2>
+                </div>
+
+                <label class="admin-car-form__switch">
+                  <input type="checkbox" checked data-car-field="isActive" />
+                  <span aria-hidden="true"></span>
+                  <strong>Показывать на сайте</strong>
+                </label>
+              </div>
+
+              <div class="admin-car-form__grid admin-car-form__grid--main">
+                <label class="admin-car-field admin-car-field--wide">
+                  <span>Название *</span>
+                  <input
+                    type="text"
+                    maxlength="120"
+                    placeholder="Mercedes-Benz E 300"
+                    required
+                    data-car-field="title"
+                  />
+                </label>
+
+                <label class="admin-car-field">
+                  <span>Класс *</span>
+                  <select required data-car-field="category">
+                    <option value="">Выберите класс</option>
+                    <option value="ECONOM">Эконом</option>
+                    <option value="COMFORT">Комфорт</option>
+                    <option value="PREMIUM">Премиум</option>
+                  </select>
+                </label>
+
+                <label class="admin-car-field admin-car-field--wide">
+                  <span>Slug</span>
+                  <input
+                    type="text"
+                    maxlength="100"
+                    placeholder="mercedes-benz-e-300"
+                    data-car-field="slug"
+                  />
+                  <small>Используется в адресе страницы автомобиля.</small>
+                </label>
+
+                <label class="admin-car-field">
+                  <span>Порядок</span>
+                  <input
+                    type="number"
+                    min="0"
+                    max="100000"
+                    value="0"
+                    data-car-field="sortOrder"
+                  />
+                </label>
+              </div>
+            </section>
+
+            <section class="admin-car-form__section">
+              <div class="admin-car-form__section-head">
+                <div>
+                  <span>Стоимость</span>
+                  <h2>Аренда</h2>
+                </div>
+              </div>
+
+              <div class="admin-car-form__grid">
+                <label class="admin-car-field">
+                  <span>Цена за сутки, ₽</span>
+                  <input
+                    type="number"
+                    min="0"
+                    max="100000000"
+                    data-car-field="pricePerDay"
+                  />
+                </label>
+
+                <label class="admin-car-field">
+                  <span>Залог, ₽</span>
+                  <input
+                    type="number"
+                    min="0"
+                    max="100000000"
+                    data-car-field="deposit"
+                  />
+                </label>
+
+                <label class="admin-car-field">
+                  <span>Минимальный срок, суток</span>
+                  <input
+                    type="number"
+                    min="1"
+                    max="365"
+                    value="1"
+                    data-car-field="minRentalDays"
+                  />
+                </label>
+              </div>
+            </section>
+
+            <section class="admin-car-form__section">
+              <div class="admin-car-form__section-head">
+                <div>
+                  <span>Параметры</span>
+                  <h2>Характеристики</h2>
+                </div>
+              </div>
+
+              <div class="admin-car-form__grid">
+                <label class="admin-car-field">
+                  <span>Год</span>
+                  <input type="number" min="1950" data-car-field="year" />
+                </label>
+
+                <label class="admin-car-field">
+                  <span>Двигатель</span>
+                  <input
+                    type="text"
+                    maxlength="120"
+                    placeholder="2.0 л / 245 л.с."
+                    data-car-field="engine"
+                  />
+                </label>
+
+                <label class="admin-car-field">
+                  <span>Топливо</span>
+                  <input
+                    type="text"
+                    maxlength="120"
+                    placeholder="Бензин"
+                    data-car-field="fuel"
+                  />
+                </label>
+
+                <label class="admin-car-field">
+                  <span>Коробка</span>
+                  <input
+                    type="text"
+                    maxlength="120"
+                    placeholder="Автомат"
+                    data-car-field="gearbox"
+                  />
+                </label>
+
+                <label class="admin-car-field">
+                  <span>Привод</span>
+                  <input
+                    type="text"
+                    maxlength="120"
+                    placeholder="Полный"
+                    data-car-field="drive"
+                  />
+                </label>
+
+                <label class="admin-car-field">
+                  <span>Тип кузова</span>
+                  <input
+                    type="text"
+                    maxlength="120"
+                    placeholder="Седан"
+                    data-car-field="bodyType"
+                  />
+                </label>
+
+                <label class="admin-car-field">
+                  <span>Количество мест</span>
+                  <input
+                    type="number"
+                    min="1"
+                    max="60"
+                    data-car-field="seats"
+                  />
+                </label>
+
+                <label class="admin-car-field">
+                  <span>Пробег</span>
+                  <input
+                    type="text"
+                    maxlength="120"
+                    placeholder="Без ограничений"
+                    data-car-field="mileage"
+                  />
+                </label>
+              </div>
+            </section>
+
+            <section class="admin-car-form__section">
+              <div class="admin-car-form__section-head">
+                <div>
+                  <span>Контент</span>
+                  <h2>Описание и условия</h2>
+                </div>
+              </div>
+
+              <div class="admin-car-form__stack">
+                <label class="admin-car-field">
+                  <span>Описание</span>
+                  <textarea
+                    rows="6"
+                    maxlength="5000"
+                    placeholder="Коротко расскажи об автомобиле и его преимуществах."
+                    data-car-field="description"
+                  ></textarea>
+                </label>
+
+                <label class="admin-car-field">
+                  <span>Условия аренды</span>
+                  <textarea
+                    rows="5"
+                    maxlength="3000"
+                    placeholder="Возраст, стаж, территория использования и другие условия."
+                    data-car-field="rentalTerms"
+                  ></textarea>
+                </label>
+
+                <label class="admin-car-field">
+                  <span>Комплектация</span>
+                  <textarea
+                    rows="5"
+                    maxlength="3000"
+                    placeholder="Оснащение автомобиля."
+                    data-car-field="complectation"
+                  ></textarea>
+                </label>
+
+                <label class="admin-car-field">
+                  <span>Ключевые особенности</span>
+                  <textarea
+                    rows="7"
+                    placeholder="Каждая особенность с новой строки"
+                    data-car-field="features"
+                  ></textarea>
+                  <small>Например: климат-контроль, камера заднего вида, CarPlay.</small>
+                </label>
+              </div>
+            </section>
+
+            <section class="admin-car-form__section admin-car-images" data-car-images-section>
+              <div class="admin-car-form__section-head">
+                <div>
+                  <span>Галерея</span>
+                  <h2>Фотографии</h2>
+                </div>
+
+                <label class="admin-car-images__upload" data-car-upload-label>
+                  <input
+                    type="file"
+                    accept="image/jpeg,image/png,image/webp"
+                    multiple
+                    hidden
+                    data-car-images-input
+                  />
+                  Загрузить фотографии
+                </label>
+              </div>
+
+              <p class="admin-car-images__hint" data-car-images-hint>
+                Сначала сохрани автомобиль — после этого станет доступна загрузка фотографий.
+              </p>
+
+              <p
+                class="admin-car-images__progress"
+                hidden
+                data-car-images-progress
+              ></p>
+
+              <div class="admin-car-images__list" data-car-images-list></div>
+
+              <div class="admin-car-images__empty" hidden data-car-images-empty>
+                Фотографий пока нет.
+              </div>
+            </section>
+
+            <div class="admin-car-form__footer">
+              <div class="admin-car-form__footer-left">
+                <button
+                  class="admin-car-form__delete"
+                  type="button"
+                  hidden
+                  data-car-delete
+                >
+                  Удалить автомобиль
+                </button>
+
+                <a
+                  class="admin-car-form__public"
+                  href="#"
+                  target="_blank"
+                  rel="noopener"
+                  hidden
+                  data-car-public-link
+                >
+                  Открыть на сайте
+                </a>
+              </div>
+
+              <button
+                class="admin-car-form__save"
+                type="submit"
+                data-car-save
+              >
+                Сохранить автомобиль
+              </button>
+            </div>
+          </form>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

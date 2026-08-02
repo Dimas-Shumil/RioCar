@@ -2,7 +2,7 @@ import prisma from '../lib/prisma.js';
 
 import {
   SESSION_COOKIE_NAME,
-  SESSION_IDLE_TIMEOUT_MS,
+  SESSION_IDLE_TTL_MS,
   SESSION_TOUCH_INTERVAL_MS,
   getSessionCookieClearOptions,
 } from '../config/security.js';
@@ -62,7 +62,7 @@ async function authenticate(req, res, next, pageMode = false) {
 
     const idleExpired =
       session.lastUsedAt.getTime() +
-        SESSION_IDLE_TIMEOUT_MS <=
+        SESSION_IDLE_TTL_MS <=
       now;
 
     if (absoluteExpired || idleExpired) {

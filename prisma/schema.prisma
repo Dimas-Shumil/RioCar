@@ -23,6 +23,7 @@ enum CarCategory {
 enum PublicationType {
   NEWS
   PROMOTION
+  OFFER
 }
 
 model Admin {
@@ -83,9 +84,14 @@ model Car {
   mileage       String?
   drive         String?
   gearbox       String?
+  fuel          String?
+  bodyType      String?
+  seats         Int?
   complectation String?
   rentalTerms   String?
   description   String?
+  features      String      @default("[]")
+  minRentalDays Int         @default(1)
 
   pricePerDay Int?
   deposit     Int?
@@ -120,15 +126,20 @@ model CarImage {
 
 model Publication {
   id   Int             @id @default(autoincrement())
-  type PublicationType
+  type PublicationType @default(NEWS)
 
   title      String
   slug       String  @unique
   excerpt    String?
   content    String
   coverImage String?
+  coverAlt   String?
 
-  isActive    Boolean   @default(true)
+  isActive   Boolean @default(true)
+  showOnHome Boolean @default(true)
+  isPinned   Boolean @default(false)
+  sortOrder  Int     @default(0)
+
   publishedAt DateTime?
   startsAt    DateTime?
   endsAt      DateTime?
@@ -137,6 +148,7 @@ model Publication {
   updatedAt DateTime @updatedAt
 
   @@index([type, isActive])
+  @@index([showOnHome, isActive, sortOrder])
   @@index([createdAt])
 }
 

@@ -7,9 +7,17 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { readFileSync } from 'node:fs';
 import cookieParser from 'cookie-parser';
+import prisma from './lib/prisma.js';
 import authRouter from './routes/auth.routes.js';
 import requireAuth from './middleware/require-auth.js';
 import dashboardRouter from './routes/dashboard.routes.js';
+import requestsRouter from './routes/requests.routes.js';
+import clientsRouter from './routes/clients.routes.js';
+import carsRouter from './routes/cars.routes.js';
+import publicationsRouter from './routes/publications.routes.js';
+import publicCarsRouter from './routes/public-cars.routes.js';
+import publicPublicationsRouter from './routes/public-publications.routes.js';
+import sessionHeartbeatRouter from './routes/session-heartbeat.routes.js';
 
 const app = express();
 
@@ -51,8 +59,6 @@ function buildPublicPage(fileName) {
 }
 
 const publicPages = {
-  home: buildPublicPage('index.html'),
-  cars: buildPublicPage('cars.html'),
   travel: buildPublicPage('travel.html'),
 };
 
@@ -83,13 +89,20 @@ app.use(
   }),
 );
 
-app.use(express.json({ limit: '20kb' }));
-app.use(express.urlencoded({ extended: false, limit: '20kb' }));
 app.use(cookieParser());
 
-app.use('/api/admin/auth', authRouter);
-app.use('/api/admin/dashboard', dashboardRouter);
+// У автомобилей и публикаций собственные JSON-лимиты для загрузки изображений.
+app.use('/api/admin/cars', carsRouter);
+app.use('/api/admin/publications', publicationsRouter);
 
+app.use(express.json({ limit: '20kb' }));
+app.use(express.urlencoded({ extended: false, limit: '20kb' }));
+
+app.use('/api/admin/auth', authRouter);
+app.use('/api/admin/session/heartbeat', sessionHeartbeatRouter);
+app.use('/api/admin/dashboard', dashboardRouter);
+app.use('/api/admin/requests', requestsRouter);
+app.use('/api/admin/clients', clientsRouter);
 app.get('/index.html', (req, res) => {
   res.redirect(301, '/');
 });
@@ -107,19 +120,50 @@ app.get('/admin', requireAuth.page, (req, res) => {
 app.get('/admin/dashboard', requireAuth.page, (req, res) => {
   res.sendFile(path.join(ADMIN_PAGES_DIR, 'dashboard.html'));
 });
+
+app.get('/admin/requests', requireAuth.page, (req, res) => {
+  res.sendFile(path.join(ADMIN_PAGES_DIR, 'requests.html'));
+});
+
+app.get('/admin/clients', requireAuth.page, (req, res) => {
+  res.sendFile(path.join(ADMIN_PAGES_DIR, 'clients.html'));
+});
+
+app.get('/admin/cars', requireAuth.page, (req, res) => {
+  res.sendFile(path.join(ADMIN_PAGES_DIR, 'cars.html'));
+});
+
+app.get('/admin/cars/new', requireAuth.page, (req, res) => {
+  res.sendFile(path.join(ADMIN_PAGES_DIR, 'car-edit.html'));
+});
+
+app.get('/admin/cars/:id/edit', requireAuth.page, (req, res) => {
+  res.sendFile(path.join(ADMIN_PAGES_DIR, 'car-edit.html'));
+});
+
+app.get('/admin/publications', requireAuth.page, (req, res) => {
+  res.sendFile(path.join(ADMIN_PAGES_DIR, 'publications.html'));
+});
+
+app.get('/admin/publications/new', requireAuth.page, (req, res) => {
+  res.sendFile(path.join(ADMIN_PAGES_DIR, 'publication-edit.html'));
+});
+
+app.get('/admin/publications/:id/edit', requireAuth.page, (req, res) => {
+  res.sendFile(path.join(ADMIN_PAGES_DIR, 'publication-edit.html'));
+});
+
 app.use('/site', express.static(path.join(__dirname, 'site')));
 app.use('/img', express.static(path.join(__dirname, 'img')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
+// Каталог и динамические страницы автомобилей
+app.use(publicCarsRouter);
+
+// Главная страница со слайдером публикаций и отдельные страницы публикаций
+app.use(publicPublicationsRouter);
+
 // Публичные HTML-страницы с готовыми компонентами
-app.get('/', (req, res) => {
-  res.status(200).type('html').send(publicPages.home);
-});
-
-app.get('/cars.html', (req, res) => {
-  res.status(200).type('html').send(publicPages.cars);
-});
-
 app.get('/travel.html', (req, res) => {
   res.status(200).type('html').send(publicPages.travel);
 });
@@ -220,13 +264,57 @@ app.post('/api/send', sendLimiter, async (req, res) => {
     }
 
     const formattedPhone = formatPhone(phone);
+
+    const lead = await prisma.$transaction(async (transaction) => {
+      const client = await transaction.client.upsert({
+        where: {
+          phone: formattedPhone,
+        },
+
+        update: {
+          name,
+        },
+
+        create: {
+          name,
+          phone: formattedPhone,
+        },
+
+        select: {
+          id: true,
+        },
+      });
+
+      return transaction.lead.create({
+        data: {
+          clientId: client.id,
+          status: 'NEW',
+
+          name,
+          phone: formattedPhone,
+          car,
+
+          tripDate: tripDate || null,
+          carYear: carYear || null,
+          carPrice: carPrice || null,
+          message: message || null,
+          page: page || null,
+        },
+
+        select: {
+          id: true,
+          createdAt: true,
+        },
+      });
+    });
     const telLink = makeTelLink(phone);
 
-    const createdAt = new Date().toLocaleString('ru-RU', {
+    const createdAt = lead.createdAt.toLocaleString('ru-RU', {
       timeZone: 'Asia/Krasnoyarsk',
     });
 
-    console.log('🔥 Новая заявка RioCar:', {
+    console.log('Новая заявка RioCar:', {
+      leadId: lead.id,
       name,
       phone: formattedPhone,
       car,
@@ -265,22 +353,35 @@ app.post('/api/send', sendLimiter, async (req, res) => {
       createdAt,
     });
 
-    const sendMailPromise = transporter.sendMail({
-      from: `"RioCar сайт" <${process.env.SMTP_USER}>`,
-      to: process.env.TO_EMAIL,
-      subject: `Заявка RioCar: ${car}`,
-      text,
-      html,
-    });
+    let emailSent = true;
 
-    const timeoutPromise = new Promise((_, reject) => {
-      setTimeout(() => reject(new Error('SMTP timeout')), 10000);
-    });
+    try {
+      const sendMailPromise = transporter.sendMail({
+        from: `"RioCar сайт" <${process.env.SMTP_USER}>`,
+        to: process.env.TO_EMAIL,
+        subject: `Заявка RioCar: ${car}`,
+        text,
+        html,
+      });
 
-    await Promise.race([sendMailPromise, timeoutPromise]);
+      const timeoutPromise = new Promise((_, reject) => {
+        setTimeout(() => reject(new Error('SMTP timeout')), 10000);
+      });
+
+      await Promise.race([sendMailPromise, timeoutPromise]);
+    } catch (emailError) {
+      emailSent = false;
+
+      console.error(
+        `Заявка №${lead.id} сохранена, но письмо не отправлено:`,
+        emailError,
+      );
+    }
 
     return res.status(200).json({
       success: true,
+      leadId: lead.id,
+      emailSent,
       message: 'Заявка отправлена. Мы скоро свяжемся с вами.',
     });
   } catch (error) {

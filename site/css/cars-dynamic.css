@@ -1,0 +1,35 @@
+.cars-card {
+  color: inherit;
+  text-decoration: none;
+}
+
+.cars-card:focus-visible {
+  outline: 2px solid #d8a016;
+  outline-offset: 5px;
+}
+
+.cars-card[hidden] {
+  display: none !important;
+}
+
+.cars-dynamic-empty {
+  grid-column: 1/-1;
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  padding: 64px 24px;
+  border: 1px solid rgba(216, 160, 22, 0.22);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.025);
+  text-align: center;
+}
+
+.cars-dynamic-empty strong {
+  color: #fff;
+  font-size: 22px;
+}
+
+.cars-dynamic-empty span {
+  color: #9b9b9b;
+  font-size: 14px;
+}

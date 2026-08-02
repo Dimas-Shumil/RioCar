@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+
+    <meta name="theme-color" content="#111214" />
+
+    <title>Заявки — RioCar | ShumDev Custom CMS</title>
+
+    <link rel="stylesheet" href="/site/css/admin.min.css" />
+
+    <script src="/site/scripts/admin/session-guard.js" defer></script>
+
+    <script src="/site/scripts/admin/requests.js" defer></script>
+  </head>
+
+  <body
+    class="admin-dashboard-page admin-requests-page"
+    data-admin-page="requests"
+  >
+    <div class="admin-shell">
+      <aside class="admin-sidebar">
+        <div class="admin-sidebar__head">
+          <a
+            class="admin-sidebar__logo"
+            href="/admin/dashboard"
+            aria-label="RioCar — панель управления"
+          >
+            <span>RIO</span><strong>CAR</strong>
+          </a>
+
+          <span class="admin-sidebar__caption">
+            ShumDev Custom CMS
+          </span>
+        </div>
+
+        <nav
+          class="admin-sidebar__nav"
+          aria-label="Навигация админ-панели"
+        >
+          <a
+            class="admin-sidebar__link"
+            href="/admin/dashboard"
+          >
+            <span class="admin-sidebar__index">01</span>
+            <span>Обзор</span>
+          </a>
+
+          <a
+            class="admin-sidebar__link admin-sidebar__link--active"
+            href="/admin/requests"
+            aria-current="page"
+          >
+            <span class="admin-sidebar__index">02</span>
+            <span>Заявки</span>
+          </a>
+
+          <a
+            class="admin-sidebar__link"
+            href="/admin/clients"
+          >
+            <span class="admin-sidebar__index">03</span>
+            <span>Клиенты</span>
+          </a>
+
+          <a
+            class="admin-sidebar__link"
+            href="/admin/cars"
+          >
+            <span class="admin-sidebar__index">04</span>
+            <span>Автомобили</span>
+          </a>
+
+          <a
+            class="admin-sidebar__link"
+            href="/admin/publications"
+          >
+            <span class="admin-sidebar__index">05</span>
+            <span>Публикации</span>
+          </a>
+        </nav>
+
+        <div class="admin-sidebar__bottom">
+          <button
+            class="admin-sidebar__site-link"
+            type="button"
+            data-admin-open-site
+          >
+            Вернуться на сайт
+          </button>
+
+          <button
+            class="admin-sidebar__logout"
+            type="button"
+            data-admin-logout
+          >
+            Выйти
+          </button>
+        </div>
+      </aside>
+
+      <main class="admin-main">
+        <header class="admin-header">
+          <div class="admin-header__intro">
+            <span class="admin-header__eyebrow">
+              Панель управления
+            </span>
+
+            <h1 class="admin-header__title">
+              Заявки RioCar
+            </h1>
+
+            <p class="admin-header__text">
+              Обращения клиентов, детали поездки и этапы обработки.
+            </p>
+          </div>
+
+          <div class="admin-header__user">
+            <div class="admin-header__user-copy">
+              <span class="admin-header__user-role">
+                Администратор
+              </span>
+
+              <strong
+                class="admin-header__user-login"
+                data-admin-login
+              >
+                —
+              </strong>
+            </div>
+
+            <button
+              class="admin-header__logout"
+              type="button"
+              data-admin-logout
+            >
+              Выйти
+            </button>
+          </div>
+        </header>
+
+        <section class="admin-requests">
+          <div class="admin-requests__head">
+            <div>
+              <span class="admin-requests__caption">
+                Работа с обращениями
+              </span>
+
+              <h2 class="admin-requests__title">
+                Все заявки
+              </h2>
+            </div>
+
+            <button
+              class="admin-requests__refresh"
+              type="button"
+              data-requests-refresh
+            >
+              Обновить
+            </button>
+          </div>
+
+          <p
+            class="admin-requests__message"
+            role="alert"
+            hidden
+            data-dashboard-message
+            data-requests-message
+          ></p>
+
+          <div class="admin-requests__filters">
+            <label class="admin-requests__search">
+              <span class="admin-requests__search-label">
+                Поиск
+              </span>
+
+              <input
+                type="search"
+                placeholder="Имя, телефон, автомобиль или дата"
+                autocomplete="off"
+                data-requests-search
+              />
+            </label>
+
+            <div
+              class="admin-requests__status-filters"
+              aria-label="Фильтр заявок по статусу"
+            >
+              <button
+                class="admin-requests__status-button admin-requests__status-button--active"
+                type="button"
+                data-requests-status="ALL"
+                aria-pressed="true"
+              >
+                Все
+
+                <span data-requests-count="ALL">
+                  0
+                </span>
+              </button>
+
+              <button
+                class="admin-requests__status-button"
+                type="button"
+                data-requests-status="NEW"
+                aria-pressed="false"
+              >
+                Новые
+
+                <span data-requests-count="NEW">
+                  0
+                </span>
+              </button>
+
+              <button
+                class="admin-requests__status-button"
+                type="button"
+                data-requests-status="IN_PROGRESS"
+                aria-pressed="false"
+              >
+                В работе
+
+                <span data-requests-count="IN_PROGRESS">
+                  0
+                </span>
+              </button>
+
+              <button
+                class="admin-requests__status-button"
+                type="button"
+                data-requests-status="CONTACTED"
+                aria-pressed="false"
+              >
+                Связались
+
+                <span data-requests-count="CONTACTED">
+                  0
+                </span>
+              </button>
+
+              <button
+                class="admin-requests__status-button"
+                type="button"
+                data-requests-status="COMPLETED"
+                aria-pressed="false"
+              >
+                Завершённые
+
+                <span data-requests-count="COMPLETED">
+                  0
+                </span>
+              </button>
+            </div>
+          </div>
+
+          <div
+            class="admin-requests__loading"
+            data-requests-loading
+          >
+            Загружаем заявки…
+          </div>
+
+          <div
+            class="admin-requests__content"
+            hidden
+            data-requests-content
+          >
+            <div class="admin-requests__table-wrap">
+              <table class="admin-requests__table">
+                <thead>
+                  <tr>
+                    <th>Заявка</th>
+                    <th>Клиент</th>
+                    <th>Автомобиль</th>
+                    <th>Телефон</th>
+                    <th>Дата поездки</th>
+                    <th>Статус</th>
+                    <th>Создана</th>
+                    <th></th>
+                  </tr>
+                </thead>
+
+                <tbody data-requests-list></tbody>
+              </table>
+            </div>
+
+            <div
+              class="admin-requests__empty"
+              hidden
+              data-requests-empty
+            >
+              <strong>Заявки не найдены</strong>
+
+              <span>
+                Измени поисковый запрос или выбранный статус.
+              </span>
+            </div>
+
+            <div
+              class="admin-requests__pagination"
+              hidden
+              data-requests-pagination
+            >
+              <button
+                type="button"
+                data-requests-page="prev"
+              >
+                Назад
+              </button>
+
+              <span data-requests-page-label>
+                Страница 1 из 1
+              </span>
+
+              <button
+                type="button"
+                data-requests-page="next"
+              >
+                Вперёд
+              </button>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div
+      class="admin-request-modal"
+      hidden
+      aria-hidden="true"
+      data-request-modal
+    >
+      <button
+        class="admin-request-modal__backdrop"
+        type="button"
+        aria-label="Закрыть карточку заявки"
+        data-request-modal-close
+      ></button>
+
+      <section
+        class="admin-request-modal__dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="request-modal-title"
+      >
+        <button
+          class="admin-request-modal__close"
+          type="button"
+          aria-label="Закрыть карточку"
+          data-request-modal-close
+        >
+          ×
+        </button>
+
+        <div
+          class="admin-request-modal__loading"
+          data-request-modal-loading
+        >
+          Загружаем заявку…
+        </div>
+
+        <div
+          class="admin-request-modal__content"
+          hidden
+          data-request-modal-content
+        >
+          <span
+            class="admin-request-modal__caption"
+            data-request-modal-number
+          >
+            Заявка
+          </span>
+
+          <h2
+            id="request-modal-title"
+            data-request-modal-name
+          >
+            —
+          </h2>
+
+          <div class="admin-request-modal__grid">
+            <div>
+              <span>Телефон</span>
+
+              <a
+                href="#"
+                data-request-modal-phone
+              >
+                —
+              </a>
+            </div>
+
+            <div>
+              <span>Автомобиль</span>
+
+              <strong data-request-modal-car>
+                —
+              </strong>
+            </div>
+
+            <div>
+              <span>Год</span>
+
+              <strong data-request-modal-year>
+                —
+              </strong>
+            </div>
+
+            <div>
+              <span>Стоимость</span>
+
+              <strong data-request-modal-price>
+                —
+              </strong>
+            </div>
+
+            <div>
+              <span>Дата поездки</span>
+
+              <strong data-request-modal-trip-date>
+                —
+              </strong>
+            </div>
+
+            <div>
+              <span>Страница сайта</span>
+
+              <strong data-request-modal-page>
+                —
+              </strong>
+            </div>
+          </div>
+
+          <div class="admin-request-modal__message-block">
+            <span>Комментарий клиента</span>
+
+            <p data-request-modal-message>
+              —
+            </p>
+          </div>
+
+          <label class="admin-request-modal__status-field">
+            <span>Статус заявки</span>
+
+            <select data-request-modal-status>
+              <option value="NEW">
+                Новая
+              </option>
+
+              <option value="IN_PROGRESS">
+                В работе
+              </option>
+
+              <option value="CONTACTED">
+                Связались
+              </option>
+
+              <option value="COMPLETED">
+                Завершена
+              </option>
+            </select>
+          </label>
+
+          <p
+            class="admin-request-modal__message"
+            role="alert"
+            hidden
+            data-request-modal-error
+          ></p>
+
+          <div class="admin-request-modal__footer">
+            <time data-request-modal-created>
+              —
+            </time>
+
+            <button
+              type="button"
+              data-request-modal-save
+            >
+              Сохранить статус
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

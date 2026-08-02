@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+    <meta name="theme-color" content="#111214" />
+
+    <title>Редактор публикации — RioCar | ShumDev Custom CMS</title>
+
+    <link rel="stylesheet" href="/site/css/admin.min.css" />
+
+    <script src="/site/scripts/admin/session-guard.js" defer></script>
+    <script src="/site/scripts/admin/publication-edit.js" defer></script>
+  </head>
+
+  <body
+    class="admin-dashboard-page admin-publication-edit-page"
+    data-admin-page="publications"
+  >
+    <div class="admin-shell">
+      <aside class="admin-sidebar">
+        <div class="admin-sidebar__head">
+          <a
+            class="admin-sidebar__logo"
+            href="/admin/dashboard"
+            aria-label="RioCar — панель управления"
+          >
+            <span>RIO</span><strong>CAR</strong>
+          </a>
+
+          <span class="admin-sidebar__caption">ShumDev Custom CMS</span>
+        </div>
+
+        <nav class="admin-sidebar__nav" aria-label="Навигация админ-панели">
+          <a class="admin-sidebar__link" href="/admin/dashboard">
+            <span class="admin-sidebar__index">01</span>
+            <span>Обзор</span>
+          </a>
+
+          <a class="admin-sidebar__link" href="/admin/requests">
+            <span class="admin-sidebar__index">02</span>
+            <span>Заявки</span>
+          </a>
+
+          <a class="admin-sidebar__link" href="/admin/clients">
+            <span class="admin-sidebar__index">03</span>
+            <span>Клиенты</span>
+          </a>
+
+          <a class="admin-sidebar__link" href="/admin/cars">
+            <span class="admin-sidebar__index">04</span>
+            <span>Автомобили</span>
+          </a>
+
+          <a
+            class="admin-sidebar__link admin-sidebar__link--active"
+            href="/admin/publications"
+            aria-current="page"
+          >
+            <span class="admin-sidebar__index">05</span>
+            <span>Публикации</span>
+          </a>
+        </nav>
+
+        <div class="admin-sidebar__bottom">
+          <button
+            class="admin-sidebar__site-link"
+            type="button"
+            data-admin-open-site
+          >
+            Вернуться на сайт
+          </button>
+
+          <button class="admin-sidebar__logout" type="button" data-admin-logout>
+            Выйти
+          </button>
+        </div>
+      </aside>
+
+      <main class="admin-main">
+        <header class="admin-header admin-publication-edit__header">
+          <div class="admin-header__intro">
+            <a class="admin-publication-edit__back" href="/admin/publications">
+              ← К публикациям
+            </a>
+            <span class="admin-header__eyebrow" data-publication-edit-eyebrow>
+              Новая публикация
+            </span>
+            <h1 class="admin-header__title" data-publication-edit-title>
+              Добавление публикации
+            </h1>
+            <p class="admin-header__text">
+              Добавь текст, сроки и обложку для слайдера на главной странице.
+            </p>
+          </div>
+
+          <div class="admin-header__user">
+            <div class="admin-header__user-copy">
+              <span class="admin-header__user-role">Администратор</span>
+              <strong class="admin-header__user-login" data-admin-login
+                >—</strong
+              >
+            </div>
+
+            <button
+              class="admin-header__logout"
+              type="button"
+              data-admin-logout
+            >
+              Выйти
+            </button>
+          </div>
+        </header>
+
+        <section class="admin-publication-edit">
+          <p
+            class="admin-publication-edit__message"
+            role="alert"
+            hidden
+            data-publication-edit-message
+          ></p>
+
+          <div
+            class="admin-publication-edit__loading"
+            data-publication-edit-loading
+          >
+            Загружаем публикацию…
+          </div>
+
+          <form
+            class="admin-publication-form"
+            hidden
+            data-publication-form
+            novalidate
+          >
+            <section class="admin-publication-form__section">
+              <div class="admin-publication-form__section-head">
+                <div>
+                  <span>Основное</span>
+                  <h2>Карточка публикации</h2>
+                </div>
+
+                <label class="admin-publication-form__switch">
+                  <input
+                    type="checkbox"
+                    checked
+                    data-publication-field="isActive"
+                  />
+                  <span aria-hidden="true"></span>
+                  <strong>Показывать на сайте</strong>
+                </label>
+              </div>
+
+              <div
+                class="admin-publication-form__grid admin-publication-form__grid--main"
+              >
+                <label
+                  class="admin-publication-field admin-publication-field--wide"
+                >
+                  <span>Заголовок *</span>
+                  <input
+                    type="text"
+                    maxlength="160"
+                    placeholder="Скидка 10% при аренде от 7 суток"
+                    required
+                    data-publication-field="title"
+                  />
+                </label>
+
+                <label class="admin-publication-field">
+                  <span>Тип *</span>
+                  <select required data-publication-field="type">
+                    <option value="PROMOTION">Акция</option>
+                    <option value="NEWS">Новость</option>
+                    <option value="OFFER">Предложение</option>
+                  </select>
+                </label>
+
+                <label
+                  class="admin-publication-field admin-publication-field--wide"
+                >
+                  <span>Slug</span>
+                  <input
+                    type="text"
+                    maxlength="110"
+                    placeholder="skidka-10-ot-7-sutok"
+                    data-publication-field="slug"
+                  />
+                  <small>Используется в адресе отдельной страницы.</small>
+                </label>
+
+                <label class="admin-publication-field">
+                  <span>Порядок в слайдере</span>
+                  <input
+                    type="number"
+                    min="0"
+                    max="100000"
+                    value="0"
+                    data-publication-field="sortOrder"
+                  />
+                </label>
+
+                <label
+                  class="admin-publication-field admin-publication-field--full"
+                >
+                  <span>Короткое описание</span>
+                  <textarea
+                    maxlength="500"
+                    rows="3"
+                    placeholder="Короткий официальный анонс для обложки страницы."
+                    data-publication-field="excerpt"
+                  ></textarea>
+                </label>
+              </div>
+            </section>
+
+            <section class="admin-publication-form__section">
+              <div class="admin-publication-form__section-head">
+                <div>
+                  <span>Текст</span>
+                  <h2>Описание публикации</h2>
+                </div>
+              </div>
+
+              <label
+                class="admin-publication-field admin-publication-field--full"
+              >
+                <span>Полный текст *</span>
+                <textarea
+                  class="admin-publication-field__content"
+                  maxlength="16000"
+                  rows="14"
+                  placeholder="Опиши условия акции или новость. Для списка начинай строку с дефиса."
+                  required
+                  data-publication-field="content"
+                ></textarea>
+                <small>
+                  Абзацы разделяй пустой строкой. Список: каждая строка
+                  начинается с «-».
+                </small>
+              </label>
+            </section>
+
+            <section class="admin-publication-form__section">
+              <div class="admin-publication-form__section-head">
+                <div>
+                  <span>Показ</span>
+                  <h2>Слайдер и сроки</h2>
+                </div>
+              </div>
+
+              <div class="admin-publication-form__settings">
+                <label class="admin-publication-form__check">
+                  <input
+                    type="checkbox"
+                    checked
+                    data-publication-field="showOnHome"
+                  />
+                  <span aria-hidden="true"></span>
+                  <strong>Показывать в слайдере на главной</strong>
+                </label>
+
+                <label class="admin-publication-form__check">
+                  <input type="checkbox" data-publication-field="isPinned" />
+                  <span aria-hidden="true"></span>
+                  <strong>Закрепить первой</strong>
+                </label>
+              </div>
+
+              <div class="admin-publication-form__grid">
+                <label class="admin-publication-field">
+                  <span>Дата публикации</span>
+                  <input
+                    type="datetime-local"
+                    data-publication-field="publishedAt"
+                  />
+                </label>
+
+                <label class="admin-publication-field">
+                  <span>Начало действия</span>
+                  <input
+                    type="datetime-local"
+                    data-publication-field="startsAt"
+                  />
+                </label>
+
+                <label class="admin-publication-field">
+                  <span>Окончание действия</span>
+                  <input
+                    type="datetime-local"
+                    data-publication-field="endsAt"
+                  />
+                </label>
+              </div>
+            </section>
+
+            <section class="admin-publication-form__section">
+              <div class="admin-publication-form__section-head">
+                <div>
+                  <span>Изображение</span>
+                  <h2>Обложка</h2>
+                </div>
+              </div>
+
+              <div class="admin-publication-cover">
+                <div class="admin-publication-cover__preview">
+                  <img
+                    src="/site/image/black-lexus.webp"
+                    alt=""
+                    data-publication-cover-preview
+                  />
+                  <span data-publication-cover-empty>Обложка не загружена</span>
+                </div>
+
+                <div class="admin-publication-cover__controls">
+                  <label class="admin-publication-field">
+                    <span>Alt-текст</span>
+                    <input
+                      type="text"
+                      maxlength="180"
+                      placeholder="Автомобиль RioCar"
+                      data-publication-field="coverAlt"
+                    />
+                  </label>
+
+                  <input
+                    type="file"
+                    accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
+                    hidden
+                    data-publication-cover-input
+                  />
+
+                  <button
+                    class="admin-publication-cover__upload"
+                    type="button"
+                    data-publication-cover-select
+                  >
+                    Выбрать изображение
+                  </button>
+
+                  <button
+                    class="admin-publication-cover__delete"
+                    type="button"
+                    hidden
+                    data-publication-cover-delete
+                  >
+                    Удалить обложку
+                  </button>
+
+                  <small>
+                    JPG, PNG или WebP до 8 МБ. Рекомендуемый формат —
+                    горизонтальный 16:9.
+                  </small>
+                </div>
+              </div>
+            </section>
+
+            <footer class="admin-publication-form__footer">
+              <div class="admin-publication-form__footer-left">
+                <button
+                  class="admin-publication-form__delete"
+                  type="button"
+                  hidden
+                  data-publication-delete
+                >
+                  Удалить публикацию
+                </button>
+
+                <a
+                  class="admin-publication-form__public"
+                  href="#"
+                  target="_blank"
+                  rel="noopener"
+                  hidden
+                  data-publication-public-link
+                >
+                  Открыть на сайте ↗
+                </a>
+              </div>
+
+              <button
+                class="admin-publication-form__save"
+                type="submit"
+                data-publication-save
+              >
+                Сохранить публикацию
+              </button>
+            </footer>
+          </form>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

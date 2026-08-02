@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>{{SEO_TITLE}}</title>
+    <meta name="description" content="{{SEO_DESCRIPTION}}" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="{{CANONICAL_URL}}" />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="{{SEO_TITLE}}" />
+    <meta property="og:description" content="{{SEO_DESCRIPTION}}" />
+    <meta property="og:url" content="{{CANONICAL_URL}}" />
+    <meta property="og:image" content="{{OG_IMAGE}}" />
+
+    <link rel="icon" href="/site/image/logo-mini.png" />
+    <link rel="stylesheet" href="/site/css/header.min.css" />
+    <link rel="stylesheet" href="/site/css/footer.min.css" />
+    <link rel="stylesheet" href="/site/css/publication.min.css" />
+  </head>
+
+  <body class="publication-page publication-page--{{PUBLICATION_TYPE_CLASS}}">
+    <!-- HEADER_COMPONENT -->
+
+    <main id="home">
+      <article class="publication-article">
+        <header class="publication-hero">
+          <img
+            class="publication-hero__image"
+            src="{{PUBLICATION_IMAGE}}"
+            alt="{{PUBLICATION_IMAGE_ALT}}"
+          />
+          <span class="publication-hero__overlay" aria-hidden="true"></span>
+
+          <div class="publication-hero__container">
+            <nav class="publication-breadcrumbs" aria-label="Хлебные крошки">
+              <a href="/">Главная</a>
+              <span aria-hidden="true">/</span>
+              <span>{{PUBLICATION_TYPE}}</span>
+            </nav>
+
+            <div class="publication-hero__copy">
+              <span class="publication-hero__badge">{{PUBLICATION_TYPE}}</span>
+              <h1>{{PUBLICATION_TITLE}}</h1>
+              <p>{{PUBLICATION_EXCERPT}}</p>
+            </div>
+          </div>
+        </header>
+
+        <section class="publication-body">
+          <div class="publication-body__container">
+            {{PUBLICATION_META}}
+
+            <div class="publication-body__layout">
+              <div class="publication-body__content">
+                <span class="publication-body__eyebrow">Подробности</span>
+                <h2>Официальная информация</h2>
+                <div class="publication-richtext">
+                  {{PUBLICATION_CONTENT}}
+                </div>
+              </div>
+
+              <aside class="publication-contact">
+                <span class="publication-contact__label">RioCar</span>
+                <h2>Нужна помощь с выбором автомобиля?</h2>
+                <p>
+                  Менеджер расскажет об условиях и поможет подобрать автомобиль
+                  под вашу поездку.
+                </p>
+                <div class="publication-contact__actions">
+                  <a class="publication-contact__primary" href="/cars.html">
+                    Выбрать автомобиль
+                  </a>
+                  <a class="publication-contact__secondary" href="/#form">
+                    Оставить заявку
+                  </a>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </section>
+      </article>
+    </main>
+
+    <!-- FOOTER_COMPONENT -->
+
+    <script defer src="/site/scripts/main.js"></script>
+    <script type="application/ld+json">{{PUBLICATION_JSON_LD}}</script>
+  </body>
+</html>

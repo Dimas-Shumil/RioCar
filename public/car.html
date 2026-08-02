@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>{{SEO_TITLE}}</title>
+    <meta name="description" content="{{SEO_DESCRIPTION}}" />
+    <link rel="canonical" href="{{CANONICAL_URL}}" />
+
+    <meta property="og:type" content="product" />
+    <meta property="og:title" content="{{SEO_TITLE}}" />
+    <meta property="og:description" content="{{SEO_DESCRIPTION}}" />
+    <meta property="og:url" content="{{CANONICAL_URL}}" />
+    <meta property="og:image" content="{{OG_IMAGE}}" />
+
+    <link rel="icon" href="/site/image/logo-mini.png" />
+    <link rel="stylesheet" href="/site/css/car.min.css" />
+  </head>
+
+  <body class="car-page" data-car-slug="{{CAR_SLUG}}">
+    <!-- HEADER_COMPONENT -->
+
+    <main id="home">
+      <section class="car-product" aria-labelledby="car-title">
+        <div class="car-product__container">
+          <div class="car-product__main">
+            <nav class="car-breadcrumbs" aria-label="Хлебные крошки">
+              <a href="/">Главная</a>
+              <span aria-hidden="true">/</span>
+              <a href="/cars.html">Автомобили</a>
+              <span aria-hidden="true">/</span>
+              <span>{{CAR_TITLE}}</span>
+            </nav>
+
+            <div class="car-heading">
+              <!-- <span class="car-heading__year">{{CAR_YEAR}}</span> -->
+              <h1 id="car-title">Прокат {{CAR_TITLE}} в Абакане</h1>
+              <div class="car-heading__meta">
+                <span class="car-heading__available">
+                  <i aria-hidden="true"></i>
+                  Доступен для бронирования
+                </span>
+                <span class="car-heading__divider" aria-hidden="true"></span>
+                <span>{{CAR_CATEGORY}}</span>
+              </div>
+            </div>
+
+            {{CAR_GALLERY}}
+
+            <div class="car-specs" aria-label="Характеристики автомобиля">
+              {{CAR_SPECS}}
+            </div>
+
+            <div class="car-information">
+              <article class="car-information__description">
+                <span class="car-section-label">Об автомобиле</span>
+                <p>{{CAR_DESCRIPTION}}</p>
+
+                <div class="car-information__extra-specs">
+                  {{CAR_ADDITIONAL_SPECS}}
+                </div>
+              </article>
+
+              <article class="car-information__features">
+                <span class="car-section-label">Ключевые особенности</span>
+                <ul>{{CAR_FEATURES}}</ul>
+              </article>
+            </div>
+
+            <article class="car-rental-terms" id="rental-terms">
+              <div>
+                <span class="car-section-label">Условия аренды</span>
+                <p>{{CAR_RENTAL_TERMS}}</p>
+              </div>
+
+              <dl>
+                <div>
+                  <dt>Минимальный срок</dt>
+                  <dd>{{CAR_MIN_DAYS}} сутки</dd>
+                </div>
+                <div>
+                  <dt>Залог</dt>
+                  <dd>{{CAR_DEPOSIT}}</dd>
+                </div>
+              </dl>
+            </article>
+          </div>
+
+          <aside class="car-product__aside">
+            <section class="car-booking" id="booking" aria-labelledby="booking-title">
+              <div class="car-booking__head">
+                <span class="car-booking__label">Стоимость аренды</span>
+
+                <div class="car-booking__price">
+                  <strong>{{CAR_PRICE}}</strong>
+                  <span>₽ / сутки</span>
+                </div>
+
+                <p class="car-booking__minimum" id="booking-title">
+                  Минимальный срок аренды — {{CAR_MIN_DAYS}} сутки
+                </p>
+              </div>
+
+              <form class="car-booking__form" id="booking-form" data-car-booking-form>
+                <div class="car-booking__dates">
+                  <label class="car-booking__field">
+                    <span>Дата начала</span>
+                    <input type="date" name="start_date" required data-start-date />
+                  </label>
+
+                  <label class="car-booking__field">
+                    <span>Дата окончания</span>
+                    <input type="date" name="end_date" required data-end-date />
+                  </label>
+                </div>
+
+                <label class="car-booking__field">
+                  <span>Ваше имя</span>
+                  <input
+                    type="text"
+                    name="name"
+                    minlength="2"
+                    maxlength="60"
+                    autocomplete="name"
+                    required
+                  />
+                </label>
+
+                <label class="car-booking__field">
+                  <span>Телефон</span>
+                  <input
+                    type="tel"
+                    name="phone"
+                    inputmode="tel"
+                    autocomplete="tel"
+                    placeholder="+7 (___) ___-__-__"
+                    required
+                  />
+                </label>
+
+                <label class="car-booking__field">
+                  <span>Комментарий</span>
+                  <textarea
+                    name="comment"
+                    maxlength="700"
+                    placeholder="Маршрут или дополнительные пожелания"
+                  ></textarea>
+                </label>
+
+                <input type="text" name="website" tabindex="-1" autocomplete="off" hidden />
+                <input type="hidden" name="car" value="{{CAR_TITLE}}" />
+                <input type="hidden" name="car_year" value="{{CAR_YEAR}}" />
+                <input type="hidden" name="car_price" value="{{CAR_PRICE_LABEL}}" />
+                <input type="hidden" name="form_time" value="" data-form-time />
+                <input type="hidden" name="form_type" value="car_booking" />
+                <input type="hidden" name="consent_version" value="2026-08-01" />
+                <input type="hidden" name="privacy_policy_version" value="2026-08-01" />
+
+                <button class="car-booking__submit" type="submit" data-booking-submit>
+                  <span>Забронировать автомобиль</span>
+                </button>
+
+                <div class="car-booking__agreements">
+                  <label class="car-booking__consent">
+                    <input
+                      type="checkbox"
+                      name="personal_data_consent"
+                      value="yes"
+                      required
+                      data-personal-data-consent
+                    />
+                    <svg class="car-booking__consent-control" viewBox="0 0 20 20" aria-hidden="true">
+                      <rect x="1" y="1" width="18" height="18" rx="3"></rect>
+                      <path d="m5.5 10.2 3 3 6-6"></path>
+                    </svg>
+                    <span class="car-booking__consent-text">
+                      Согласен на
+                      <a href="/personal-data-consent.html" target="_blank" rel="noopener">
+                        обработку персональных данных
+                      </a>
+                    </span>
+                  </label>
+
+                  <label class="car-booking__consent">
+                    <input
+                      type="checkbox"
+                      name="privacy_policy_accepted"
+                      value="yes"
+                      required
+                      data-privacy-policy-accepted
+                    />
+                    <svg class="car-booking__consent-control" viewBox="0 0 20 20" aria-hidden="true">
+                      <rect x="1" y="1" width="18" height="18" rx="3"></rect>
+                      <path d="m5.5 10.2 3 3 6-6"></path>
+                    </svg>
+                    <span class="car-booking__consent-text">
+                      Ознакомлен с
+                      <a href="/privacy-policy.html" target="_blank" rel="noopener">
+                        политикой обработки данных
+                      </a>
+                    </span>
+                  </label>
+                </div>
+
+                <p class="car-booking__status" role="status" hidden data-booking-status></p>
+              </form>
+            </section>
+
+            <section class="car-related" aria-labelledby="related-title">
+              <div class="car-related__head">
+                <span class="car-section-label" id="related-title">
+                  Вас может заинтересовать
+                </span>
+                <a href="/cars.html" aria-label="Смотреть весь автопарк">→</a>
+              </div>
+
+              <div class="car-related__grid">{{RELATED_CARS}}</div>
+            </section>
+          </aside>
+        </div>
+      </section>
+
+      <section class="car-travel" aria-labelledby="car-travel-title">
+        <div class="car-travel__container">
+          <div class="car-travel__map" aria-hidden="true">
+            <svg viewBox="0 0 220 320">
+              <path d="M83 13 121 25l19 28 24 9 20 38-14 31 20 26-16 43-30 15-7 33-36 26-26-18-32 8-25-34 15-31-16-26 21-37-7-34 28-18 4-34 20-8Z"></path>
+              <circle cx="96" cy="214" r="9"></circle>
+              <path d="M96 223v23"></path>
+            </svg>
+          </div>
+
+          <div class="car-travel__copy">
+            <span class="car-section-label">Путешествия RioCar</span>
+            <h2 id="car-travel-title">Откройте Хакасию на машине</h2>
+            <p>
+              Бескрайние степи, горные перевалы, чистейшие озёра и древние
+              тайны. Выбирайте маршрут и путешествуйте по Хакасии с комфортом и
+              свободой.
+            </p>
+            <a href="/travel.html">
+              Смотреть маршруты
+            </a>
+          </div>
+
+          <div class="car-travel__cards">
+            <a class="car-travel-card" href="/travel.html#travel-directions">
+              <img src="/site/image/travel/ergaki.WEBP" alt="Горный маршрут по Хакасии" loading="lazy" />
+              <span>Горные маршруты</span>
+            </a>
+
+            <a class="car-travel-card" href="/travel.html#travel-directions">
+              <img src="/site/image/travel/sunduki.WEBP" alt="Сундуки в Хакасии" loading="lazy" />
+              <span>Древняя Хакасия</span>
+            </a>
+
+            <a class="car-travel-card" href="/travel.html#travel-directions">
+              <img src="/site/image/travel/shira.WEBP" alt="Озёра Хакасии" loading="lazy" />
+              <span>Озёра и природа</span>
+            </a>
+
+            <a class="car-travel-card" href="/travel.html#travel-directions">
+              <img src="/site/image/travel/back.WEBP" alt="Дорога по Хакасии" loading="lazy" />
+              <span>Дороги для впечатлений</span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER_COMPONENT -->
+
+    <script defer src="/site/scripts/car.js"></script>
+    <script type="application/ld+json">{{CAR_JSON_LD}}</script>
+  </body>
+</html>

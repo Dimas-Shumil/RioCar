@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+    <meta name="theme-color" content="#111214" />
+
+    <title>Автомобили — RioCar | ShumDev Custom CMS</title>
+
+    <link rel="stylesheet" href="/site/css/admin.min.css" />
+
+    <script src="/site/scripts/admin/session-guard.js" defer></script>
+    <script src="/site/scripts/admin/cars.js" defer></script>
+  </head>
+
+  <body
+    class="admin-dashboard-page admin-cars-page"
+    data-admin-page="cars"
+  >
+    <div class="admin-shell">
+      <aside class="admin-sidebar">
+        <div class="admin-sidebar__head">
+          <a
+            class="admin-sidebar__logo"
+            href="/admin/dashboard"
+            aria-label="RioCar — панель управления"
+          >
+            <span>RIO</span><strong>CAR</strong>
+          </a>
+
+          <span class="admin-sidebar__caption">ShumDev Custom CMS</span>
+        </div>
+
+        <nav class="admin-sidebar__nav" aria-label="Навигация админ-панели">
+          <a class="admin-sidebar__link" href="/admin/dashboard">
+            <span class="admin-sidebar__index">01</span>
+            <span>Обзор</span>
+          </a>
+
+          <a class="admin-sidebar__link" href="/admin/requests">
+            <span class="admin-sidebar__index">02</span>
+            <span>Заявки</span>
+          </a>
+
+          <a class="admin-sidebar__link" href="/admin/clients">
+            <span class="admin-sidebar__index">03</span>
+            <span>Клиенты</span>
+          </a>
+
+          <a
+            class="admin-sidebar__link admin-sidebar__link--active"
+            href="/admin/cars"
+            aria-current="page"
+          >
+            <span class="admin-sidebar__index">04</span>
+            <span>Автомобили</span>
+          </a>
+
+          <a class="admin-sidebar__link" href="/admin/publications">
+            <span class="admin-sidebar__index">05</span>
+            <span>Публикации</span>
+          </a>
+        </nav>
+
+        <div class="admin-sidebar__bottom">
+          <button
+            class="admin-sidebar__site-link"
+            type="button"
+            data-admin-open-site
+          >
+            Вернуться на сайт
+          </button>
+
+          <button class="admin-sidebar__logout" type="button" data-admin-logout>
+            Выйти
+          </button>
+        </div>
+      </aside>
+
+      <main class="admin-main">
+        <header class="admin-header">
+          <div class="admin-header__intro">
+            <span class="admin-header__eyebrow">Панель управления</span>
+            <h1 class="admin-header__title">Автомобили</h1>
+            <p class="admin-header__text">
+              Управление автопарком, ценами, характеристиками и публикацией на сайте.
+            </p>
+          </div>
+
+          <div class="admin-header__user">
+            <div class="admin-header__user-copy">
+              <span class="admin-header__user-role">Администратор</span>
+              <strong class="admin-header__user-login" data-admin-login>—</strong>
+            </div>
+
+            <button class="admin-header__logout" type="button" data-admin-logout>
+              Выйти
+            </button>
+          </div>
+        </header>
+
+        <section class="admin-cars">
+          <div class="admin-cars__head">
+            <div>
+              <span class="admin-dashboard__caption">Автопарк RioCar</span>
+              <h2 class="admin-cars__title">Список автомобилей</h2>
+            </div>
+
+            <div class="admin-cars__head-actions">
+              <button
+                class="admin-cars__refresh"
+                type="button"
+                data-cars-refresh
+              >
+                Обновить
+              </button>
+
+              <a class="admin-cars__create" href="/admin/cars/new">
+                Добавить автомобиль
+              </a>
+            </div>
+          </div>
+
+          <p
+            class="admin-cars__message"
+            role="alert"
+            hidden
+            data-cars-message
+          ></p>
+
+          <div class="admin-cars__filters">
+            <label class="admin-cars__search">
+              <span>Поиск</span>
+              <input
+                type="search"
+                placeholder="Название, год, двигатель или slug"
+                autocomplete="off"
+                data-cars-search
+              />
+            </label>
+
+            <label class="admin-cars__filter">
+              <span>Класс</span>
+              <select data-cars-category>
+                <option value="ALL">Все классы</option>
+                <option value="ECONOM">Эконом</option>
+                <option value="COMFORT">Комфорт</option>
+                <option value="PREMIUM">Премиум</option>
+              </select>
+            </label>
+
+            <label class="admin-cars__filter">
+              <span>Публикация</span>
+              <select data-cars-visibility>
+                <option value="ALL">Все</option>
+                <option value="ACTIVE">На сайте</option>
+                <option value="HIDDEN">Скрытые</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="admin-cars__loading" data-cars-loading>
+            Загружаем автомобили…
+          </div>
+
+          <div class="admin-cars__content" hidden data-cars-content>
+            <div class="admin-cars__stats">
+              <article>
+                <span>Всего</span>
+                <strong data-cars-stat="total">0</strong>
+              </article>
+
+              <article>
+                <span>На сайте</span>
+                <strong data-cars-stat="active">0</strong>
+              </article>
+
+              <article>
+                <span>Скрытые</span>
+                <strong data-cars-stat="hidden">0</strong>
+              </article>
+            </div>
+
+            <div class="admin-cars__table-wrap" data-cars-table>
+              <table class="admin-cars-table">
+                <thead>
+                  <tr>
+                    <th>Автомобиль</th>
+                    <th>Класс</th>
+                    <th>Цена</th>
+                    <th>Порядок</th>
+                    <th>Статус</th>
+                    <th>Действия</th>
+                  </tr>
+                </thead>
+
+                <tbody data-cars-list></tbody>
+              </table>
+            </div>
+
+            <div class="admin-cars__empty" hidden data-cars-empty>
+              <strong>Автомобили не найдены</strong>
+              <span>Измени фильтры или добавь новую машину.</span>
+            </div>
+
+            <div class="admin-cars__pagination" hidden data-cars-pagination>
+              <button type="button" data-cars-page="prev">Назад</button>
+              <span data-cars-page-label>Страница 1 из 1</span>
+              <button type="button" data-cars-page="next">Вперёд</button>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
