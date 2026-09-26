@@ -717,6 +717,49 @@ function initContactFormSubmit() {
 }
 
 // вызов
+function initMobileActions() {
+  const actions = document.querySelector('.mobile-actions');
+  const hero = document.querySelector('main > section:first-child');
+  const contactSection = document.querySelector('.contact-section');
+
+  if (!actions || !hero) return;
+
+  const updateVisibility = () => {
+    if (window.innerWidth > 768) {
+      actions.classList.remove('is-visible');
+      return;
+    }
+
+    const heroPassed = hero.getBoundingClientRect().bottom <= 0;
+
+    const contactReached = contactSection
+      ? contactSection.getBoundingClientRect().top <= window.innerHeight
+      : false;
+
+    actions.classList.toggle(
+      'is-visible',
+      heroPassed && !contactReached,
+    );
+  };
+
+  let ticking = false;
+
+  const requestUpdate = () => {
+    if (ticking) return;
+
+    ticking = true;
+
+    window.requestAnimationFrame(() => {
+      updateVisibility();
+      ticking = false;
+    });
+  };
+
+  updateVisibility();
+
+  window.addEventListener('scroll', requestUpdate, { passive: true });
+  window.addEventListener('resize', requestUpdate);
+}
 async function initApp() {
   await loadComponents();
 
@@ -731,6 +774,7 @@ async function initApp() {
   initPublicationsSlider();
   initReviewsTabs();
   initReviewsSliders();
+  initMobileActions();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
