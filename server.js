@@ -18,6 +18,8 @@ import publicationsRouter from './routes/publications.routes.js';
 import publicCarsRouter from './routes/public-cars.routes.js';
 import publicPublicationsRouter from './routes/public-publications.routes.js';
 import sessionHeartbeatRouter from './routes/session-heartbeat.routes.js';
+import pushRouter from './routes/push.routes.js';
+import { sendNewLeadNotification } from './services/push.service.js';
 
 const app = express();
 
@@ -102,6 +104,7 @@ app.use('/api/admin/auth', authRouter);
 app.use('/api/admin/session/heartbeat', sessionHeartbeatRouter);
 app.use('/api/admin/dashboard', dashboardRouter);
 app.use('/api/admin/requests', requestsRouter);
+app.use('/api/admin/push', pushRouter);
 app.use('/api/admin/clients', clientsRouter);
 app.get('/index.html', (req, res) => {
   res.redirect(301, '/');
@@ -156,6 +159,18 @@ app.get('/admin/publications/:id/edit', requireAuth.page, (req, res) => {
 app.use('/site', express.static(path.join(__dirname, 'site')));
 app.use('/img', express.static(path.join(__dirname, 'img')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+app.get('/service-worker.js', (_req, res) => {
+  res.set('Cache-Control', 'no-cache');
+  res.set('Service-Worker-Allowed', '/');
+  return res.sendFile(path.join(__dirname, 'service-worker.js'));
+});
+
+app.get('/manifest.webmanifest', (_req, res) => {
+  res.type('application/manifest+json');
+  res.set('Cache-Control', 'no-cache');
+  return res.sendFile(path.join(__dirname, 'manifest.webmanifest'));
+});
 
 // Каталог и динамические страницы автомобилей
 app.use(publicCarsRouter);
@@ -307,6 +322,14 @@ app.post('/api/send', sendLimiter, async (req, res) => {
         },
       });
     });
+    // После фиксации заявки начинаем Push-доставку независимо от SMTP.
+    // Сбой Push не влияет на успешную отправку клиентской формы.
+    void sendNewLeadNotification({ id: lead.id, name, phone: formattedPhone, car })
+      .then((result) => {
+        if (result.sent) console.log(`RioCar Push: заявка №${lead.id}, устройств: ${result.sent}`);
+      })
+      .catch((error) => console.error('RioCar Push:', error));
+
     const telLink = makeTelLink(phone);
 
     const createdAt = lead.createdAt.toLocaleString('ru-RU', {

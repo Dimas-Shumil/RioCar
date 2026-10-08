@@ -33,7 +33,8 @@ model Admin {
   lastLoginAt  DateTime?
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @updatedAt
-  sessions     AdminSession[]
+  sessions          AdminSession[]
+  pushSubscriptions PushSubscription[]
 }
 
 model Client {
@@ -168,4 +169,20 @@ model AdminSession {
   @@index([adminId])
   @@index([expiresAt])
   @@index([lastUsedAt])
+}
+
+// Отдельная подписка для каждого браузера/устройства администратора.
+model PushSubscription {
+  id        Int      @id @default(autoincrement())
+  adminId   Int
+  endpoint  String   @unique
+  p256dh    String
+  auth      String
+  userAgent String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  admin Admin @relation(fields: [adminId], references: [id], onDelete: Cascade)
+
+  @@index([adminId])
 }

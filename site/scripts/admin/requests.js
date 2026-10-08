@@ -599,6 +599,11 @@
     bindEvents();
 
     await loadRequests();
+
+    const leadParam = new URLSearchParams(location.search).get('lead');
+    if (leadParam && /^[1-9]\d{0,9}$/.test(leadParam)) {
+      await openRequest(Number(leadParam));
+    }
   }
 
   void init();

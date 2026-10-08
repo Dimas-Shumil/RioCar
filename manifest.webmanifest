@@ -1,0 +1,25 @@
+{
+  "name": "RioCar — Управление заявками",
+  "short_name": "RioCar",
+  "description": "Административная панель RioCar и уведомления о новых заявках",
+  "id": "/admin/dashboard",
+  "start_url": "/admin/dashboard",
+  "scope": "/admin/",
+  "display": "standalone",
+  "background_color": "#111214",
+  "theme_color": "#111214",
+  "icons": [
+    {
+      "src": "/site/img/riocar-push-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/site/img/riocar-push-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

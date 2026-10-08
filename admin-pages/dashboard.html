@@ -11,15 +11,23 @@
 
     <title>Панель управления — RioCar | ShumDev Custom CMS</title>
 
-    <link rel="stylesheet" href="/site/css/admin.min.css" />
+    <link rel="stylesheet" href="/site/css/admin.min.css?v=20261008-mobile" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="/site/img/riocar-push-192.png" />
 
     <script src="/site/scripts/admin/session-guard.js" defer></script>
+    <script src="/site/scripts/admin/mobile-nav.js" defer></script>
+    <script src="/site/scripts/admin/push.js" defer></script>
 
     <script src="/site/scripts/admin/dashboard.js" defer></script>
   </head>
 
   <body class="admin-dashboard-page" data-admin-page="dashboard">
     <div class="admin-shell">
+      <div class="admin-mobile-head" aria-label="Панель управления RioCar">
+        <a class="admin-mobile-head__brand" href="/admin/dashboard" aria-label="RioCar — главная админки"><span>RIO</span><strong>CAR</strong></a>
+        <span class="admin-mobile-head__subtitle">ПАНЕЛЬ УПРАВЛЕНИЯ</span>
+      </div>
       <aside class="admin-sidebar">
         <div class="admin-sidebar__head">
           <a
@@ -112,6 +120,23 @@
             </button>
           </div>
         </header>
+
+        <section class="admin-push" aria-labelledby="admin-push-heading">
+          <div class="admin-push__intro">
+            <span class="admin-push__icon" aria-hidden="true">
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/></svg>
+            </span>
+            <div>
+              <h2 id="admin-push-heading">Уведомления о заявках</h2>
+              <p data-push-status role="status" aria-live="polite">Проверяем поддержку уведомлений…</p>
+            </div>
+          </div>
+          <div class="admin-push__buttons">
+            <button type="button" data-push-enable>Включить</button>
+            <button type="button" data-push-test hidden>Проверить</button>
+            <button type="button" data-push-disable hidden>Отключить</button>
+          </div>
+        </section>
 
         <section class="admin-dashboard">
           <div class="admin-dashboard__head">
@@ -233,5 +258,31 @@
         </section>
       </main>
     </div>
+  <nav class="admin-mobile-nav" aria-label="Основные разделы админки">
+      <a href="/admin/dashboard" class="admin-mobile-nav__item is-active" aria-current="page" data-mobile-tab="dashboard"><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.4"/><rect x="14" y="3" width="7" height="7" rx="1.4"/><rect x="3" y="14" width="7" height="7" rx="1.4"/><rect x="14" y="14" width="7" height="7" rx="1.4"/></svg><span>Обзор</span></a>
+      <a href="/admin/requests" class="admin-mobile-nav__item" data-mobile-tab="requests"><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3h8l4 4v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h3Z"/><path d="M15 3v5h5"/><path d="M8 12h8M8 16h6"/></svg><span>Заявки</span></a>
+      <a href="/admin/clients" class="admin-mobile-nav__item" data-mobile-tab="clients"><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20v-1a6 6 0 0 1 12 0v1"/><path d="M16 5.5a3 3 0 0 1 0 5.8M18 14a5 5 0 0 1 3 5v1"/></svg><span>Клиенты</span></a>
+      <a href="/admin/cars" class="admin-mobile-nav__item" data-mobile-tab="cars"><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 16 3.8 14a2 2 0 0 1 .2-2l1.5-5A2 2 0 0 1 7.4 5h9.2a2 2 0 0 1 1.9 2l1.5 5a2 2 0 0 1 .2 2L19 16"/><path d="M4 12h16M6 16h12"/><circle cx="7" cy="14" r=".9" fill="currentColor" stroke="none"/><circle cx="17" cy="14" r=".9" fill="currentColor" stroke="none"/><path d="M5 16v2a1 1 0 0 0 2 0v-1M17 17v1a1 1 0 0 0 2 0v-2"/></svg><span>Авто</span></a>
+      <button type="button" class="admin-mobile-nav__item admin-mobile-nav__more" data-admin-mobile-open aria-expanded="false" aria-controls="admin-mobile-menu"><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.5" fill="currentColor" stroke="none"/></svg><span>Ещё</span></button>
+    </nav>
+<div class="admin-mobile-menu-backdrop" data-admin-mobile-backdrop hidden></div>
+    <section class="admin-mobile-menu" id="admin-mobile-menu" role="dialog" aria-modal="true" aria-labelledby="admin-mobile-menu-title" data-admin-mobile-menu hidden>
+      <div class="admin-mobile-menu__handle" aria-hidden="true"></div>
+      <header class="admin-mobile-menu__header">
+        <div><span class="admin-mobile-menu__eyebrow">RioCar CMS</span><h2 id="admin-mobile-menu-title">Все разделы</h2><p>Быстрый доступ ко всему управлению</p></div>
+        <button class="admin-mobile-menu__close" type="button" data-admin-mobile-close aria-label="Закрыть меню"><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+      </header>
+      <nav class="admin-mobile-menu__links" aria-label="Все разделы админки">
+        <a href="/admin/dashboard" class="admin-mobile-menu__link is-active" aria-current="page"><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.4"/><rect x="14" y="3" width="7" height="7" rx="1.4"/><rect x="3" y="14" width="7" height="7" rx="1.4"/><rect x="14" y="14" width="7" height="7" rx="1.4"/></svg><span class="admin-mobile-menu__link-text"><strong>Обзор</strong><small>Основные показатели</small></span><span class="admin-mobile-menu__link-marker" aria-hidden="true"></span></a>
+        <a href="/admin/requests" class="admin-mobile-menu__link"><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3h8l4 4v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h3Z"/><path d="M15 3v5h5"/><path d="M8 12h8M8 16h6"/></svg><span class="admin-mobile-menu__link-text"><strong>Заявки</strong><small>Обращения клиентов</small></span><span class="admin-mobile-menu__link-marker" aria-hidden="true"></span></a>
+        <a href="/admin/clients" class="admin-mobile-menu__link"><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20v-1a6 6 0 0 1 12 0v1"/><path d="M16 5.5a3 3 0 0 1 0 5.8M18 14a5 5 0 0 1 3 5v1"/></svg><span class="admin-mobile-menu__link-text"><strong>Клиенты</strong><small>Контакты и история</small></span><span class="admin-mobile-menu__link-marker" aria-hidden="true"></span></a>
+        <a href="/admin/cars" class="admin-mobile-menu__link"><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 16 3.8 14a2 2 0 0 1 .2-2l1.5-5A2 2 0 0 1 7.4 5h9.2a2 2 0 0 1 1.9 2l1.5 5a2 2 0 0 1 .2 2L19 16"/><path d="M4 12h16M6 16h12"/><circle cx="7" cy="14" r=".9" fill="currentColor" stroke="none"/><circle cx="17" cy="14" r=".9" fill="currentColor" stroke="none"/><path d="M5 16v2a1 1 0 0 0 2 0v-1M17 17v1a1 1 0 0 0 2 0v-2"/></svg><span class="admin-mobile-menu__link-text"><strong>Автомобили</strong><small>Управление автопарком</small></span><span class="admin-mobile-menu__link-marker" aria-hidden="true"></span></a>
+        <a href="/admin/publications" class="admin-mobile-menu__link"><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg><span class="admin-mobile-menu__link-text"><strong>Публикации</strong><small>Новости и предложения</small></span><span class="admin-mobile-menu__link-marker" aria-hidden="true"></span></a>
+      </nav>
+      <div class="admin-mobile-menu__actions">
+        <a href="/" class="admin-mobile-menu__action"><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 5h6v6M19 5l-9 9"/><path d="M19 14v5H5V5h5"/></svg><span>Открыть сайт</span></a>
+        <button class="admin-mobile-menu__action admin-mobile-menu__action--logout" type="button" data-admin-logout><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h4"/><path d="M14 16l4-4-4-4M8 12h10"/></svg><span>Выйти из аккаунта</span></button>
+      </div>
+    </section>
   </body>
 </html>
